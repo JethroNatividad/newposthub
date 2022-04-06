@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     }
     async function getPosts(res) {
         try {
-            const posts = await Post.find()
+            const posts = await Post.find().populate('author', ['username', '_id'])
             res.status(200).json({ error: null, posts })
         } catch (error) {
             console.log(error)
