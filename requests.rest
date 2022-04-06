@@ -28,7 +28,7 @@ GET http://localhost:3000/api/auth/logout
 ###
 # create a post
 POST http://localhost:3000/api/posts/
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGQ2NDdlY2ViYzc0NjRlNmVjY2NlOCIsInVzZXJuYW1lIjoidGVzdCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQ5MjUxOTAxLCJleHAiOjE2NDkyNTE5MTF9.xJm6f42ybQ-cDu_TO10nqhv3JaNiY2F4zqXT6vo2rRg
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGQ2NDdlY2ViYzc0NjRlNmVjY2NlOCIsInVzZXJuYW1lIjoidGVzdCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQ5MjUyMDQ1LCJleHAiOjE2NDkyNTIwNTV9.E4RS-qHcgyEq9S-ASdwowyAzJpoif5UeStaXqzmxu_0
 Content-Type: application/json
 
 {
