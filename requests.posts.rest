@@ -1,0 +1,13 @@
+###
+# create a post
+POST http://localhost:3000/api/posts/
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGQ5NzM2ODE3ZTQ1OTM4NTkzMDExZCIsInVzZXJuYW1lIjoidGVzdCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQ5MjUyNzA2LCJleHAiOjE2NDkyNTI3MTZ9._lgnW_-PBwfq1SRG0aVj0gqOgPKhuYQrKdFUnrx34AM
+Content-Type: application/json
+
+{
+    "text": "This is my first post"
+}
+
+###
+# get all posts
+GET http://localhost:3000/api/posts/
