@@ -41,6 +41,8 @@ export default async function handler(req, res) {
         // create new user
         try {
             const newUser = new User({ username, email, password })
+            await newUser.save()
+
             return res.status(200).json({ error: null, user: newUser })
 
         } catch (error) {
