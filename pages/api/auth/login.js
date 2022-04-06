@@ -45,9 +45,9 @@ export default async function handler(req, res) {
             }
 
             const accessToken = generateAccessToken(user)
-            const refreshToken = generateRefreshToken(user)
+            const refreshToken = await generateRefreshToken(user)
 
-            return res.status(200).json({ error: null, accessToken })
+            return res.status(200).json({ error: null, accessToken, refreshToken })
         } catch (error) {
             console.log(error)
             return res.status(400)
