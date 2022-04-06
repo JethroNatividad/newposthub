@@ -1,12 +1,14 @@
 import dbConnect from "../../../lib/dbConnect"
+import verifyToken from "../../../lib/verifyToken"
 
 export default async function handler(req, res) {
     await dbConnect()
 
-    const { method } = req
+    const { method, body } = req
     switch (method) {
         case 'POST':
-            createPost()
+            const user = await verifyToken(req, res)
+            createPost(user, body)
             break
         default:
             res.setHeader('Allow', ['GET', 'POST'])
