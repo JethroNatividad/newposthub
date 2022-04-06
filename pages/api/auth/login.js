@@ -1,6 +1,8 @@
 import dbConnect from "../../../lib/dbConnect"
 import { generateAccessToken, generateRefreshToken } from "../../../lib/jwt"
 import User from "../../../lib/models/User"
+import { serialize } from "cookie"
+
 
 export default async function handler(req, res) {
     await dbConnect()
@@ -46,6 +48,10 @@ export default async function handler(req, res) {
 
             const accessToken = generateAccessToken(user)
             const refreshToken = await generateRefreshToken(user)
+
+            // add refresh token to cookie http only
+            const serialized = serialize("refresh_token", refreshToken, { httpOnly: true, sameSite: "strict", path: "/" })
+            res.setHeader('Set-Cookie', serialized)
 
             return res.status(200).json({ error: null, accessToken, refreshToken })
         } catch (error) {
