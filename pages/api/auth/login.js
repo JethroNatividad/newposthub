@@ -1,4 +1,5 @@
 import dbConnect from "../../../lib/dbConnect"
+import { generateAccessToken } from "../../../lib/jwt"
 import User from "../../../lib/models/User"
 
 export default async function handler(req, res) {
@@ -42,6 +43,7 @@ export default async function handler(req, res) {
             if (!validPass) {
                 return res.status(200).json({ error: { message: "Incorrect password", field: 'password' } })
             }
+            const accessToken = generateAccessToken(user)
 
             return res.status(200).json({ error: null, user })
 
@@ -49,7 +51,5 @@ export default async function handler(req, res) {
             console.log(error)
             return res.status(400)
         }
-
-
     }
 }
