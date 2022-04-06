@@ -21,3 +21,6 @@ Content-Type: application/json
 ###
 # GET TOKEN
 GET http://localhost:3000/api/auth/token
+###
+#logout
+GET http://localhost:3000/api/auth/logout
