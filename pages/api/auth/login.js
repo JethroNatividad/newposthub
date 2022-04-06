@@ -56,7 +56,7 @@ export default async function handler(req, res) {
             return res.status(200).json({ error: null, accessToken, refreshToken })
         } catch (error) {
             console.log(error)
-            return res.status(400)
+            return res.status(400).end(error.message)
         }
     }
 }
