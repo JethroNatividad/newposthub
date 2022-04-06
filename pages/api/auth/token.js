@@ -25,13 +25,13 @@ export default async function handler(req, res) {
         const refreshToken = cookie.refresh_token
         if (!refreshToken) {
             console.log('no refresh token')
-            return res.status(403)
+            return res.status(403).end('no refresh token')
         }
         try {
             const tokenExists = await Token.findOne({ token: refreshToken })
             if (!tokenExists) {
                 console.log('refresh token not found')
-                return res.status(403)
+                return res.status(403).end('refresh token not found')
             }
 
             const user = jwt.verify(tokenExists.token, process.env.REFRESH_TOKEN_SECRET)
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
             return res.status(200).json({ error: null, accessToken })
         } catch (error) {
             console.log(error)
-            return res.status(403)
+            return res.status(403).end(error.message)
         }
     }
 }
