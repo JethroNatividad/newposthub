@@ -25,3 +25,8 @@ Content-Type: application/json
 {
     "text": "This is my first post updated by test2"
 }
+
+###
+#test
+
+GET http://localhost:3000/api/posts/624d9f0cdd38d5a28188cea4/comments/test

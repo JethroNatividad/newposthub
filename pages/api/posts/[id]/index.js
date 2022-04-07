@@ -1,9 +1,13 @@
-import Post from "../../../lib/models/Post"
-import verifyToken from "../../../lib/verifyToken"
+import Post from "../../../../lib/models/Post"
+import verifyToken from "../../../../lib/verifyToken"
 
 export default function handler(req, res) {
     const { method, query: { id } } = req
+    // [0] is id, [1] is /comments [2] is /comments/:id
 
+    // check if there is /comments
+    // if (params.length === 1) {
+    //     const id = params[0]
     switch (method) {
         case 'GET':
             getPost(id)
@@ -15,6 +19,7 @@ export default function handler(req, res) {
             res.setHeader('Allow', ['GET', 'PUT'])
             res.status(405).end(`Method ${method} Not Allowed`)
     }
+    // }
     async function getPost(id) {
         try {
             const post = await Post.findById(id).populate('author', ['username', '_id'])
