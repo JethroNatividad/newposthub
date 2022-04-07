@@ -9,12 +9,25 @@ export default async function handler(req, res) {
 
     const { method, query: { pid } } = req
     switch (method) {
+        case 'GET':
+            getComments(pid)
+            break
         case 'POST':
             verifyToken(req, res, () => createComment(req, res))
             break
         default:
             res.setHeader('Allow', ['GET', 'POST'])
             res.status(405).end(`Method ${method} Not Allowed`)
+    }
+
+    async function getComments(pid) {
+        try {
+            const comments = await Comment.find({ post: pid }).populate('author', ['username', '_id'])
+            return res.status(200).json({ error: null, comments })
+        } catch (error) {
+            console.log(error)
+            return res.status(400).end(error.message)
+        }
     }
 
     async function createComment(req, res) {
