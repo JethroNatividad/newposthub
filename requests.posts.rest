@@ -1,4 +1,4 @@
-@pid = 624d9f0cdd38d5a28188cea4
+@pid = 624f114cfb6531b6abedd863
 ###
 # create a post
 POST {{$dotenv BASEURL}}/posts/
@@ -11,15 +11,15 @@ Content-Type: application/json
 
 ###
 # get all posts
-GET {{$dotenv BASEURL}}posts/
+GET {{$dotenv BASEURL}}/posts/
 
 ###
 # get single posts
-GET {{$dotenv BASEURL}}posts/{{pid}}
+GET {{$dotenv BASEURL}}/posts/{{pid}}
 
 ###
 # update a post
-PUT {{$dotenv BASEURL}}posts/{{pid}}
+PUT {{$dotenv BASEURL}}/posts/{{pid}}
 Authorization: bearer {{$dotenv ACCESSTOKEN}}
 Content-Type: application/json
 
