@@ -29,6 +29,9 @@ export default function handler(req, res) {
     }
     async function updatePost(req, res, id) {
         const { body: { text }, user } = req
+        if (!text) {
+            return res.status(200).json({ error: { message: "text required", field: 'text' } })
+        }
 
         try {
             const post = await Post.findById(id)

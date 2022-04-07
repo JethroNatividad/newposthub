@@ -27,8 +27,11 @@ export default async function handler(req, res) {
             return res.status(403).end(error.message)
         }
     }
-    async function createPost(req) {
+    async function createPost(req, res) {
         const { body: { text }, user: { id } } = req
+        if (!text) {
+            return res.status(200).json({ error: { message: "text required", field: 'text' } })
+        }
 
         try {
             const currentUser = await User.findById(id)
