@@ -1,11 +1,11 @@
 ###
 # create a post
 POST http://localhost:3000/api/posts/
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGQ5NzM2ODE3ZTQ1OTM4NTkzMDExZCIsInVzZXJuYW1lIjoidGVzdCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQ5MjU0MTIwLCJleHAiOjE2NDkyNTc3MjB9.qT1eeOjS6q3BycpQmz_V2OWtZGoVB5LvIZeWQu46Vcw
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0MTIwOCwiZXhwIjoxNjQ5MzQ0ODA4fQ.52roMfwEkVTTNbbC7G6H0SDmQWOo_6CB73io8UE7w9w
 Content-Type: application/json
 
 {
-    "text": "This is my first post"
+    "text": "This is my asdas post"
 }
 
 ###
@@ -14,16 +14,16 @@ GET http://localhost:3000/api/posts/
 
 ###
 # get single posts
-GET http://localhost:3000/api/posts/624d9f0cdd38d5a28188cea4
+GET http://localhost:3000/api/posts/624ef3397108e971ef4519a5
 
 ###
 # update a post
-PUT http://localhost:3000/api/posts/624d9f0cdd38d5a28188cea4
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTMzMzA2MSwiZXhwIjoxNjQ5MzM2NjYxfQ.pCsGqNkKHoJVgsrhc8ozXsxSNDRbPWzB69w4V8IAHR0
+PUT http://localhost:3000/api/posts/624ef3397108e971ef4519a5
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0MTIwOCwiZXhwIjoxNjQ5MzQ0ODA4fQ.52roMfwEkVTTNbbC7G6H0SDmQWOo_6CB73io8UE7w9w
 Content-Type: application/json
 
 {
-    "text": "This is my first post updated by test2"
+    "text": "This is my asdasda post updated by test2"
 }
 
 ###

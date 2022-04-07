@@ -2,21 +2,22 @@ import Post from "../../../../lib/models/Post"
 import verifyToken from "../../../../lib/verifyToken"
 
 export default function handler(req, res) {
-    const { method, query: { id } } = req
+    const { method, query: { pid } } = req
+    console.log("Post id", pid)
     switch (method) {
         case 'GET':
-            getPost(id)
+            getPost(pid)
             break
         case 'PUT':
-            verifyToken(req, res, () => updatePost(req, res, id))
+            verifyToken(req, res, () => updatePost(req, res, pid))
             break
         default:
             res.setHeader('Allow', ['GET', 'PUT'])
             res.status(405).end(`Method ${method} Not Allowed`)
     }
-    async function getPost(id) {
+    async function getPost(pid) {
         try {
-            const post = await Post.findById(id).populate('author', ['username', '_id'])
+            const post = await Post.findOne({ _id: pid }).populate('author', ['username', '_id'])
             if (!post) {
                 return res.status(404).end('Post not found')
             }
@@ -26,18 +27,18 @@ export default function handler(req, res) {
             return res.status(400).end(error.message)
         }
     }
-    async function updatePost(req, res, id) {
-        const { body: { text }, user } = req
+    async function updatePost(req, res, pid) {
+        const { body: { text }, user: { id } } = req
         if (!text) {
             return res.status(200).json({ error: { message: "text required", field: 'text' } })
         }
 
         try {
-            const post = await Post.findById(id)
+            const post = await Post.findOne({ _id: pid })
             if (!post) {
                 return res.status(404).end('Post not found')
             }
-            if (post.author.toString() !== user.id) {
+            if (post.author.toString() !== id) {
                 return res.status(403).end('You are not authorized to edit this post')
             }
             post.text = text
