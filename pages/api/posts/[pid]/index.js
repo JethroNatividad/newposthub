@@ -1,5 +1,6 @@
 import dbConnect from "../../../../lib/dbConnect"
 import Post from "../../../../lib/models/Post"
+import Comment from "../../../../lib/models/Comment"
 import verifyToken from "../../../../lib/verifyToken"
 
 export default async function handler(req, res) {
@@ -15,8 +16,11 @@ export default async function handler(req, res) {
         case 'PUT':
             verifyToken(req, res, () => updatePost(req, res, pid))
             break
+        case 'DELETE':
+            verifyToken(req, res, () => deletePost(req, res, pid))
+            break
         default:
-            res.setHeader('Allow', ['GET', 'PUT'])
+            res.setHeader('Allow', ['GET', 'PUT', 'DELETE'])
             res.status(405).end(`Method ${method} Not Allowed`)
     }
     async function getPost(pid) {
@@ -31,6 +35,7 @@ export default async function handler(req, res) {
             return res.status(400).end(error.message)
         }
     }
+
     async function updatePost(req, res, pid) {
         const { body: { text }, user: { id } } = req
         if (!text) {
@@ -48,6 +53,32 @@ export default async function handler(req, res) {
             post.text = text
             await post.save()
             return res.status(200).json({ error: null, post })
+        } catch (error) {
+            console.log(error)
+            return res.status(400).end(error.message)
+        }
+    }
+
+    async function deletePost(req, res, pid) {
+        const { user: { id } } = req
+
+
+        try {
+            const post = await Post.findOne({ _id: pid })
+            if (!post) {
+                return res.status(404).end('Post not found')
+            }
+            if (post.author.toString() !== id) {
+                return res.status(403).end('You are not authorized to delete this post')
+            }
+
+            // remove also the comments of this post
+            post.comments.forEach(async (cid) => {
+                await Comment.findOneAndDelete({ _id: cid })
+            })
+
+            await post.remove()
+            return res.status(200).end('Post deleted')
         } catch (error) {
             console.log(error)
             return res.status(400).end(error.message)
