@@ -1,8 +1,8 @@
-import dbConnect from "../../../lib/dbConnect"
-import User from "../../../lib/models/User"
-import Comment from "../../../lib/models/Comment"
-import Post from "../../../lib/models/Post"
-import verifyToken from "../../../lib/verifyToken"
+import User from "../../../../../lib/models/User"
+import Comment from "../../../../../lib/models/Comment"
+import Post from "../../../../../lib/models/Post"
+import verifyToken from "../../../../../lib/verifyToken"
+import dbConnect from "../../../../../lib/dbConnect"
 
 export default async function handler(req, res) {
     await dbConnect()
