@@ -2,10 +2,15 @@
 POST http://localhost:3000/api/auth/signup
 Content-Type: application/json
 
+# {
+#     "password": "hello",
+#     "email": "test@gmail.com",
+#     "username": "test"
+# }
 {
     "password": "hello",
-    "email": "test@gmail.com",
-    "username": "test"
+    "email": "test2@gmail.com",
+    "username": "test2"
 }
 
 ###
@@ -15,7 +20,7 @@ Content-Type: application/json
 
 {
     "password": "hello",
-    "usernameOrEmail": "test@gmail.com"
+    "usernameOrEmail": "test2@gmail.com"
 }
 
 ###
