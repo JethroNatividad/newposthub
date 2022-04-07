@@ -10,18 +10,18 @@ Content-Type: application/json
 
 ###
 # get all comments of a post
-GET http://localhost:3000/api/posts/id/comment
+GET http://localhost:3000/api/posts/624ef3397108e971ef4519a5/comments
 
 ###
 # get single comment
-GET http://localhost:3000/api/posts/624ef3397108e971ef4519a5/comment/cid
+GET http://localhost:3000/api/posts/624ef3397108e971ef4519a5/comments/624ef9781dd4f5f0b1918d6f
 
 ###
 # update a comment
-PUT http://localhost:3000/api/posts/624ef3397108e971ef4519a5/comment/cid
+PUT http://localhost:3000/api/posts/624ef3397108e971ef4519a5/comments/624ef9921dd4f5f0b1918d73
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0MTIwOCwiZXhwIjoxNjQ5MzQ0ODA4fQ.52roMfwEkVTTNbbC7G6H0SDmQWOo_6CB73io8UE7w9w
 Content-Type: application/json
 
 {
-    "text": "This is my 2 asdasda post updated by test2"
+    "text": "I change my mind sir"
 }
