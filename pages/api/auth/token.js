@@ -15,11 +15,10 @@ export default async function handler(req, res) {
     const { method, cookies } = req
     switch (method) {
         case 'GET':
-            refreshToken(cookies)
-            break
+            return refreshToken(cookies)
         default:
             res.setHeader('Allow', ['GET'])
-            res.status(405).end(`Method ${method} Not Allowed`)
+            return res.status(405).end(`Method ${method} Not Allowed`)
     }
     async function refreshToken(cookie) {
         const refreshToken = cookie.refresh_token

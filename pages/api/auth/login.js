@@ -19,11 +19,10 @@ export default async function handler(req, res) {
             if (!password) {
                 return res.status(200).json({ error: { message: "password required", field: 'password' } })
             }
-            login(usernameOrEmail, password)
-            break
+            return login(usernameOrEmail, password)
         default:
             res.setHeader('Allow', ['POST'])
-            res.status(405).end(`Method ${method} Not Allowed`)
+            return res.status(405).end(`Method ${method} Not Allowed`)
     }
 
     async function login(usernameOrEmail, password) {

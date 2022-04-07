@@ -17,11 +17,10 @@ export default async function handler(req, res) {
             if (!password) {
                 return res.status(200).json({ error: { message: "password required", field: 'password' } })
             }
-            signup(username, email, password)
-            break
+            return signup(username, email, password)
         default:
             res.setHeader('Allow', ['POST'])
-            res.status(405).end(`Method ${method} Not Allowed`)
+            return res.status(405).end(`Method ${method} Not Allowed`)
     }
 
     async function signup(username, email, password) {
