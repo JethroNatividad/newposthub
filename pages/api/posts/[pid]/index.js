@@ -1,9 +1,13 @@
+import dbConnect from "../../../../lib/dbConnect"
 import Post from "../../../../lib/models/Post"
 import verifyToken from "../../../../lib/verifyToken"
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
+    // i forgot to add this lol
+    await dbConnect()
+
     const { method, query: { pid } } = req
-    console.log("Post id", pid)
+
     switch (method) {
         case 'GET':
             getPost(pid)
