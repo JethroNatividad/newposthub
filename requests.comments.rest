@@ -25,3 +25,6 @@ Content-Type: application/json
 {
     "text": "I change my mind sir"
 }
+### delete a comment
+DELETE http://localhost:3000/api/posts/624ef3397108e971ef4519a5/comments/624ef9781dd4f5f0b1918d6f
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0MTIwOCwiZXhwIjoxNjQ5MzQ0ODA4fQ.52roMfwEkVTTNbbC7G6H0SDmQWOo_6CB73io8UE7w9w
