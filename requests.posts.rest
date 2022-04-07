@@ -11,3 +11,17 @@ Content-Type: application/json
 ###
 # get all posts
 GET http://localhost:3000/api/posts/
+
+###
+# get single posts
+GET http://localhost:3000/api/posts/624d9f0cdd38d5a28188cea4
+
+###
+# update a post
+PUT http://localhost:3000/api/posts/624d9f0cdd38d5a28188cea4
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGQ5NzM2ODE3ZTQ1OTM4NTkzMDExZCIsInVzZXJuYW1lIjoidGVzdCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQ5MzMyODgwLCJleHAiOjE2NDkzMzY0ODB9.RNG4KeBNhgCXAwYfTrzgNBXgc-xi1YLNnLRfS5Gx9eQ
+Content-Type: application/json
+
+{
+    "text": "This is my first post updated"
+}

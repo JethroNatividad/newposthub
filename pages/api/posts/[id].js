@@ -1,4 +1,5 @@
 import Post from "../../../lib/models/Post"
+import verifyToken from "../../../lib/verifyToken"
 
 export default function handler(req, res) {
     const { method, query: { id } } = req
@@ -8,13 +9,13 @@ export default function handler(req, res) {
             getPost(id)
             break
         case 'PUT':
-            updatePost()
+            verifyToken(req, res, () => updatePost(req, res, id))
             break
         default:
-            res.setHeader('Allow', ['GET', 'POST'])
+            res.setHeader('Allow', ['GET', 'PUT'])
             res.status(405).end(`Method ${method} Not Allowed`)
     }
-    async function getPost() {
+    async function getPost(id) {
         try {
             const post = await Post.findById(id).populate('author', ['username', '_id'])
             if (!post) {
@@ -26,5 +27,23 @@ export default function handler(req, res) {
             return res.status(400).end(error.message)
         }
     }
-    async function updatePost() {}
+    async function updatePost(req, res, id) {
+        const { body: { text }, user } = req
+
+        try {
+            const post = await Post.findById(id)
+            if (!post) {
+                return res.status(404).end('Post not found')
+            }
+            if (post.author.toString() !== user.id) {
+                return res.status(403).end('You are not authorized to edit this post')
+            }
+            post.text = text
+            await post.save()
+            return res.status(200).json({ error: null, post })
+        } catch (error) {
+            console.log(error)
+            return res.status(400).end(error.message)
+        }
+    }
 }
