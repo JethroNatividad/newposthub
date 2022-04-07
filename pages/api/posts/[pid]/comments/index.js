@@ -7,13 +7,13 @@ import dbConnect from "../../../../../lib/dbConnect"
 export default async function handler(req, res) {
     await dbConnect()
 
-    const { method } = req
+    const { method, query: { pid } } = req
     switch (method) {
         case 'POST':
             verifyToken(req, res, () => createComment(req, res))
             break
         default:
-            res.setHeader('Allow', ['POST'])
+            res.setHeader('Allow', ['GET', 'POST'])
             res.status(405).end(`Method ${method} Not Allowed`)
     }
 
@@ -24,16 +24,23 @@ export default async function handler(req, res) {
         }
 
         try {
-            const currentUser = await User.findById(id)
-            const newPost = new Post({ text, author: currentUser._id })
-            const savedPost = await newPost.save()
-            currentUser.posts.push(savedPost._id)
-            await currentUser.save()
+            const currentPost = await Post.findById(pid)
+            if (!currentPost) {
+                return res.status(404).end('Post not found')
+            }
 
-            return res.status(201).json({ error: null, post: savedPost })
+            const currentUser = await User.findById(id)
+
+            const newComment = new Comment({ text, author: currentUser._id, post: currentPost._id })
+            const savedComment = await newComment.save()
+
+            currentPost.comments.push(savedComment._id)
+            await currentPost.save()
+
+            return res.status(201).json({ error: null, comment: savedComment })
         } catch (error) {
             console.log(error)
-            return res.status(403).end(error.message)
+            return res.status(400).end(error.message)
         }
     }
 }

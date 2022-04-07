@@ -1,24 +1,24 @@
 ###
-# create a post
-POST http://localhost:3000/api/posts/
+# create a comment
+POST http://localhost:3000/api/posts/624ef3397108e971ef4519a5/comments
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0MTIwOCwiZXhwIjoxNjQ5MzQ0ODA4fQ.52roMfwEkVTTNbbC7G6H0SDmQWOo_6CB73io8UE7w9w
 Content-Type: application/json
 
 {
-    "text": "This is my asdas post"
+    "text": "Hello i love u"
 }
 
 ###
-# get all posts
-GET http://localhost:3000/api/posts/
+# get all comments of a post
+GET http://localhost:3000/api/posts/id/comment
 
 ###
-# get single posts
-GET http://localhost:3000/api/posts/624ef3397108e971ef4519a5
+# get single comment
+GET http://localhost:3000/api/posts/624ef3397108e971ef4519a5/comment/cid
 
 ###
-# update a post
-PUT http://localhost:3000/api/posts/624ef3397108e971ef4519a5
+# update a comment
+PUT http://localhost:3000/api/posts/624ef3397108e971ef4519a5/comment/cid
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0MTIwOCwiZXhwIjoxNjQ5MzQ0ODA4fQ.52roMfwEkVTTNbbC7G6H0SDmQWOo_6CB73io8UE7w9w
 Content-Type: application/json
 
