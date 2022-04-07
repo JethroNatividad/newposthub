@@ -12,17 +12,17 @@ export default async function handler(req, res) {
 
     switch (method) {
         case 'GET':
-            getComment(cid)
-            break
+            return getComment(cid)
+
         case 'PUT':
-            verifyToken(req, res, () => updateComment(req, res, cid))
-            break
+            return verifyToken(req, res, () => updateComment(req, res, cid))
+
         case 'DELETE':
-            verifyToken(req, res, () => deleteComment(req, res, cid))
-            break
+            return verifyToken(req, res, () => deleteComment(req, res, cid))
+
         default:
             res.setHeader('Allow', ['GET', 'PUT', 'DELETE'])
-            res.status(405).end(`Method ${method} Not Allowed`)
+            return res.status(405).end(`Method ${method} Not Allowed`)
     }
     async function getComment(cid) {
         try {

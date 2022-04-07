@@ -9,19 +9,17 @@ export default async function handler(req, res) {
     const { method } = req
     switch (method) {
         case 'GET':
-            getPosts(res)
-            break
+            return getPosts(res)
         case 'POST':
-            verifyToken(req, res, () => createPost(req, res))
-            break
+            return verifyToken(req, res, () => createPost(req, res))
         default:
             res.setHeader('Allow', ['GET', 'POST'])
-            res.status(405).end(`Method ${method} Not Allowed`)
+            return res.status(405).end(`Method ${method} Not Allowed`)
     }
     async function getPosts(res) {
         try {
             const posts = await Post.find().populate('author', ['username', '_id'])
-            res.status(200).json({ error: null, posts })
+            return res.status(200).json({ error: null, posts })
         } catch (error) {
             console.log(error)
             return res.status(403).end(error.message)

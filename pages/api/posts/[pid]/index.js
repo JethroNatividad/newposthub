@@ -11,17 +11,14 @@ export default async function handler(req, res) {
 
     switch (method) {
         case 'GET':
-            getPost(pid)
-            break
+            return getPost(pid)
         case 'PUT':
-            verifyToken(req, res, () => updatePost(req, res, pid))
-            break
+            return verifyToken(req, res, () => updatePost(req, res, pid))
         case 'DELETE':
-            verifyToken(req, res, () => deletePost(req, res, pid))
-            break
+            return verifyToken(req, res, () => deletePost(req, res, pid))
         default:
             res.setHeader('Allow', ['GET', 'PUT', 'DELETE'])
-            res.status(405).end(`Method ${method} Not Allowed`)
+            return res.status(405).end(`Method ${method} Not Allowed`)
     }
     async function getPost(pid) {
         try {

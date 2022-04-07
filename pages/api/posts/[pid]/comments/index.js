@@ -10,14 +10,12 @@ export default async function handler(req, res) {
     const { method, query: { pid } } = req
     switch (method) {
         case 'GET':
-            getComments(pid)
-            break
+            return getComments(pid)
         case 'POST':
-            verifyToken(req, res, () => createComment(req, res))
-            break
+            return verifyToken(req, res, () => createComment(req, res))
         default:
             res.setHeader('Allow', ['GET', 'POST'])
-            res.status(405).end(`Method ${method} Not Allowed`)
+            return res.status(405).end(`Method ${method} Not Allowed`)
     }
 
     async function getComments(pid) {

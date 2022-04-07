@@ -14,17 +14,17 @@ GET http://localhost:3000/api/posts/
 
 ###
 # get single posts
-GET http://localhost:3000/api/posts/624ef3397108e971ef4519a5
+GET http://localhost:3000/api/posts/624d9f0cdd38d5a28188cea4
 
 ###
 # update a post
-PUT http://localhost:3000/api/posts/624ef3397108e971ef4519a5
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0MTIwOCwiZXhwIjoxNjQ5MzQ0ODA4fQ.52roMfwEkVTTNbbC7G6H0SDmQWOo_6CB73io8UE7w9w
+PUT http://localhost:3000/api/posts/624f0aed1dd4f5f0b1918dd9
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0NjI0NywiZXhwIjoxNjQ5MzQ5ODQ3fQ.6UVXxMiHBr695R6Qcnc1jQlagQtIhJ0QPVygB2_E6QI
 Content-Type: application/json
 
 {
     "text": "This is my 2 asdasda post updated by test2"
 }
 ### delete a post
-DELETE http://localhost:3000/api/posts/624f07451dd4f5f0b1918da3
+DELETE http://localhost:3000/api/posts/624f0aed1dd4f5f0b1918dd9
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0NjI0NywiZXhwIjoxNjQ5MzQ5ODQ3fQ.6UVXxMiHBr695R6Qcnc1jQlagQtIhJ0QPVygB2_E6QI
