@@ -1,5 +1,5 @@
 #SIGNUP
-POST http://localhost:3000/api/auth/signup
+POST {{$dotenv BASEURL}}/auth/signup
 Content-Type: application/json
 
 # {
@@ -15,7 +15,7 @@ Content-Type: application/json
 
 ###
 #LOGIN
-POST http://localhost:3000/api/auth/login
+POST {{$dotenv BASEURL}}/auth/login
 Content-Type: application/json
 
 {
@@ -25,7 +25,7 @@ Content-Type: application/json
 
 ###
 # GET TOKEN
-GET http://localhost:3000/api/auth/token
+GET {{$dotenv BASEURL}}/auth/token
 ###
 #logout
-GET http://localhost:3000/api/auth/logout
+GET {{$dotenv BASEURL}}/auth/logout

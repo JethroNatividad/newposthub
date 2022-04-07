@@ -1,7 +1,9 @@
+@pid = 624f0b051dd4f5f0b1918de1
+@cid = 624f0b161dd4f5f0b1918de6
 ###
-# create a comment
-POST http://localhost:3000/api/posts/624f0b051dd4f5f0b1918de1/comments
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0NjI0NywiZXhwIjoxNjQ5MzQ5ODQ3fQ.6UVXxMiHBr695R6Qcnc1jQlagQtIhJ0QPVygB2_E6QI
+# @create a comment
+POST {{$dotenv BASEURL}}/posts/{{pid}}/comments
+Authorization: bearer {{$dotenv ACCESSTOKEN}}
 Content-Type: application/json
 
 {
@@ -10,21 +12,21 @@ Content-Type: application/json
 
 ###
 # get all comments of a post
-GET http://localhost:3000/api/posts/624f0b051dd4f5f0b1918de1/comments
+GET {{$dotenv BASEURL}}/posts/{{pid}}/comments
 
 ###
 # get single comment
-GET http://localhost:3000/api/posts/624f0b051dd4f5f0b1918de1/comments/624f0b161dd4f5f0b1918de6
+GET {{$dotenv BASEURL}}/posts/{{pid}}/comments/{{cid}}
 
 ###
 # update a comment
-PUT http://localhost:3000/api/posts/624f0b051dd4f5f0b1918de1/comments/624f0b161dd4f5f0b1918de6
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0NjI0NywiZXhwIjoxNjQ5MzQ5ODQ3fQ.6UVXxMiHBr695R6Qcnc1jQlagQtIhJ0QPVygB2_E6QI
+PUT {{$dotenv BASEURL}}/posts/{{pid}}/comments/{{cid}}
+Authorization: bearer {{$dotenv ACCESSTOKEN}}
 Content-Type: application/json
 
 {
     "text": "I change my mind sir"
 }
 ### delete a comment
-DELETE http://localhost:3000/api/posts/624f0b051dd4f5f0b1918de1/comments/624f0b161dd4f5f0b1918de6
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0NjI0NywiZXhwIjoxNjQ5MzQ5ODQ3fQ.6UVXxMiHBr695R6Qcnc1jQlagQtIhJ0QPVygB2_E6QI
+DELETE {{$dotenv BASEURL}}/posts/624f0b051dd4f5f0b1918de1/comments/{{cid}}
+Authorization: bearer {{$dotenv ACCESSTOKEN}}

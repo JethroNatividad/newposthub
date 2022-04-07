@@ -1,30 +1,31 @@
+@pid = 624d9f0cdd38d5a28188cea4
 ###
 # create a post
-POST http://localhost:3000/api/posts/
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0NjI0NywiZXhwIjoxNjQ5MzQ5ODQ3fQ.6UVXxMiHBr695R6Qcnc1jQlagQtIhJ0QPVygB2_E6QI
+POST {{$dotenv BASEURL}}/posts/
+Authorization: bearer {{$dotenv ACCESSTOKEN}}
 Content-Type: application/json
 
 {
-    "text": "This is my asdas post bruh"
+    "text": "This is my asdas post bruh2"
 }
 
 ###
 # get all posts
-GET http://localhost:3000/api/posts/
+GET {{$dotenv BASEURL}}posts/
 
 ###
 # get single posts
-GET http://localhost:3000/api/posts/624d9f0cdd38d5a28188cea4
+GET {{$dotenv BASEURL}}posts/{{pid}}
 
 ###
 # update a post
-PUT http://localhost:3000/api/posts/624f0aed1dd4f5f0b1918dd9
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0NjI0NywiZXhwIjoxNjQ5MzQ5ODQ3fQ.6UVXxMiHBr695R6Qcnc1jQlagQtIhJ0QPVygB2_E6QI
+PUT {{$dotenv BASEURL}}posts/{{pid}}
+Authorization: bearer {{$dotenv ACCESSTOKEN}}
 Content-Type: application/json
 
 {
     "text": "This is my 2 asdasda post updated by test2"
 }
 ### delete a post
-DELETE http://localhost:3000/api/posts/624f0aed1dd4f5f0b1918dd9
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGVkMzMwMjY1M2U3OTZhZWY4MmEyNSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0OTM0NjI0NywiZXhwIjoxNjQ5MzQ5ODQ3fQ.6UVXxMiHBr695R6Qcnc1jQlagQtIhJ0QPVygB2_E6QI
+DELETE {{$dotenv BASEURL}}posts/{{pid}}
+Authorization: bearer {{$dotenv ACCESSTOKEN}}
