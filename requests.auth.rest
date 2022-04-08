@@ -1,3 +1,4 @@
+
 #SIGNUP
 POST {{$dotenv BASEURL}}/auth/signup
 Content-Type: application/json
@@ -29,3 +30,9 @@ GET {{$dotenv BASEURL}}/auth/token
 ###
 #logout
 GET {{$dotenv BASEURL}}/auth/logout
+
+###
+# @Get user
+
+GET {{$dotenv BASEURL}}/auth/user
+Authorization: bearer {{$dotenv ACCESSTOKEN}}
