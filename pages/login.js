@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../lib/axios'
 import { Formik } from 'formik'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -23,7 +23,7 @@ const Login = () => {
                         onSubmit={ async ({ usernameOrEmail, password }, { setSubmitting }) => {
                             try {
                                 setSubmitting(true)
-                                const res = await axios.post('/api/auth/login', { usernameOrEmail, password })
+                                const res = await axios.post('/auth/login', { usernameOrEmail, password })
                                 console.log(res.data)
                                 if (res.data.error) {
                                     alert(res.data.error.message)
