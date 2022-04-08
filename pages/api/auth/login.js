@@ -8,12 +8,13 @@ export default async function handler(req, res) {
     await dbConnect()
 
     const { method, body } = req
+    console.log(body)
 
     switch (method) {
         case 'POST':
             const { usernameOrEmail, password } = body
             if (!usernameOrEmail) {
-                return res.status(200).json({ error: { message: "username or email required", field: 'username' } })
+                return res.status(200).json({ error: { message: "username or email required", field: 'usernameOrEmail' } })
             }
 
             if (!password) {
