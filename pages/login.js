@@ -3,9 +3,11 @@ import { Formik } from 'formik'
 import { useRouter } from 'next/router'
 import React from 'react'
 import Link from "next/link"
+import useAuth from '../hooks/useAuth'
 
 const Login = () => {
     const router = useRouter()
+    const { setAuth } = useAuth()
     return (
         <div
             className='min-h-screen bg-primary-dark'
@@ -29,6 +31,8 @@ const Login = () => {
                                     alert(res.data.error.message)
                                     return setSubmitting(false)
                                 }
+                                const { accessToken, user: { username, email, _id, role } } = res.data
+                                setAuth({ token: accessToken, user: { username, email, _id, role } })
                                 router.push('/')
                                 setSubmitting(false)
                             } catch (error) {
