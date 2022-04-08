@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Formik } from 'formik'
 import { useRouter } from 'next/router'
 import React from 'react'
+import Link from "next/link"
 
 const Login = () => {
     const router = useRouter()
@@ -16,31 +17,43 @@ const Login = () => {
                     <p className='text-lg md:text-xl max-w-md'>Connect with friends and the world around you on Posthub.</p>
                 </div>
 
-                <Formik initialValues={ { usernameOrEmail: '', password: '' } }
-                    onSubmit={ async ({ usernameOrEmail, password }, { setSubmitting }) => {
-                        try {
-                            setSubmitting(true)
-                            const res = await axios.post('/api/auth/login', { usernameOrEmail, password })
-                            console.log(res.data)
-                            if (res.data.error) {
-                                alert(res.data.error.message)
-                                return setSubmitting(false)
-                            }
-                            router.push('/')
-                            setSubmitting(false)
-                        } catch (error) {
-                            console.log(error)
-                        }
-                    } }>
-                    { ({ values, handleChange, isSubmitting, handleSubmit }) => (
-                        <form className='flex rounded-lg flex-col p-2 space-y-3 bg-secondary-dark w-full max-w-md mx-auto md:mx-0' onSubmit={ handleSubmit }>
+                <div className='rounded-lg p-2 bg-secondary-dark w-full max-w-md mx-auto md:mx-0'>
 
-                            <input className=' px-4 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-tertiary-dark' placeholder='Username or Email' type="text" name="usernameOrEmail" value={ values.usernameOrEmail } onChange={ handleChange } />
-                            <input className=' px-4 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-tertiary-dark' placeholder='Password' type="password" name="password" value={ values.password } onChange={ handleChange } />
-                            <button className='px-4 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-primary-dark' type="submit">Login</button>
-                        </form>
-                    ) }
-                </Formik>
+                    <Formik initialValues={ { usernameOrEmail: '', password: '' } }
+                        onSubmit={ async ({ usernameOrEmail, password }, { setSubmitting }) => {
+                            try {
+                                setSubmitting(true)
+                                const res = await axios.post('/api/auth/login', { usernameOrEmail, password })
+                                console.log(res.data)
+                                if (res.data.error) {
+                                    alert(res.data.error.message)
+                                    return setSubmitting(false)
+                                }
+                                router.push('/')
+                                setSubmitting(false)
+                            } catch (error) {
+                                console.log(error)
+                            }
+                        } }>
+                        { ({ values, handleChange, isSubmitting, handleSubmit }) => (
+                            <form className='flex flex-col space-y-3' onSubmit={ handleSubmit }>
+
+                                <input className=' px-4 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-tertiary-dark' placeholder='Username or Email' type="text" name="usernameOrEmail" value={ values.usernameOrEmail } onChange={ handleChange } />
+                                <input className=' px-4 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-tertiary-dark' placeholder='Password' type="password" name="password" value={ values.password } onChange={ handleChange } />
+                                <button className='px-4 hover:brightness-110 mb-5 py-3 rounded-lg outline-none text-md md:text-xl font-bold text-offwhite-50 bg-primary-dark' type="submit">Log In</button>
+
+                            </form>
+                        ) }
+                    </Formik>
+                    <div className='flex flex-col items-center my-5 space-y-5'>
+                        <Link href="#">
+                            <a className='text-offwhite-50'>Forgot password?</a>
+                        </Link>
+                        <hr className='border-b-[1px] border-primary-dark w-full' />
+
+                        <button className='px-4 hover:brightness-110 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-primary-dark max-w-xs' type="submit">Create new account</button>
+                    </div>
+                </div>
             </div>
         </div>
     )
