@@ -8,6 +8,7 @@ export default function Home() {
         <meta name="description" content="Posthub" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar />
 
     </div>
   )
