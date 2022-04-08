@@ -7,7 +7,7 @@ import useAuth from '../hooks/useAuth'
 
 const Login = () => {
     const router = useRouter()
-    const { setAuth } = useAuth()
+    const { setUser, setToken } = useAuth()
     return (
         <div
             className='min-h-screen bg-primary-dark'
@@ -32,7 +32,8 @@ const Login = () => {
                                     return setSubmitting(false)
                                 }
                                 const { accessToken, user: { username, email, _id, role } } = res.data
-                                setAuth({ token: accessToken, user: { username, email, _id, role } })
+                                setToken(accessToken)
+                                setUser({ username, email, id: _id, role })
                                 router.push('/')
                                 setSubmitting(false)
                             } catch (error) {
