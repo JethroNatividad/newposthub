@@ -9,7 +9,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <p className='text-green-400'>Hello</p>
     </div>
   )
 }
