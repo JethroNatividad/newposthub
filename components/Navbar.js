@@ -4,15 +4,15 @@ import { UserIcon } from '@heroicons/react/solid'
 
 const Navbar = () => {
     return (
-        <div className="flex h-14 justify-between items-center bg-secondary-dark px-5">
+        <div className="flex h-14 w-screen justify-between items-center bg-secondary-dark px-5 absolute top-0 right-0">
             {/* Logo */ }
             <div className="flex justify-center">
 
                 <Link href="/">
-                    <>
-                        <p className="text-offwhite-50 font-mono text-3xl font-bold sm:hidden">PH</p>
-                        <p className="text-offwhite-50 font-mono text-3xl font-bold hidden sm:block">POSTHUB</p>
-                    </>
+                    <a className="text-offwhite-50 font-mono text-3xl font-bold sm:hidden">PH</a>
+                </Link>
+                <Link href="/">
+                    <a className="text-offwhite-50 font-mono text-3xl font-bold hidden sm:block">POSTHUB</a>
                 </Link>
             </div>
 
