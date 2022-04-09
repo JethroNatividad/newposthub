@@ -8,7 +8,7 @@ import fetcherSSR from '../lib/fetcherSSR'
 
 export async function getServerSideProps({ req, res }) {
   const [error, data] = await fetcherSSR(req, res, '/auth/user')
-  if (!data.user) {
+  if (!data?.user) {
     return { redirect: { destination: '/login' } }
   }
   return { props: { user: data.user } }

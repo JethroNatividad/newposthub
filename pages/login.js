@@ -3,25 +3,18 @@ import { Formik } from 'formik'
 import { useRouter } from 'next/router'
 import React from 'react'
 import Link from "next/link"
-import { useEffect } from 'react'
-import fetcher from '../lib/fetcher'
+import fetcherSSR from '../lib/fetcherSSR'
 
+export async function getServerSideProps({ req, res }) {
+    const [error, data] = await fetcherSSR(req, res, '/auth/user')
+    if (data?.user) {
+        return { redirect: { destination: '/' } }
+    }
+    return { props: {} }
+}
 
 const Login = () => {
     const router = useRouter()
-
-    useEffect(() => {
-        const fn = async () => {
-            const [error, data] = await fetcher('/auth/user')
-            if (data?.user) {
-                router.push('/')
-            }
-            if (error) {
-                console.log(error)
-            }
-        }
-        fn()
-    }, [])
 
     return (
         <div
