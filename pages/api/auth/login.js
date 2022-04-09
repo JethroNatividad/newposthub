@@ -50,8 +50,9 @@ export default async function handler(req, res) {
             const refreshToken = await generateRefreshToken(user)
 
             // add refresh token to cookie http only
-            const serialized = serialize("refresh_token", refreshToken, { httpOnly: true, sameSite: "strict", path: "/" })
-            res.setHeader('Set-Cookie', serialized)
+            const serializedRefresh = serialize("refresh_token", refreshToken, { httpOnly: true, sameSite: "strict", path: "/" })
+            const serializedAccess = serialize("access_token", accessToken, { httpOnly: true, sameSite: "strict", path: "/" })
+            res.setHeader('Set-Cookie', [serializedAccess, serializedRefresh])
 
             return res.status(200).json({ error: null, accessToken, refreshToken, user })
         } catch (error) {

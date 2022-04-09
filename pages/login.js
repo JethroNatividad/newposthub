@@ -3,11 +3,12 @@ import { Formik } from 'formik'
 import { useRouter } from 'next/router'
 import React from 'react'
 import Link from "next/link"
-import useAuth from '../hooks/useAuth'
 
+export async function getInitialProps({ req }) {
+
+}
 const Login = () => {
     const router = useRouter()
-    const { setUser, setToken } = useAuth()
     return (
         <div
             className='min-h-screen bg-primary-dark'
@@ -31,9 +32,7 @@ const Login = () => {
                                     alert(res.data.error.message)
                                     return setSubmitting(false)
                                 }
-                                const { accessToken, user: { username, email, _id, role } } = res.data
-                                setToken(accessToken)
-                                setUser({ username, email, id: _id, role })
+
                                 router.push('/')
                                 setSubmitting(false)
                             } catch (error) {
