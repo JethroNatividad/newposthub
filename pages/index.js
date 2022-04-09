@@ -15,30 +15,6 @@ export async function getServerSideProps({ req, res }) {
 
 }
 export default function Home({ user }) {
-  // const { auth, setUser } = useAuth()
-  // const router = useRouter()
-
-  // useEffect(() => {
-  //   const fn = async () => {
-  //     const [error, data] = await fetcher('/auth/user')
-  //     if (!data?.user) {
-  //       router.push('/login')
-  //     }
-
-  //     if (!error && data) {
-  //       setUser(data.user)
-  //     }
-
-  //     if (error) {
-  //       console.log(error)
-  //       if (error.response.status === 403) {
-  //         router.push('/login')
-  //       }
-  //     }
-  //   }
-
-  //   fn()
-  // }, [])
 
   return (
     <div className='bg-primary-dark min-h-screen mt-14'>
