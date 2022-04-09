@@ -3,9 +3,30 @@ import { Formik } from 'formik'
 import { useRouter } from 'next/router'
 import React from 'react'
 import Link from "next/link"
+import useAxiosPrivate from '../hooks/useAxiosPrivate'
+import { useEffect } from 'react'
 
 const Login = () => {
     const router = useRouter()
+    const axiosPrivate = useAxiosPrivate()
+
+    useEffect(() => {
+        const fn = async () => {
+            try {
+                const { data } = await axiosPrivate.get('/auth/user')
+                const user = data?.user
+                if (user) {
+                    router.push('/')
+                }
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        fn()
+    }, [])
+
     return (
         <div
             className='min-h-screen bg-primary-dark'
