@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import useAuth from '../hooks/useAuth'
 import { useRouter } from 'next/router'
-import { fetcher } from '../lib/axios'
+import fetcher from '../lib/fetcher'
 
 export default function Home() {
   const { auth, setUser } = useAuth()

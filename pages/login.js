@@ -1,9 +1,11 @@
-import axios, { fetcher } from '../lib/axios'
+import axios from '../lib/axios'
 import { Formik } from 'formik'
 import { useRouter } from 'next/router'
 import React from 'react'
 import Link from "next/link"
 import { useEffect } from 'react'
+import fetcher from '../lib/fetcher'
+
 
 const Login = () => {
     const router = useRouter()
