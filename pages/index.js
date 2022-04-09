@@ -2,30 +2,46 @@ import Head from 'next/head'
 import { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import useAuth from '../hooks/useAuth'
-import useAxiosPrivate from '../hooks/useAxiosPrivate'
+// import useAxiosPrivate from '../hooks/useAxiosPrivate'
 import { useRouter } from 'next/router'
+import { fetcher } from '../lib/axios'
 
 export default function Home() {
   const { auth, setUser } = useAuth()
-  const axiosPrivate = useAxiosPrivate()
+  // const axiosPrivate = useAxiosPrivate()
   const router = useRouter()
 
   useEffect(() => {
     const fn = async () => {
-      try {
-        const { data } = await axiosPrivate.get('/auth/user')
-        const user = data?.user
-        if (!user) {
-          router.push('/login')
-        }
-        setUser(user)
+      const [error, data] = await fetcher('/auth/user')
+      if (!data?.user) {
+        router.push('/login')
+      }
 
-      } catch (error) {
-        // if there is no refresh token
+      if (!error && data) {
+        setUser(data.user)
+      }
+
+      if (error) {
+        console.log(error)
         if (error.response.status === 403) {
           router.push('/login')
         }
       }
+      // try {
+      //   const { data } = await axiosPrivate.get('/auth/user')
+      //   const user = data?.user
+      //   if (!user) {
+      //     router.push('/login')
+      //   }
+      //   setUser(user)
+
+      // } catch (error) {
+      //   // if there is no refresh token
+      // if (error.response.status === 403) {
+      //   router.push('/login')
+      // }
+      // }
     }
 
     fn()
