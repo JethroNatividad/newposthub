@@ -1,9 +1,5 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
 import Navbar from '../components/Navbar'
-import useAuth from '../hooks/useAuth'
-import { useRouter } from 'next/router'
-// import fetcher from '../lib/fetcher'
 import fetcherSSR from '../lib/fetcherSSR'
 
 export async function getServerSideProps({ req, res }) {
