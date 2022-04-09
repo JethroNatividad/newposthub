@@ -3,6 +3,7 @@ import { Formik } from 'formik'
 import { useRouter } from 'next/router'
 import React from 'react'
 import Link from "next/link"
+import Nprogress from 'nprogress'
 
 const Login = () => {
     const router = useRouter()
@@ -23,6 +24,7 @@ const Login = () => {
                     <Formik initialValues={ { usernameOrEmail: '', password: '' } }
                         onSubmit={ async ({ usernameOrEmail, password }, { setSubmitting }) => {
                             try {
+                                Nprogress.start()
                                 setSubmitting(true)
                                 const res = await axios.post('/auth/login', { usernameOrEmail, password })
                                 console.log(res.data)
@@ -30,7 +32,7 @@ const Login = () => {
                                     alert(res.data.error.message)
                                     return setSubmitting(false)
                                 }
-
+                                Nprogress.done()
                                 router.push('/')
                                 setSubmitting(false)
                             } catch (error) {
