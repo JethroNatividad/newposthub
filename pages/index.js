@@ -12,13 +12,19 @@ export default function Home() {
 
   useEffect(() => {
     const fn = async () => {
-      const { data } = await axiosPrivate.get('/auth/user')
-      const user = data?.user
-
-      if (user) {
+      try {
+        const { data } = await axiosPrivate.get('/auth/user')
+        const user = data?.user
+        if (!user) {
+          router.push('/login')
+        }
         setUser(user)
-      } else {
-        router.push('/login')
+
+      } catch (error) {
+        // if there is no refresh token
+        if (error.response.status === 403) {
+          router.push('/login')
+        }
       }
     }
 

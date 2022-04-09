@@ -4,9 +4,6 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import Link from "next/link"
 
-export async function getInitialProps({ req }) {
-
-}
 const Login = () => {
     const router = useRouter()
     return (

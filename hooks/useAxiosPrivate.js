@@ -7,7 +7,8 @@ const useAxiosPrivate = () => {
         try {
             return await axios.get('/auth/token', { withCredentials: true })
         } catch (error) {
-            console.log(error)
+            // throw the error
+            throw error
         }
     }
 
