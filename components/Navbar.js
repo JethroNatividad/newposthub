@@ -3,12 +3,15 @@ import { CollectionIcon, HomeIcon, LogoutIcon } from '@heroicons/react/outline'
 import { UserIcon } from '@heroicons/react/solid'
 import apiAxios from "../lib/axios"
 import { useRouter } from 'next/router'
+import nprogress from "nprogress"
 
 
 const Navbar = () => {
     const router = useRouter()
     async function logout() {
+        nprogress.start()
         await apiAxios.get('/auth/logout', { withCredentials: true })
+        nprogress.done()
         router.push('/login')
     }
 
