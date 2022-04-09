@@ -29,8 +29,10 @@ export default async function handler(req, res) {
                 return res.status(403).end('refresh token not found so you are already logged out')
             }
             await tokenExists.remove()
-            const serialized = serialize("refresh_token", null, { httpOnly: true, sameSite: "strict", path: "/" })
-            res.setHeader('Set-Cookie', serialized)
+            const serializedRefresh = serialize("refresh_token", null, { httpOnly: true, sameSite: "strict", path: "/" })
+            const serializedAccess = serialize("access_token", null, { httpOnly: true, sameSite: "strict", path: "/" })
+            res.setHeader('Set-Cookie', [serializedAccess, serializedRefresh])
+
             console.log("Logged out successfully")
             return res.status(200).end('Logged out successfully')
         } catch (error) {

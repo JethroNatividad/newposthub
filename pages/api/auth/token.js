@@ -1,3 +1,4 @@
+import { serialize } from "cookie"
 import jwt from "jsonwebtoken"
 import dbConnect from "../../../lib/dbConnect"
 import { generateAccessToken } from "../../../lib/jwt"
@@ -35,6 +36,9 @@ export default async function handler(req, res) {
 
             const user = jwt.verify(tokenExists.token, process.env.REFRESH_TOKEN_SECRET)
             const accessToken = generateAccessToken(user)
+            // add the access token to cookies
+            const serializedAccess = serialize("access_token", accessToken, { httpOnly: true, sameSite: "strict", path: "/" })
+            res.setHeader('Set-Cookie', serializedAccess)
             return res.status(200).json({ error: null, accessToken })
         } catch (error) {
             console.log(error)
