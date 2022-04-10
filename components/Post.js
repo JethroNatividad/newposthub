@@ -19,7 +19,7 @@ const Post = () => {
 
             {/* Content */ }
             <div className='p-2 md:p-4'>
-                <p>Content</p>
+                <p>Lorem ipsum dolor sit amet</p>
             </div>
 
             {/* Comments button */ }

@@ -14,7 +14,7 @@ export async function getServerSideProps({ req, res }) {
 export default function Home({ user }) {
 
   return (
-    <div className='bg-primary-dark min-h-screen mt-14'>
+    <div className='bg-primary-dark min-h-screen'>
       <Head>
         <title>Posthub</title>
         <meta name="description" content="Posthub" />
@@ -25,6 +25,11 @@ export default function Home({ user }) {
 
       <div className='max-w-3xl mx-3 md:mx-auto'>
         <Post />
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+
       </div>
     </div>
   )
