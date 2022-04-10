@@ -1,5 +1,7 @@
+import { serialize } from "cookie"
 import dbConnect from "../../../lib/dbConnect"
 import User from "../../../lib/models/User"
+import { generateAccessToken, generateRefreshToken } from "../../../lib/jwt"
 
 export default async function handler(req, res) {
     await dbConnect()

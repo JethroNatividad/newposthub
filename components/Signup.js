@@ -30,6 +30,8 @@ const Signup = () => {
                                 console.log(res.data)
                                 if (res.data.error) {
                                     alert(res.data.error.message)
+                                    Nprogress.done()
+
                                     return setSubmitting(false)
                                 }
                                 Nprogress.done()
