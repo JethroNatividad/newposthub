@@ -55,7 +55,7 @@ const Login = () => {
                         </Link>
                         <hr className='border-b-[1px] border-primary-dark w-full' />
 
-                        <button className='px-4 hover:brightness-110 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-primary-dark max-w-xs' type="submit">Create new account</button>
+                        <button className='px-4 hover:brightness-110 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-primary-dark max-w-xs' type="submit"><Link href="/signup">Create new account</Link></button>
                     </div>
                 </div>
             </div>
