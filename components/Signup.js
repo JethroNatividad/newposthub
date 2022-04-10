@@ -21,12 +21,12 @@ const Signup = () => {
 
                 <div className='rounded-lg p-2 bg-secondary-dark w-full max-w-md mx-auto md:mx-0'>
 
-                    <Formik initialValues={ { usernameOrEmail: '', password: '' } }
-                        onSubmit={ async ({ usernameOrEmail, password }, { setSubmitting }) => {
+                    <Formik initialValues={ { username: '', email: '', password: '' } }
+                        onSubmit={ async ({ username, email, password }, { setSubmitting }) => {
                             try {
                                 Nprogress.start()
                                 setSubmitting(true)
-                                const res = await axios.post('/auth/login', { usernameOrEmail, password })
+                                const res = await axios.post('/auth/signup', { username, email, password })
                                 console.log(res.data)
                                 if (res.data.error) {
                                     alert(res.data.error.message)
@@ -42,16 +42,17 @@ const Signup = () => {
                         { ({ values, handleChange, isSubmitting, handleSubmit }) => (
                             <form className='flex flex-col space-y-3' onSubmit={ handleSubmit }>
 
-                                <input className=' px-4 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-tertiary-dark' placeholder='Username or Email' type="text" name="usernameOrEmail" value={ values.usernameOrEmail } onChange={ handleChange } />
+                                <input className=' px-4 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-tertiary-dark' placeholder='Username' type="text" name="username" value={ values.username } onChange={ handleChange } />
+                                <input className=' px-4 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-tertiary-dark' placeholder='Email' type="text" name="email" value={ values.email } onChange={ handleChange } />
                                 <input className=' px-4 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-tertiary-dark' placeholder='Password' type="password" name="password" value={ values.password } onChange={ handleChange } />
-                                <button className='px-4 hover:brightness-110 mb-5 py-3 rounded-lg outline-none text-md md:text-xl font-bold text-offwhite-50 bg-primary-dark' type="submit">Log In</button>
+                                <button className='px-4 hover:brightness-110 mb-5 py-3 rounded-lg outline-none text-md md:text-xl font-bold text-offwhite-50 bg-primary-dark' type="submit">Sign up</button>
 
                             </form>
                         ) }
                     </Formik>
                     <div className='flex flex-col items-center my-5 space-y-5'>
                         <hr className='border-b-[1px] border-primary-dark w-full' />
-                        <p className='text-offwhite-50'>Already have an account? <Link href="#">
+                        <p className='text-offwhite-50'>Already have an account? <Link href="/login">
                             <a >Log in</a>
                         </Link></p>
 
