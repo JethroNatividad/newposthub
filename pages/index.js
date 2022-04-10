@@ -4,14 +4,17 @@ import Post from '../components/Post'
 import fetcherSSR from '../lib/fetcherSSR'
 
 export async function getServerSideProps({ req, res }) {
-  const [error, data] = await fetcherSSR(req, res, '/auth/user')
-  if (!data?.user) {
+  const [error, user] = await fetcherSSR(req, res, '/auth/user')
+  if (!user?.user) {
     return { redirect: { destination: '/login' } }
   }
-  return { props: { user: data.user } }
+
+  const [error2, posts] = await fetcherSSR(req, res, '/posts')
+
+  return { props: { user: user.user, posts: posts.posts } }
 
 }
-export default function Home({ user }) {
+export default function Home({ user, posts }) {
 
   return (
     <div className='bg-primary-dark min-h-screen'>
@@ -22,12 +25,12 @@ export default function Home({ user }) {
       </Head>
       <Navbar user={ user } />
 
+
       <div className='max-w-3xl mx-3 md:mx-auto space-y-2'>
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+
+        { posts.map(post => (
+          <Post key={ post._id } data={ post } />
+        )) }
 
       </div>
     </div>

@@ -2,7 +2,10 @@ import React from 'react'
 import { UserIcon } from '@heroicons/react/solid'
 import { ChatAltIcon } from '@heroicons/react/outline'
 
-const Post = () => {
+const Post = ({ data }) => {
+    const { text, author, comments, updatedAt } = data
+    const commentsCount = comments.length
+    console.log(data)
     return (
         <div className='w-full bg-secondary-dark rounded-lg text-offwhite-50'>
             {/* Author */ }
@@ -12,20 +15,20 @@ const Post = () => {
                 </div>
                 <div>
 
-                    <p className='font-semibold'>Author</p>
+                    <p className='font-semibold'>{ author.username }</p>
                     <p className='text-sm text-offwhite-100'>1h ago</p>
                 </div>
             </div>
 
             {/* Content */ }
             <div className='p-2 md:p-4'>
-                <p>Lorem ipsum dolor sit amet</p>
+                <p>{ text }</p>
             </div>
 
             {/* Comments button */ }
             <div className='p-2 md:p-4 space-y-3 flex flex-col'>
                 <div className='flex justify-end items-center'>
-                    <p className='text-sm text-offwhite-100'>100 Comments</p>
+                    { commentsCount > 0 && (<p className='text-sm text-offwhite-100'>{ commentsCount } { commentsCount > 1 ? "Comments" : "Comment" }</p>) }
                 </div>
 
                 <div className='w-full  h-[1px] bg-offwhite-50' />
