@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
+import Post from '../components/Post'
 import fetcherSSR from '../lib/fetcherSSR'
 
 export async function getServerSideProps({ req, res }) {
@@ -21,6 +22,10 @@ export default function Home({ user }) {
       </Head>
       <Navbar />
       <p>Welcome home { user?.username }</p>
+
+      <div className='max-w-3xl mx-3 md:mx-auto'>
+        <Post />
+      </div>
     </div>
   )
 }
