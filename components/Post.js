@@ -1,10 +1,12 @@
 import React from 'react'
 import { UserIcon } from '@heroicons/react/solid'
 import { ChatAltIcon } from '@heroicons/react/outline'
+import moment from 'moment'
 
 const Post = ({ data }) => {
     const { text, author, comments, updatedAt } = data
     const commentsCount = comments.length
+    const timePassed = moment(updatedAt).fromNow()
     console.log(data)
     return (
         <div className='w-full bg-secondary-dark rounded-lg text-offwhite-50'>
@@ -16,7 +18,7 @@ const Post = ({ data }) => {
                 <div>
 
                     <p className='font-semibold'>{ author.username }</p>
-                    <p className='text-sm text-offwhite-100'>1h ago</p>
+                    <p className='text-sm text-offwhite-100'>{ timePassed }</p>
                 </div>
             </div>
 
