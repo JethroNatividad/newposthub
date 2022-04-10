@@ -40,9 +40,18 @@ export default async function handler(req, res) {
         // create new user
         try {
             const newUser = new User({ username, email, password })
-            await newUser.save()
+            const savedUser = await newUser.save()
 
-            return res.status(200).json({ error: null, user: newUser })
+            const accessToken = generateAccessToken(savedUser)
+            const refreshToken = await generateRefreshToken(savedUser)
+
+            // add refresh token to cookie http only
+            const serializedRefresh = serialize("refresh_token", refreshToken, { httpOnly: true, sameSite: "strict", path: "/" })
+            const serializedAccess = serialize("access_token", accessToken, { httpOnly: true, sameSite: "strict", path: "/" })
+            res.setHeader('Set-Cookie', [serializedAccess, serializedRefresh])
+
+            return res.status(200).json({ error: null, accessToken, refreshToken, savedUser })
+            // return res.status(200).json({ error: null, user: newUser })
 
         } catch (error) {
             console.log(error)
