@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { CollectionIcon, HomeIcon, LogoutIcon } from '@heroicons/react/outline'
+import { DocumentAddIcon, HomeIcon, LogoutIcon } from '@heroicons/react/outline'
 import { UserIcon } from '@heroicons/react/solid'
 import apiAxios from "../lib/axios"
 import { useRouter } from 'next/router'
@@ -34,7 +34,7 @@ const Navbar = ({ user }) => {
                     <HomeIcon className="w-10 h-10" />
                 </div>
                 <div className="text-offwhite-100 cursor-pointer hover:bg-tertiary-dark px-3 py-1 rounded-lg">
-                    <CollectionIcon className="w-10 h-10" />
+                    <DocumentAddIcon className="w-10 h-10" />
                 </div>
             </div>
 
