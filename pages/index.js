@@ -20,10 +20,9 @@ export default function Home({ user }) {
         <meta name="description" content="Posthub" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
-      <p>Welcome home { user?.username }</p>
+      <Navbar user={ user } />
 
-      <div className='max-w-3xl mx-3 md:mx-auto'>
+      <div className='max-w-3xl mx-3 md:mx-auto space-y-2'>
         <Post />
         <Post />
         <Post />
