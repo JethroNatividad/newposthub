@@ -14,11 +14,11 @@ export default async function handler(req, res) {
         case 'POST':
             const { usernameOrEmail, password } = body
             if (!usernameOrEmail) {
-                return res.status(200).json({ error: { message: "username or email required", field: 'usernameOrEmail' } })
+                return res.status(200).json({ error: { message: "Username or email required", field: 'usernameOrEmail' } })
             }
 
             if (!password) {
-                return res.status(200).json({ error: { message: "password required", field: 'password' } })
+                return res.status(200).json({ error: { message: "Password required", field: 'password' } })
             }
             return login(usernameOrEmail, password)
         default:
@@ -37,13 +37,13 @@ export default async function handler(req, res) {
             // check if user exists
             const user = await User.findOne(query)
             if (!user) {
-                return res.status(200).json({ error: { message: "User not found", field: 'usernameOrEmail', query } })
+                return res.status(200).json({ error: { message: `Incorrect ${isEmail ? 'email' : 'username'} or password` } })
             }
 
             // check if password is correct
             const validPass = await user.validPassword(password)
             if (!validPass) {
-                return res.status(200).json({ error: { message: "Incorrect password", field: 'password' } })
+                return res.status(200).json({ error: { message: `Incorrect ${isEmail ? 'email' : 'username'} or password` } })
             }
 
             const accessToken = generateAccessToken(user)
