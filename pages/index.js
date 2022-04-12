@@ -17,7 +17,7 @@ export async function getServerSideProps({ req, res }) {
 export default function Home({ user, posts }) {
 
   return (
-    <div className='bg-primary-dark min-h-screen'>
+    <div className=' bg-primary-dark min-h-screen'>
       <Head>
         <title>Posthub</title>
         <meta name="description" content="Posthub" />

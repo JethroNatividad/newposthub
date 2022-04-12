@@ -34,7 +34,9 @@ const Navbar = ({ user }) => {
                     <HomeIcon className="w-10 h-10" />
                 </div>
                 <div className="text-offwhite-100 cursor-pointer hover:bg-tertiary-dark px-3 py-1 rounded-lg">
-                    <DocumentAddIcon className="w-10 h-10" />
+                    <Link href="/newPost">
+                        <DocumentAddIcon className="w-10 h-10" />
+                    </Link>
                 </div>
             </div>
 
