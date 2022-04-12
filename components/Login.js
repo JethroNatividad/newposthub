@@ -5,6 +5,7 @@ import React from 'react'
 import Link from "next/link"
 import Nprogress from 'nprogress'
 import { toast } from 'react-toastify'
+import { poster } from '../lib/fetcher'
 
 const Login = () => {
     const router = useRouter()
@@ -27,16 +28,17 @@ const Login = () => {
                             try {
                                 Nprogress.start()
                                 setSubmitting(true)
-                                const res = await axios.post('/auth/login', { usernameOrEmail, password })
-                                console.log(res.data)
-                                if (res.data.error) {
-                                    toast.error(res.data.error.message)
+                                // const res = await axios.post('/auth/login', { usernameOrEmail, password })
+                                const [err, data] = await poster('/auth/login', { usernameOrEmail, password })
+                                console.log(data)
+                                if (err) {
+                                    toast.error(err.message)
                                     Nprogress.done()
                                     return setSubmitting(false)
                                 }
                                 Nprogress.done()
                                 router.push('/')
-                                toast.success("Welcome back, " + res.data.user.username, { delay: 1000 })
+                                toast.success("Welcome back, " + data.user.username, { delay: 1000 })
                                 setSubmitting(false)
                             } catch (error) {
                                 console.log(error)
