@@ -8,7 +8,22 @@ import { toast } from 'react-toastify'
 
 const Signup = () => {
     const router = useRouter()
-
+    const handleSubmit = async ({ username, email, password }, { setSubmitting }) => {
+        Nprogress.start()
+        setSubmitting(true)
+        const [err, data] = await poster('/auth/signup', { username, email, password })
+        console.log(data)
+        if (err) {
+            alert(err.message)
+            Nprogress.done()
+            toast.error(err.message)
+            return setSubmitting(false)
+        }
+        Nprogress.done()
+        router.push('/')
+        toast.success("Welcome to posthub, " + data.user.username, { delay: 1000 })
+        setSubmitting(false)
+    }
 
     return (
         <div
@@ -24,23 +39,7 @@ const Signup = () => {
                 <div className='rounded-lg p-2 bg-secondary-dark w-full max-w-md mx-auto md:mx-0'>
 
                     <Formik initialValues={ { username: '', email: '', password: '' } }
-                        onSubmit={ async ({ username, email, password }, { setSubmitting }) => {
-                            Nprogress.start()
-                            setSubmitting(true)
-                            const [err, data] = await poster('/auth/signup', { username, email, password })
-                            console.log(data)
-                            if (err) {
-                                alert(err.message)
-                                Nprogress.done()
-                                toast.error(err.message)
-                                return setSubmitting(false)
-                            }
-                            Nprogress.done()
-                            router.push('/')
-                            toast.success("Welcome to posthub, " + data.user.username, { delay: 1000 })
-                            setSubmitting(false)
-
-                        } }>
+                        onSubmit={ handleSubmit }>
                         { ({ values, handleChange, isSubmitting, handleSubmit }) => (
                             <form className='flex flex-col space-y-3' onSubmit={ handleSubmit }>
 

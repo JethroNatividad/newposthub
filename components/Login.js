@@ -1,4 +1,3 @@
-import axios from '../lib/axios'
 import { Formik } from 'formik'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -9,7 +8,22 @@ import { poster } from '../lib/fetcher'
 
 const Login = () => {
     const router = useRouter()
-
+    const handleSubmit = async ({ usernameOrEmail, password }, { setSubmitting }) => {
+        Nprogress.start()
+        setSubmitting(true)
+        // const res = await axios.post('/auth/login', { usernameOrEmail, password })
+        const [err, data] = await poster('/auth/login', { usernameOrEmail, password })
+        console.log(data)
+        if (err) {
+            toast.error(err.message)
+            Nprogress.done()
+            return setSubmitting(false)
+        }
+        Nprogress.done()
+        router.push('/')
+        toast.success("Welcome back, " + data.user.username, { delay: 1000 })
+        setSubmitting(false)
+    }
     return (
         <div
             className='min-h-screen bg-primary-dark'
@@ -24,22 +38,7 @@ const Login = () => {
                 <div className='rounded-lg p-2 bg-secondary-dark w-full max-w-md mx-auto md:mx-0'>
 
                     <Formik initialValues={ { usernameOrEmail: '', password: '' } }
-                        onSubmit={ async ({ usernameOrEmail, password }, { setSubmitting }) => {
-                            Nprogress.start()
-                            setSubmitting(true)
-                            // const res = await axios.post('/auth/login', { usernameOrEmail, password })
-                            const [err, data] = await poster('/auth/login', { usernameOrEmail, password })
-                            console.log(data)
-                            if (err) {
-                                toast.error(err.message)
-                                Nprogress.done()
-                                return setSubmitting(false)
-                            }
-                            Nprogress.done()
-                            router.push('/')
-                            toast.success("Welcome back, " + data.user.username, { delay: 1000 })
-                            setSubmitting(false)
-                        } }>
+                        onSubmit={ handleSubmit }>
                         { ({ values, handleChange, isSubmitting, handleSubmit }) => (
                             <form className='flex flex-col space-y-3' onSubmit={ handleSubmit }>
 
