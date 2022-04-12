@@ -1,22 +1,28 @@
 import { Formik } from 'formik'
 import nprogress from 'nprogress'
 import React from 'react'
-import Link from "next/link"
 import { poster } from '../lib/fetcher'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
+
 
 const NewPost = () => {
+    const router = useRouter()
 
     const handleSubmit = async ({ text }, { setValues, setSubmitting }) => {
         nprogress.start()
         setSubmitting(true)
         const [err, data] = await poster('/posts', { text })
         if (err) {
-            alert(err.message)
             console.log(err.message)
+            nprogress.done()
+            return toast.error(err.message)
         }
         console.log(data)
         setValues({ text: '' })
         nprogress.done()
+        router.push('/')
+        toast.success("Post created successfully", { delay: 500 })
         setSubmitting(false)
     }
     return (
