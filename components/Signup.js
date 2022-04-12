@@ -1,12 +1,13 @@
-import axios from '../lib/axios'
 import { Formik } from 'formik'
 import { useRouter } from 'next/router'
 import React from 'react'
 import Link from "next/link"
 import Nprogress from 'nprogress'
+import { poster } from '../lib/fetcher'
 
 const Signup = () => {
     const router = useRouter()
+
 
     return (
         <div
@@ -23,22 +24,19 @@ const Signup = () => {
 
                     <Formik initialValues={ { username: '', email: '', password: '' } }
                         onSubmit={ async ({ username, email, password }, { setSubmitting }) => {
-                            try {
-                                Nprogress.start()
-                                setSubmitting(true)
-                                const res = await axios.post('/auth/signup', { username, email, password })
-                                console.log(res.data)
-                                if (res.data.error) {
-                                    alert(res.data.error.message)
-                                    Nprogress.done()
-                                    return setSubmitting(false)
-                                }
+                            Nprogress.start()
+                            setSubmitting(true)
+                            const [err, data] = await poster('/auth/signup', { username, email, password })
+                            console.log(data)
+                            if (err) {
+                                alert(err.message)
                                 Nprogress.done()
-                                router.push('/')
-                                setSubmitting(false)
-                            } catch (error) {
-                                console.log(error)
+                                return setSubmitting(false)
                             }
+                            Nprogress.done()
+                            router.push('/')
+                            setSubmitting(false)
+
                         } }>
                         { ({ values, handleChange, isSubmitting, handleSubmit }) => (
                             <form className='flex flex-col space-y-3' onSubmit={ handleSubmit }>
@@ -46,7 +44,7 @@ const Signup = () => {
                                 <input className=' px-4 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-tertiary-dark' placeholder='Username' type="text" name="username" value={ values.username } onChange={ handleChange } />
                                 <input className=' px-4 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-tertiary-dark' placeholder='Email' type="text" name="email" value={ values.email } onChange={ handleChange } />
                                 <input className=' px-4 py-3 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-tertiary-dark' placeholder='Password' type="password" name="password" value={ values.password } onChange={ handleChange } />
-                                <button className='px-4 hover:brightness-110 mb-5 py-3 rounded-lg outline-none text-md md:text-xl font-bold text-offwhite-50 bg-primary-dark' type="submit">Sign up</button>
+                                <button disabled={ isSubmitting } className='px-4 hover:brightness-110 mb-5 py-3 rounded-lg outline-none text-md md:text-xl font-bold text-offwhite-50 bg-primary-dark' type="submit">Sign up</button>
 
                             </form>
                         ) }
