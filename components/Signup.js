@@ -37,7 +37,7 @@ const Signup = () => {
                             }
                             Nprogress.done()
                             router.push('/')
-                            toast.success("Welcome back, " + data.user.username, { delay: 1000 })
+                            toast.success("Welcome to posthub, " + data.user.username, { delay: 1000 })
                             setSubmitting(false)
 
                         } }>
