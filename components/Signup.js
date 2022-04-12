@@ -14,7 +14,6 @@ const Signup = () => {
         const [err, data] = await poster('/auth/signup', { username, email, password })
         console.log(data)
         if (err) {
-            alert(err.message)
             Nprogress.done()
             toast.error(err.message)
             return setSubmitting(false)

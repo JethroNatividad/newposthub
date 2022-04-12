@@ -52,7 +52,7 @@ export default async function handler(req, res) {
             const serializedAccess = serialize("access_token", accessToken, { httpOnly: true, sameSite: "strict", path: "/" })
             res.setHeader('Set-Cookie', [serializedAccess, serializedRefresh])
 
-            return res.status(200).json({ error: null, accessToken, refreshToken, savedUser })
+            return res.status(200).json({ error: null, accessToken, refreshToken, user: savedUser })
             // return res.status(200).json({ error: null, user: newUser })
 
         } catch (error) {
