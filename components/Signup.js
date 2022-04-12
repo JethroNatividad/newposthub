@@ -4,6 +4,7 @@ import React from 'react'
 import Link from "next/link"
 import Nprogress from 'nprogress'
 import { poster } from '../lib/fetcher'
+import { toast } from 'react-toastify'
 
 const Signup = () => {
     const router = useRouter()
@@ -31,10 +32,12 @@ const Signup = () => {
                             if (err) {
                                 alert(err.message)
                                 Nprogress.done()
+                                toast.error(err.message)
                                 return setSubmitting(false)
                             }
                             Nprogress.done()
                             router.push('/')
+                            toast.success("Welcome back, " + data.user.username, { delay: 1000 })
                             setSubmitting(false)
 
                         } }>
