@@ -13,6 +13,7 @@ const Navbar = ({ user }) => {
         await apiAxios.get('/auth/logout', { withCredentials: true })
         nprogress.done()
         router.push('/login')
+        toast.success("Logged out successfully", { delay: 1000 })
     }
 
     return (

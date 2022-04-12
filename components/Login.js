@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import Link from "next/link"
 import Nprogress from 'nprogress'
+import { toast } from 'react-toastify'
 
 const Login = () => {
     const router = useRouter()
@@ -29,12 +30,13 @@ const Login = () => {
                                 const res = await axios.post('/auth/login', { usernameOrEmail, password })
                                 console.log(res.data)
                                 if (res.data.error) {
-                                    alert(res.data.error.message)
+                                    toast.error(res.data.error.message)
                                     Nprogress.done()
                                     return setSubmitting(false)
                                 }
                                 Nprogress.done()
                                 router.push('/')
+                                toast.success("Welcome back, " + res.data.user.username, { delay: 1000 })
                                 setSubmitting(false)
                             } catch (error) {
                                 console.log(error)
@@ -60,7 +62,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

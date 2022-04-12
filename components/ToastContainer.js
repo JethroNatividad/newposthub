@@ -6,7 +6,7 @@ const MyToastContainer = () => {
 
     return <ToastContainer
         position="top-right"
-        autoClose={ 5000 }
+        autoClose={ 2000 }
         hideProgressBar={ false }
         newestOnTop={ false }
         closeOnClick
@@ -15,6 +15,7 @@ const MyToastContainer = () => {
         draggable
         pauseOnHover={ false }
         theme="dark"
+
     />
 }
 
