@@ -31,7 +31,9 @@ const Navbar = ({ user }) => {
             {/* Middle area */ }
             <div className="flex justify-center space-x-1 md:space-x-3">
                 <div className="text-offwhite-100 cursor-pointer hover:bg-tertiary-dark px-1 md:px-3 py-1 rounded-lg">
-                    <HomeIcon className="w-10 h-10" />
+                    <Link href="/">
+                        <HomeIcon className="w-10 h-10" />
+                    </Link>
                 </div>
                 <div className="text-offwhite-100 cursor-pointer hover:bg-tertiary-dark px-3 py-1 rounded-lg">
                     <Link href="/newPost">
