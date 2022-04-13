@@ -6,10 +6,11 @@ import Link from "next/link"
 import DotsMenu from './DotsMenu'
 
 const Post = ({ data, user }) => {
-    const { text, author, comments, updatedAt, _id } = data
+    const { text, author, comments, updatedAt, createdAt, _id } = data
     const commentsCount = comments.length
     const isAuthor = author._id === user.id
-    const timePassed = moment(updatedAt).fromNow()
+    const timePassed = moment(createdAt).fromNow()
+    const isEdited = updatedAt !== createdAt
     console.log(data)
     return (
         <div className='w-full bg-secondary-dark rounded-lg text-offwhite-50'>
@@ -22,7 +23,7 @@ const Post = ({ data, user }) => {
                     <div>
 
                         <p className='font-semibold'>{ author.username }</p>
-                        <p className='text-sm text-offwhite-100'>{ timePassed }</p>
+                        <p className='text-sm text-offwhite-100'>{ timePassed } { isEdited && <span className='text-xs text-gray-500'> • edited</span> }</p>
                     </div>
                 </div>
 
