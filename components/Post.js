@@ -1,12 +1,12 @@
 import React from 'react'
 import { DotsHorizontalIcon, UserIcon } from '@heroicons/react/solid'
-import { ChatAltIcon } from '@heroicons/react/outline'
+import { ChatAltIcon, PencilAltIcon, TrashIcon } from '@heroicons/react/outline'
 import moment from 'moment'
 import Link from "next/link"
 import DotsMenu from './DotsMenu'
 
 const Post = ({ data, user }) => {
-    const { text, author, comments, updatedAt } = data
+    const { text, author, comments, updatedAt, _id } = data
     const commentsCount = comments.length
     const isAuthor = author._id === user.id
     const timePassed = moment(updatedAt).fromNow()
@@ -27,7 +27,10 @@ const Post = ({ data, user }) => {
                 </div>
 
                 {
-                    isAuthor && <DotsMenu />
+                    isAuthor && <DotsMenu>
+                        <button className='px-4 flex justify-center hover:brightness-110 py-1 w-full rounded-lg outline-none text-md md:text-xl text-offwhite-100 bg-primary-dark max-w-xs hover:text-orange-400' type="submit"><Link href={ { pathname: '/editPost', query: { pid: _id } } } ><PencilAltIcon className="w-6 h-6 relative" /></Link></button>
+                        <button className='px-4 flex justify-center hover:brightness-110 py-1 w-full rounded-lg outline-none text-md md:text-xl text-offwhite-100 bg-primary-dark max-w-xs hover:text-red-600' type="submit"><TrashIcon className="w-6 h-6 relative" /></button>
+                    </DotsMenu>
                 }
             </div>
 
