@@ -3,6 +3,7 @@ import { DotsHorizontalIcon, UserIcon } from '@heroicons/react/solid'
 import { ChatAltIcon } from '@heroicons/react/outline'
 import moment from 'moment'
 import Link from "next/link"
+import DotsMenu from './DotsMenu'
 
 const Post = ({ data, user }) => {
     const { text, author, comments, updatedAt } = data
@@ -26,9 +27,7 @@ const Post = ({ data, user }) => {
                 </div>
 
                 {
-                    isAuthor && (<div className="text-offwhite-100 h-5 flex items-center px-1 cursor-pointer hover:bg-tertiary-dark  rounded-lg">
-                        <DotsHorizontalIcon className="w-6 h-6 relative" />
-                    </div>)
+                    isAuthor && <DotsMenu />
                 }
             </div>
 

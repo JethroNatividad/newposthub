@@ -17,7 +17,7 @@ const Navbar = ({ user }) => {
     }
 
     return (
-        <div className="flex shadow-md shadow-primary-dark h-14 w-full justify-between items-center bg-secondary-dark px-5 sticky top-0 right-0">
+        <div className="flex z-20 shadow-md shadow-primary-dark h-14 w-full justify-between items-center bg-secondary-dark px-5 sticky top-0 right-0">
             {/* Logo */ }
 
             <div className="flex justify-center">
