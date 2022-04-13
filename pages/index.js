@@ -1,6 +1,9 @@
 import Head from 'next/head'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import Navbar from '../components/Navbar'
 import Post from '../components/Post'
+import fetcher, { deleter } from '../lib/fetcher'
 import fetcherSSR from '../lib/fetcherSSR'
 
 export async function getServerSideProps({ req, res }) {
@@ -9,12 +12,38 @@ export async function getServerSideProps({ req, res }) {
     return { redirect: { destination: '/login' } }
   }
 
-  const [error2, posts] = await fetcherSSR(req, res, '/posts')
 
-  return { props: { user: user.user, posts: posts.posts } }
+  return { props: { user: user.user } }
 
 }
-export default function Home({ user, posts }) {
+export default function Home({ user }) {
+
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    const fn = async () => {
+      const [err, data] = await fetcher('/posts')
+      if (err) {
+        return toast.error(err.message)
+      }
+      setPosts(data.posts)
+    }
+    fn()
+  }, [])
+
+
+  const deletePost = async (id) => {
+    const toastId = toast.loading("Deleting...")
+    const [err] = await deleter(`/posts/${id}`)
+    if (err) {
+      return toast.update(toastId, { render: err.message, type: "error", isLoading: false, closeOnClick: true, autoClose: 2000 })
+    }
+    setPosts(posts =>
+      posts.filter(post => post._id !== id)
+    )
+    return toast.update(toastId, { render: "Post deleted", type: "success", isLoading: false, closeOnClick: true, autoClose: 2000 })
+
+  }
 
   return (
     <div className=' bg-primary-dark min-h-screen'>
@@ -29,7 +58,7 @@ export default function Home({ user, posts }) {
       <div className='max-w-3xl mx-3 md:mx-auto space-y-2'>
 
         { posts.map(post => (
-          <Post key={ post._id } data={ post } user={ user } />
+          <Post deletePost={ deletePost } key={ post._id } data={ post } user={ user } />
         )) }
 
       </div>

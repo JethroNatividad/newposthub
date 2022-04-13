@@ -6,13 +6,17 @@ import Link from "next/link"
 import DotsMenu from './DotsMenu'
 import ConfirmationButton from './ConfirmationButton'
 
-const Post = ({ data, user }) => {
+
+const Post = ({ data, user, deletePost }) => {
     const { text, author, comments, updatedAt, createdAt, _id } = data
     const commentsCount = comments.length
     const isAuthor = author._id === user.id
     const timePassed = moment(createdAt).fromNow()
     const isEdited = updatedAt !== createdAt
 
+    const handleDelete = () => {
+        deletePost(_id)
+    }
 
     console.log(data)
     return (
@@ -33,7 +37,7 @@ const Post = ({ data, user }) => {
                 {
                     isAuthor && <DotsMenu>
                         <button className='px-4 flex justify-center hover:brightness-110 py-1 w-full rounded-lg outline-none text-md md:text-xl text-offwhite-100 bg-primary-dark max-w-xs hover:text-orange-400' type="submit"><Link href={ { pathname: '/editPost', query: { pid: _id } } } ><PencilAltIcon className="w-6 h-6 relative" /></Link></button>
-                        <ConfirmationButton />
+                        <ConfirmationButton handleDelete={ handleDelete } />
                     </DotsMenu>
                 }
             </div>

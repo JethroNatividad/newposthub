@@ -1,9 +1,9 @@
 import { CheckIcon, TrashIcon, XIcon } from '@heroicons/react/outline'
 import { useState, useRef, useEffect } from 'react'
 
-const ConfirmationButton = () => {
+const ConfirmationButton = ({ handleDelete }) => {
     const ref = useRef(null)
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
         /**
@@ -24,6 +24,7 @@ const ConfirmationButton = () => {
     }, [ref, isOpen])
 
     const handleConfirm = () => {
+        handleDelete()
         setIsOpen(false)
         console.log("confirmed")
     }
