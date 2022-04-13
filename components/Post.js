@@ -4,6 +4,7 @@ import { ChatAltIcon, PencilAltIcon, TrashIcon } from '@heroicons/react/outline'
 import moment from 'moment'
 import Link from "next/link"
 import DotsMenu from './DotsMenu'
+import ConfirmationButton from './ConfirmationButton'
 
 const Post = ({ data, user }) => {
     const { text, author, comments, updatedAt, createdAt, _id } = data
@@ -11,6 +12,8 @@ const Post = ({ data, user }) => {
     const isAuthor = author._id === user.id
     const timePassed = moment(createdAt).fromNow()
     const isEdited = updatedAt !== createdAt
+
+
     console.log(data)
     return (
         <div className='w-full bg-secondary-dark rounded-lg text-offwhite-50'>
@@ -30,7 +33,7 @@ const Post = ({ data, user }) => {
                 {
                     isAuthor && <DotsMenu>
                         <button className='px-4 flex justify-center hover:brightness-110 py-1 w-full rounded-lg outline-none text-md md:text-xl text-offwhite-100 bg-primary-dark max-w-xs hover:text-orange-400' type="submit"><Link href={ { pathname: '/editPost', query: { pid: _id } } } ><PencilAltIcon className="w-6 h-6 relative" /></Link></button>
-                        <button className='px-4 flex justify-center hover:brightness-110 py-1 w-full rounded-lg outline-none text-md md:text-xl text-offwhite-100 bg-primary-dark max-w-xs hover:text-red-600' type="submit"><TrashIcon className="w-6 h-6 relative" /></button>
+                        <ConfirmationButton />
                     </DotsMenu>
                 }
             </div>
