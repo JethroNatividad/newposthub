@@ -29,7 +29,7 @@ export default function Home({ user, posts }) {
       <div className='max-w-3xl mx-3 md:mx-auto space-y-2'>
 
         { posts.map(post => (
-          <Post key={ post._id } data={ post } />
+          <Post key={ post._id } data={ post } user={ user } />
         )) }
 
       </div>

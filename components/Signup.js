@@ -55,8 +55,6 @@ const Signup = () => {
                         <p className='text-offwhite-50'>Already have an account? <Link href="/login">
                             <a >Log in</a>
                         </Link></p>
-
-
                     </div>
                 </div>
             </div>
