@@ -38,7 +38,7 @@ const Navbar = ({ user }) => {
                     </Link>
                 </div>
                 <div className="text-offwhite-100 cursor-pointer hover:bg-tertiary-dark px-3 py-1 rounded-lg">
-                    <Link href="/newPost">
+                    <Link href="/post/new">
                         <DocumentAddIcon className="w-10 h-10" />
                     </Link>
                 </div>
