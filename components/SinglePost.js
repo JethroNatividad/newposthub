@@ -4,6 +4,7 @@ import moment from 'moment'
 import Link from "next/link"
 import ConfirmationButton from './ConfirmationButton'
 import DotsMenu from './DotsMenu'
+import CommentSection from './CommentSection'
 
 
 const SinglePost = ({ data, loading, user }) => {
@@ -20,7 +21,7 @@ const SinglePost = ({ data, loading, user }) => {
 
     if (loading) return <p>Loading</p>
     return (
-        <div className='w-full bg-secondary-dark rounded-lg text-offwhite-50'>
+        <div className='w-full max-w-3xl mx-3 md:mx-auto bg-secondary-dark rounded-lg text-offwhite-50'>
             {/* Author */ }
             <div className='flex p-2 md:p-4 justify-between'>
                 <div className='flex space-x-2'>
@@ -55,12 +56,7 @@ const SinglePost = ({ data, loading, user }) => {
                 <div className='w-full  h-[1px] bg-offwhite-50' />
 
                 <div className='flex justify-center items-center'>
-                    <Link href={ `/post/${_id}` } >
-                        <div className="text-offwhite-100 cursor-pointer flex justify-center space-x-1 hover:bg-tertiary-dark px-3 py-1 rounded-lg w-40">
-                            <ChatAltIcon className="w-7 h-7" />
-                            <p className='font-semibold'>Comment</p>
-                        </div>
-                    </Link>
+                    <CommentSection />
                 </div>
 
             </div>
