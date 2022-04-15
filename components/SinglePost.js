@@ -5,9 +5,14 @@ import Link from "next/link"
 import ConfirmationButton from './ConfirmationButton'
 import DotsMenu from './DotsMenu'
 import CommentSection from './CommentSection'
+import { useRouter } from 'next/router'
+import { deleter } from '../lib/fetcher'
+import { toast } from 'react-toastify'
 
 
 const SinglePost = ({ data, loading, user }) => {
+    const router = useRouter()
+
     const text = data?.text
     const author = data?.author
     const comments = data?.comments
@@ -20,6 +25,18 @@ const SinglePost = ({ data, loading, user }) => {
     const isEdited = updatedAt !== createdAt
 
     if (loading) return <p>Loading</p>
+    const deletePost = async (id) => {
+        const toastId = toast.loading("Deleting...")
+        const [err] = await deleter(`/posts/${id}`)
+        if (err) {
+            return toast.update(toastId, { render: err.message, type: "error", isLoading: false, closeOnClick: true, autoClose: 2000 })
+        }
+        router.push('/')
+        return toast.update(toastId, { render: "Post deleted", type: "success", isLoading: false, closeOnClick: true, autoClose: 2000 })
+    }
+
+    const handleDelete = () => deletePost(_id)
+
     return (
         <div className='p-3'>
 
@@ -30,7 +47,7 @@ const SinglePost = ({ data, loading, user }) => {
                         <div className="text-offwhite-50 hover:brightness-150 bg-tertiary-dark p-2 rounded-3xl cursor-pointer flex justify-center items-center">
                             <UserIcon className="w-7 h-7" />
                         </div>
-                        <div>
+                        <div className='flex-1'>
                             <p className='font-semibold'>{ author.username }</p>
                             <p className='text-sm text-offwhite-100'>{ timePassed } { isEdited && <span className='text-xs text-gray-500'> • edited</span> }</p>
                         </div>
