@@ -1,6 +1,7 @@
 import { ChevronRightIcon, UserIcon } from '@heroicons/react/solid'
 import { Formik } from 'formik'
 import React from 'react'
+import Comment from './Comment'
 
 const CommentSection = () => {
     const handleSubmit = async () => {
@@ -8,16 +9,20 @@ const CommentSection = () => {
     }
     return (
         <div className='w-full'>
-            <div className='mb-3'>
-                <div className='flex'>
-                    <div className="text-offwhite-50 w-10 h-10 mr-1 hover:brightness-150 bg-tertiary-dark rounded-full cursor-pointer flex justify-center items-center">
-                        <UserIcon className="w-6 h-6" />
-                    </div>
-                    <div className='bg-tertiary-dark py-1 px-2 rounded-xl w-full max-w-xl flex-1'>
-                        <p className='font-bold text-sm'>Username</p>
-                        <p className='text-md'>Comment Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, cum. Lorem ipsum dolor sit amet.</p>
-                    </div>
-                </div>
+            <div className='mb-3 space-y-2 max-h-[60vh] overflow-y-scroll'>
+
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+
             </div>
             <Formik initialValues={ { text: '', } }
                 onSubmit={ handleSubmit }>
