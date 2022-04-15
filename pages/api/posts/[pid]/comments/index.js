@@ -43,9 +43,11 @@ export default async function handler(req, res) {
             const currentUser = await User.findById(id)
 
             const newComment = new Comment({ text, author: currentUser._id, post: currentPost._id })
-            const savedComment = await newComment.save()
+            let savedComment = await newComment.save()
 
             currentPost.comments.push(savedComment._id)
+
+            savedComment = await savedComment.populate('author', ['username', '_id'])
             await currentPost.save()
 
             return res.status(201).json({ error: null, comment: savedComment })
