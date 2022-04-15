@@ -1,27 +1,39 @@
 import { ChevronRightIcon, UserIcon } from '@heroicons/react/solid'
 import { Formik } from 'formik'
 import React from 'react'
+import { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
+import fetcher, { poster } from '../lib/fetcher'
 import Comment from './Comment'
 
-const CommentSection = () => {
-    const handleSubmit = async () => {
+const CommentSection = ({ pid }) => {
+    const [comments, setComments] = useState([])
+    const [loadingComments, setLoadingComments] = useState(true)
 
+    useEffect(() => {
+        const fn = async () => {
+            const [err, data] = await fetcher(`/posts/${pid}/comments`)
+            if (err) {
+                return toast.error(err.message)
+            }
+            setComments(data.comments)
+            setLoadingComments(false)
+        }
+        fn()
+    }, [])
+
+    const handleSubmit = async ({ text }) => {
+        console.log('CLICK')
+        const [err, data] = await poster(`/posts/${pid}/comments`, { text: text })
+        if (err) {
+            return toast.error(err.message)
+        }
+        setComments([data.comment, ...comments])
     }
     return (
         <div className='w-full'>
             <div className='mb-3 space-y-2 max-h-[60vh] overflow-y-scroll'>
-
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
+                { comments.map(comment => (<Comment key={ comment._id } data={ comment } />)) }
 
             </div>
             <Formik initialValues={ { text: '', } }

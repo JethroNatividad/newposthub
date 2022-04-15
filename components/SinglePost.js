@@ -75,7 +75,7 @@ const SinglePost = ({ data, loading, user }) => {
                     <div className='w-full  h-[1px] bg-offwhite-50' />
 
                     <div className='flex justify-center items-center'>
-                        <CommentSection />
+                        <CommentSection pid={ _id } />
                     </div>
 
                 </div>
