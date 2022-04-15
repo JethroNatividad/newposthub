@@ -21,7 +21,8 @@ const EditPost = ({ post }) => {
         console.log(data)
         setValues({ text: '' })
         nprogress.done()
-        router.push('/')
+        // redirect to previous page
+        router.back()
         toast.success("Post updated successfully", { delay: 1000 })
         setSubmitting(false)
     }
