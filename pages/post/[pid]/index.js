@@ -19,14 +19,17 @@ const index = ({ user, query }) => {
     // get the query params
     const { pid } = query
     const [post, setPost] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fn = async () => {
             const [err, data] = await fetcher(`/posts/${pid}`)
             if (err) {
+                setLoading(false)
                 return toast.error(err.message)
             }
             console.log(data, "POST DATA SINGLE")
+            setLoading(false)
             setPost(data.post)
         }
         fn()
@@ -35,7 +38,7 @@ const index = ({ user, query }) => {
     return (
         <div className='bg-primary-dark min-h-screen'>
             <Navbar user={ user } />
-            <SinglePost user={ user } data={ post } loading={ post === null } />
+            <SinglePost user={ user } data={ post } loading={ loading } />
         </div>
     )
 }
