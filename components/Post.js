@@ -31,12 +31,18 @@ const Post = ({ data, user, deletePost, loading }) => {
             {/* Author */ }
             <div className='flex p-2 md:p-4 justify-between'>
                 <div className='flex space-x-2'>
-                    <div className="text-offwhite-50 hover:brightness-150 bg-tertiary-dark p-2 rounded-3xl cursor-pointer flex justify-center items-center">
-                        <UserIcon className="w-7 h-7" />
+                    <div className='h-10 w-10 rounded-3xl overflow-hidden'>
+
+                        { loading ? <Skeleton circle height={ 40 } width={ 40 } /> : <div className="text-offwhite-50 hover:brightness-150 w-full h-full flex items-center justify-center bg-tertiary-dark">
+                            <UserIcon className="w-6 h-6" />
+                        </div> }
                     </div>
                     <div>
-                        <p className='font-semibold'>{ loading ? <Skeleton enableAnimation={ true } /> : author?.username }</p>
-                        <p className='text-sm text-offwhite-100'>{ timePassed } { isEdited && <span className='text-xs text-gray-500'> • edited</span> }</p>
+                        <p className='font-semibold'>{ loading ? <Skeleton width={ 100 } /> : author?.username }</p>
+                        <div className='flex items-center space-x-1'>
+                            <p className='text-sm text-offwhite-100'>{ loading ? <Skeleton width={ 50 } /> : timePassed }</p>
+                            { isEdited && <span className='text-xs text-gray-500'>• edited</span> }
+                        </div>
                     </div>
                 </div>
 
