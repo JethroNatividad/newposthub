@@ -40,7 +40,12 @@ const CommentSection = ({ pid }) => {
     return (
         <div className='w-full'>
             <div className='mb-3 space-y-2 max-h-[60vh] overflow-y-scroll'>
-                { comments.map(comment => (<Comment key={ comment._id } data={ comment } />)) }
+
+                { loadingComments ? <>
+                    <Comment loading={ true } />
+                    <Comment loading={ true } />
+
+                </> : comments.map(comment => (<Comment key={ comment._id } data={ comment } />)) }
 
             </div>
             <Formik initialValues={ { text: '', } }
