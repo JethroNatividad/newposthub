@@ -25,13 +25,17 @@ const CommentSection = ({ pid }) => {
         fn()
     }, [])
 
-    const handleSubmit = async ({ text }) => {
+    const handleSubmit = async ({ text }, { setValues, setSubmitting }) => {
+        setSubmitting(true)
         console.log('CLICK')
         const [err, data] = await poster(`/posts/${pid}/comments`, { text: text })
         if (err) {
+            setSubmitting(false)
             return toast.error(err.message)
         }
+        setValues({ text: '' })
         setComments([...comments, data.comment])
+        setSubmitting(false)
     }
     return (
         <div className='w-full'>
