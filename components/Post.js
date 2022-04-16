@@ -5,12 +5,18 @@ import moment from 'moment'
 import Link from "next/link"
 import DotsMenu from './DotsMenu'
 import ConfirmationButton from './ConfirmationButton'
+import Skeleton from 'react-loading-skeleton'
 
+const Post = ({ data, user, deletePost, loading }) => {
 
-const Post = ({ data, user, deletePost }) => {
-    const { text, author, comments, updatedAt, createdAt, _id } = data
-    const commentsCount = comments.length
-    const isAuthor = author._id === user.id
+    const text = data?.text
+    const author = data?.author
+    const comments = data?.comments
+    const updatedAt = data?.updatedAt
+    const createdAt = data?.createdAt
+    const _id = data?._id
+    const commentsCount = comments?.length
+    const isAuthor = author?._id === user?.id
     const timePassed = moment(createdAt).fromNow()
     const isEdited = updatedAt !== createdAt
 
@@ -29,8 +35,7 @@ const Post = ({ data, user, deletePost }) => {
                         <UserIcon className="w-7 h-7" />
                     </div>
                     <div>
-
-                        <p className='font-semibold'>{ author.username }</p>
+                        <p className='font-semibold'>{ loading ? <Skeleton enableAnimation={ true } /> : author?.username }</p>
                         <p className='text-sm text-offwhite-100'>{ timePassed } { isEdited && <span className='text-xs text-gray-500'> • edited</span> }</p>
                     </div>
                 </div>

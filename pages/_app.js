@@ -4,6 +4,8 @@ import ToastContainer from '../components/ToastContainer'
 import { AuthProvider } from '../lib/AuthProvider'
 import '../styles/globals.css'
 import '../styles/nprogress.css' //styles of nprogress
+import 'react-loading-skeleton/dist/skeleton.css'
+import { SkeletonTheme } from 'react-loading-skeleton'
 
 //Binding events. 
 NProgress.configure({ showSpinner: false })
@@ -12,7 +14,15 @@ function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
       <ToastContainer />
-      <Component { ...pageProps } />
+      <SkeletonTheme
+        baseColor="#b0b3b8"
+        highlightColor="#e4e6eb"
+        borderRadius="0.5rem"
+        duration={ 1 }
+      >
+
+        <Component { ...pageProps } />
+      </SkeletonTheme>
     </AuthProvider>
   )
 }

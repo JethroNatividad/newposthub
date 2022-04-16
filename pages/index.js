@@ -19,13 +19,18 @@ export async function getServerSideProps({ req, res }) {
 export default function Home({ user }) {
 
   const [posts, setPosts] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fn = async () => {
+      setLoading(true)
       const [err, data] = await fetcher('/posts')
+
       if (err) {
+        setLoading(false)
         return toast.error(err.message)
       }
+      setLoading(false)
       setPosts(data.posts)
     }
     fn()
@@ -56,10 +61,13 @@ export default function Home({ user }) {
 
 
       <div className='max-w-3xl mx-3 md:mx-auto space-y-2'>
+        <Post loading={ true } />
+        { loading
+          ? <Post loading={ loading } />
+          : posts.map(post => (
+            <Post deletePost={ deletePost } key={ post._id } data={ post } user={ user } />
+          )) }
 
-        { posts.map(post => (
-          <Post deletePost={ deletePost } key={ post._id } data={ post } user={ user } />
-        )) }
 
       </div>
     </div>
