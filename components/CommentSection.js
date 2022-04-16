@@ -1,5 +1,6 @@
 import { ChevronRightIcon, UserIcon } from '@heroicons/react/solid'
 import { Formik } from 'formik'
+import nprogress from 'nprogress'
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
@@ -27,6 +28,7 @@ const CommentSection = ({ pid }) => {
 
     const handleSubmit = async ({ text }, { setValues, setSubmitting }) => {
         setSubmitting(true)
+        nprogress.start()
         console.log('CLICK')
         const [err, data] = await poster(`/posts/${pid}/comments`, { text: text })
         if (err) {
@@ -34,6 +36,7 @@ const CommentSection = ({ pid }) => {
             return toast.error(err.message)
         }
         setValues({ text: '' })
+        nprogress.done()
         setComments([...comments, data.comment])
         setSubmitting(false)
     }
