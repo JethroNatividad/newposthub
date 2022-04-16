@@ -6,6 +6,9 @@ import { toast } from 'react-toastify'
 import fetcher, { poster } from '../lib/fetcher'
 import Comment from './Comment'
 
+const fetchComments = async (pid) => {
+
+}
 const CommentSection = ({ pid }) => {
     const [comments, setComments] = useState([])
     const [loadingComments, setLoadingComments] = useState(true)
@@ -28,7 +31,7 @@ const CommentSection = ({ pid }) => {
         if (err) {
             return toast.error(err.message)
         }
-        setComments([data.comment, ...comments])
+        setComments([...comments, data.comment])
     }
     return (
         <div className='w-full'>
