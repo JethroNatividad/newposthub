@@ -56,7 +56,7 @@ const Post = ({ data, user, deletePost, loading }) => {
 
             {/* Content */ }
             <div className='p-2 md:p-4'>
-                <p>{ text }</p>
+                <p>{ loading ? <Skeleton count={ 3 } /> : text }</p>
             </div>
 
             {/* Comments button */ }
