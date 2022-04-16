@@ -61,9 +61,14 @@ export default function Home({ user }) {
 
 
       <div className='max-w-3xl mx-3 md:mx-auto space-y-2'>
-        <Post loading={ true } />
         { loading
-          ? <Post loading={ loading } />
+          ? <>
+            <Post loading={ loading } />
+            <Post loading={ loading } />
+            <Post loading={ loading } />
+            <Post loading={ loading } />
+
+          </>
           : posts.map(post => (
             <Post deletePost={ deletePost } key={ post._id } data={ post } user={ user } />
           )) }
