@@ -10,7 +10,6 @@ import { useRouter } from 'next/router'
 import { deleter } from '../lib/fetcher'
 import { toast } from 'react-toastify'
 
-
 const SinglePost = ({ data, loading, user }) => {
     const router = useRouter()
 
@@ -24,6 +23,12 @@ const SinglePost = ({ data, loading, user }) => {
     const isAuthor = author?._id === user.id
     const timePassed = moment(createdAt).fromNow()
     const isEdited = updatedAt !== createdAt
+
+    const testImages = [
+        { src: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80' },
+        { src: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' },
+        { src: 'https://raw.githubusercontent.com/sopetrichor/react-photo-collage/master/preview.png' }]
+
 
     const deletePost = async (id) => {
         const toastId = toast.loading("Deleting...")
@@ -70,6 +75,7 @@ const SinglePost = ({ data, loading, user }) => {
                 {/* Content */ }
                 <div className='p-2 md:p-4'>
                     <p>{ loading ? <Skeleton count={ 3 } /> : text }</p>
+
                 </div>
 
                 {/* Comments button */ }
