@@ -7,20 +7,24 @@ import { toast } from 'react-toastify'
 import fetcher, { deleter, poster } from '../lib/fetcher'
 import Comment from './Comment'
 
-const fetchComments = async (pid) => {
 
-}
 const CommentSection = ({ pid }) => {
     const [comments, setComments] = useState([])
     const [loadingComments, setLoadingComments] = useState(true)
 
+    const fetchComments = async () => {
+        const [err, data] = await fetcher(`/posts/${pid}/comments`)
+        if (err) {
+            toast.error(err.message)
+            return []
+        }
+        return data.comments
+    }
+
     useEffect(() => {
         const fn = async () => {
-            const [err, data] = await fetcher(`/posts/${pid}/comments`)
-            if (err) {
-                return toast.error(err.message)
-            }
-            setComments(data.comments)
+            const comments = await fetchComments()
+            setComments(comments)
             setLoadingComments(false)
         }
         fn()
@@ -33,7 +37,10 @@ const CommentSection = ({ pid }) => {
             return toast.update(toastId, { render: err.message, type: "error", isLoading: false, closeOnClick: true, autoClose: 2000 })
         }
         setComments(comments => comments.filter(comment => comment._id !== id))
-        return toast.update(toastId, { render: "Comment deleted", type: "success", isLoading: false, closeOnClick: true, autoClose: 2000 })
+        toast.update(toastId, { render: "Comment deleted", type: "success", isLoading: false, closeOnClick: true, autoClose: 2000 })
+        // sync with server
+        const comments = await fetchComments()
+        setComments(comments)
 
     }
 
@@ -50,6 +57,10 @@ const CommentSection = ({ pid }) => {
         nprogress.done()
         setComments([...comments, data.comment])
         setSubmitting(false)
+
+        // sync with server
+        const sync = await fetchComments()
+        setComments(sync)
     }
     return (
         <div className='w-full'>
