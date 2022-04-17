@@ -53,7 +53,7 @@ const CommentSection = ({ pid }) => {
     }
     return (
         <div className='w-full'>
-            <div className='mb-3 space-y-2 max-h-[60vh] overflow-y-scroll'>
+            <div className='mb-3 pb-5 space-y-2 max-h-[60vh] overflow-y-scroll'>
 
                 { loadingComments ? <>
                     <Comment loading={ true } />

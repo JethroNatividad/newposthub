@@ -32,7 +32,7 @@ const Comment = ({ data, loading, deleteComment }) => {
 
                     <p className='font-bold text-sm'>{ loading ? <Skeleton width={ 60 } /> : author?.username }</p>
                     {
-                        loading ? <Skeleton width={ 30 } /> : isAuthor && <DotsMenu className="bg-primary-dark">
+                        loading ? <Skeleton width={ 30 } /> : isAuthor && <DotsMenu className="bg-secondary-dark">
                             <ConfirmationButton handleDelete={ () => handleDelete(data._id) } />
                         </DotsMenu>
                     }
