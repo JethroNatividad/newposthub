@@ -49,7 +49,7 @@ export default async function handler(req, res) {
                 return res.status(404).end('Comment not found')
             }
             if (comment.author.toString() !== id) {
-                return res.status(403).end('You are not authorized to edit this comment')
+                return res.status(401).end('You are not authorized to edit this comment')
             }
             comment.text = text
             await comment.save()
@@ -69,7 +69,7 @@ export default async function handler(req, res) {
                 return res.status(404).end('Comment not found, already deleted')
             }
             if (comment.author.toString() !== id) {
-                return res.status(403).end('You are not authorized to delete this comment')
+                return res.status(401).end('You are not authorized to delete this comment')
             }
 
             await comment.remove()

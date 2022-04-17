@@ -4,7 +4,7 @@ import nprogress from 'nprogress'
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
-import fetcher, { poster } from '../lib/fetcher'
+import fetcher, { deleter, poster } from '../lib/fetcher'
 import Comment from './Comment'
 
 const fetchComments = async (pid) => {
@@ -25,6 +25,17 @@ const CommentSection = ({ pid }) => {
         }
         fn()
     }, [])
+
+    const deleteComment = async (id) => {
+        const toastId = toast.loading("Deleting...")
+        const [err] = await deleter(`/posts/${pid}/comments/${id}`)
+        if (err) {
+            return toast.update(toastId, { render: err.message, type: "error", isLoading: false, closeOnClick: true, autoClose: 2000 })
+        }
+        setComments(comments => comments.filter(comment => comment._id !== id))
+        return toast.update(toastId, { render: "Comment deleted", type: "success", isLoading: false, closeOnClick: true, autoClose: 2000 })
+
+    }
 
     const handleSubmit = async ({ text }, { setValues, setSubmitting }) => {
         setSubmitting(true)
@@ -48,7 +59,7 @@ const CommentSection = ({ pid }) => {
                     <Comment loading={ true } />
                     <Comment loading={ true } />
 
-                </> : comments.map(comment => (<Comment key={ comment._id } data={ comment } />)) }
+                </> : comments.map(comment => (<Comment key={ comment._id } deleteComment={ deleteComment } data={ comment } />)) }
 
             </div>
             <Formik initialValues={ { text: '', } }
