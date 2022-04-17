@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { DocumentAddIcon, HomeIcon, LogoutIcon } from '@heroicons/react/outline'
+import { DocumentAddIcon as SolidDocumentAddIcon, HomeIcon as SolidHomeIcon, LogoutIcon as SolidLogoutIcon } from '@heroicons/react/solid'
 import { UserIcon } from '@heroicons/react/solid'
 import apiAxios from "../lib/axios"
 import { useRouter } from 'next/router'
@@ -8,6 +9,7 @@ import { toast } from "react-toastify"
 
 const Navbar = ({ user }) => {
     const router = useRouter()
+
     async function logout() {
         nprogress.start()
         await apiAxios.get('/auth/logout', { withCredentials: true })
@@ -34,12 +36,12 @@ const Navbar = ({ user }) => {
             <div className="flex justify-center space-x-1 md:space-x-3">
                 <div className="text-offwhite-100 cursor-pointer hover:bg-tertiary-dark px-1 md:px-3 py-1 rounded-lg">
                     <Link href="/">
-                        <HomeIcon className="w-10 h-10" />
+                        { router.route === '/' ? <SolidHomeIcon className="w-10 h-10" /> : <HomeIcon className="w-10 h-10" /> }
                     </Link>
                 </div>
                 <div className="text-offwhite-100 cursor-pointer hover:bg-tertiary-dark px-3 py-1 rounded-lg">
                     <Link href="/post/new">
-                        <DocumentAddIcon className="w-10 h-10" />
+                        { router.route === '/post/new' ? <SolidDocumentAddIcon className="w-10 h-10" /> : <DocumentAddIcon className="w-10 h-10" /> }
                     </Link>
                 </div>
             </div>
