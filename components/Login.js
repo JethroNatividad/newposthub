@@ -32,7 +32,7 @@ const Login = () => {
 
                 <div className='text-offwhite-50 text-center lg:text-left'>
                     <h1 className="text-5xl font-bold font-mono">POSTHUB</h1>
-                    <p className='text-lg md:text-xl max-w-md'>Connect with friends and the world around you on Posthub.</p>
+                    <p className='text-lg md:text-xl max-w-md'>Connect with friends and the world around you on Posthub. vurl:{ process.env.VERCEL_URL }burl:{ process.env.BASE_URL }url:{ process.env.URL }vuri:{ process.env.VERCEL_URI }</p>
                 </div>
 
                 <div className='rounded-lg p-2 bg-secondary-dark w-full max-w-md mx-auto md:mx-0'>
