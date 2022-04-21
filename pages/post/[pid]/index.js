@@ -15,7 +15,7 @@ export async function getServerSideProps({ req, res, query }) {
 
 }
 
-const index = ({ user, query }) => {
+const Index = ({ user, query }) => {
     // get the query params
     const { pid } = query
     const [post, setPost] = useState(null)
@@ -46,4 +46,4 @@ const index = ({ user, query }) => {
 
 
 
-export default index
+export default Index

@@ -50,7 +50,7 @@ const Post = ({ data, user, deletePost, loading }) => {
 
                 {
                     loading ? <Skeleton width={ 30 } /> : isAuthor && <DotsMenu className="bg-tertiary-dark">
-                        <button className='px-4 flex justify-center hover:brightness-110 py-1 w-full rounded-lg outline-none text-md md:text-xl text-offwhite-100 bg-primary-dark max-w-xs hover:text-orange-400' type="submit"><Link href={ `/post/${_id}/edit` } ><PencilAltIcon className="w-6 h-6 relative" /></Link></button>
+                        <button className='px-4 flex justify-center hover:brightness-110 py-1 w-full rounded-lg outline-none text-md md:text-xl text-offwhite-100 bg-primary-dark max-w-xs hover:text-orange-400' type="submit"><Link href={ `/post/${_id}/edit` } passHref ><PencilAltIcon className="w-6 h-6 relative" /></Link></button>
                         <ConfirmationButton handleDelete={ handleDelete } />
                     </DotsMenu>
                 }
@@ -64,7 +64,7 @@ const Post = ({ data, user, deletePost, loading }) => {
             {/* Comments button */ }
             <div className='p-2 md:p-4 space-y-3 flex flex-col'>
                 <div className='flex justify-end items-center'>
-                    { loading ? <Skeleton width={ 70 } /> : commentsCount > 0 && (<Link href={ `/post/${_id}` } ><p className='text-sm text-offwhite-100 hover:underline cursor-pointer'>{ commentsCount } { commentsCount > 1 ? "Comments" : "Comment" }</p></Link>) }
+                    { loading ? <Skeleton width={ 70 } /> : commentsCount > 0 && (<Link passHref href={ `/post/${_id}` } ><p className='text-sm text-offwhite-100 hover:underline cursor-pointer'>{ commentsCount } { commentsCount > 1 ? "Comments" : "Comment" }</p></Link>) }
                 </div>
 
                 <div className='w-full  h-[1px] bg-offwhite-50' />
