@@ -11,11 +11,13 @@ export async function getServerSideProps({ req, res }) {
     if (data?.user) {
         return { redirect: { destination: '/' } }
     }
-    return { props: { error } }
+    return { props: { error: error, data } }
 }
 
-const login = ({ error }) => {
+const login = ({ error, data }) => {
     useEffect(() => {
+        console.log("login error", error)
+        console.log("login data", data)
         if (error) {
             console.log("error", error)
             console.log("error", error.message)
