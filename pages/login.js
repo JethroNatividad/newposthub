@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import fetcherSSR from '../lib/fetcherSSR'
 import Login from '../components/Login'
+import { toast } from 'react-toastify'
 
 export async function getServerSideProps({ req, res }) {
     const [error, data] = await fetcherSSR(req, res, '/api/auth/user')
@@ -10,10 +11,18 @@ export async function getServerSideProps({ req, res }) {
     if (data?.user) {
         return { redirect: { destination: '/' } }
     }
-    return { props: {} }
+    return { props: { error } }
 }
 
-const login = () => {
+const login = ({ error }) => {
+    useEffect(() => {
+        if (error) {
+            console.log("error", error)
+            console.log("error", error.message)
+            toast.error(error.message)
+        }
+    }, [])
+
     return (
         <Login />
     )
