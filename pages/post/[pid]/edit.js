@@ -4,7 +4,7 @@ import fetcherSSR from "../../../lib/fetcherSSR"
 
 
 export async function getServerSideProps({ req, res, query }) {
-    const [error, user] = await fetcherSSR(req, res, '/auth/user')
+    const [error, user] = await fetcherSSR(req, res, '/api/auth/user')
     if (!user?.user) {
         return { redirect: { destination: '/login' } }
     }
@@ -13,7 +13,7 @@ export async function getServerSideProps({ req, res, query }) {
         return { redirect: { destination: '/404' } }
     }
 
-    const [error2, data] = await fetcherSSR(req, res, `/posts/${pid}`)
+    const [error2, data] = await fetcherSSR(req, res, `/api/posts/${pid}`)
     if (!data?.post) {
         return { redirect: { destination: '/404' } }
     }

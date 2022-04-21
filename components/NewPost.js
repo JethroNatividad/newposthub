@@ -13,7 +13,7 @@ const NewPost = () => {
         console.log("IMAGES", images)
         nprogress.start()
         setSubmitting(true)
-        const [err, data] = await poster('/posts', { text, images })
+        const [err, data] = await poster('/api/posts', { text, images })
         if (err) {
             console.log(err.message)
             nprogress.done()

@@ -7,7 +7,8 @@ import fetcher, { deleter } from '../lib/fetcher'
 import fetcherSSR from '../lib/fetcherSSR'
 
 export async function getServerSideProps({ req, res }) {
-  const [error, user] = await fetcherSSR(req, res, '/auth/user')
+  const [error, user] = await fetcherSSR(req, res, '/api/auth/user')
+  console.log("ssr USER", user)
   if (!user?.user) {
     return { redirect: { destination: '/login' } }
   }
@@ -24,7 +25,7 @@ export default function Home({ user }) {
   useEffect(() => {
     const fn = async () => {
       setLoading(true)
-      const [err, data] = await fetcher('/posts')
+      const [err, data] = await fetcher('/api/posts')
 
       if (err) {
         setLoading(false)
@@ -39,7 +40,7 @@ export default function Home({ user }) {
 
   const deletePost = async (id) => {
     const toastId = toast.loading("Deleting...")
-    const [err] = await deleter(`/posts/${id}`)
+    const [err] = await deleter(`/api/posts/${id}`)
     if (err) {
       return toast.update(toastId, { render: err.message, type: "error", isLoading: false, closeOnClick: true, autoClose: 2000 })
     }

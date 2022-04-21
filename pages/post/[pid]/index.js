@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import fetcher from '../../../lib/fetcher'
 
 export async function getServerSideProps({ req, res, query }) {
-    const [error, user] = await fetcherSSR(req, res, '/auth/user')
+    const [error, user] = await fetcherSSR(req, res, '/api/auth/user')
     if (!user?.user) {
         return { redirect: { destination: '/login' } }
     }
@@ -23,7 +23,7 @@ const Index = ({ user, query }) => {
 
     useEffect(() => {
         const fn = async () => {
-            const [err, data] = await fetcher(`/posts/${pid}`)
+            const [err, data] = await fetcher(`/api/posts/${pid}`)
             if (err) {
                 setLoading(false)
                 return toast.error(err.message)

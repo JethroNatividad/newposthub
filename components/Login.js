@@ -11,8 +11,8 @@ const Login = () => {
     const handleSubmit = async ({ usernameOrEmail, password }, { setSubmitting }) => {
         Nprogress.start()
         setSubmitting(true)
-        // const res = await axios.post('/auth/login', { usernameOrEmail, password })
-        const [err, data] = await poster('/auth/login', { usernameOrEmail, password })
+        // const res = await axios.post('/api/auth/login', { usernameOrEmail, password })
+        const [err, data] = await poster('/api/auth/login', { usernameOrEmail, password })
         console.log(data)
         if (err) {
             toast.error(err.message)

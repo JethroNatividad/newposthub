@@ -11,7 +11,7 @@ const Signup = () => {
     const handleSubmit = async ({ username, email, password }, { setSubmitting }) => {
         Nprogress.start()
         setSubmitting(true)
-        const [err, data] = await poster('/auth/signup', { username, email, password })
+        const [err, data] = await poster('/api/auth/signup', { username, email, password })
         console.log(data)
         if (err) {
             Nprogress.done()

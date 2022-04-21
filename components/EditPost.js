@@ -12,7 +12,7 @@ const EditPost = ({ post }) => {
     const handleSubmit = async ({ text }, { setValues, setSubmitting }) => {
         nprogress.start()
         setSubmitting(true)
-        const [err, data] = await putter(`/posts/${post._id}`, { text })
+        const [err, data] = await putter(`/api/posts/${post._id}`, { text })
         if (err) {
             console.log(err.message)
             nprogress.done()

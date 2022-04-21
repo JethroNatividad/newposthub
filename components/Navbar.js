@@ -2,7 +2,7 @@ import Link from "next/link"
 import { DocumentAddIcon, HomeIcon, LogoutIcon } from '@heroicons/react/outline'
 import { DocumentAddIcon as SolidDocumentAddIcon, HomeIcon as SolidHomeIcon, LogoutIcon as SolidLogoutIcon } from '@heroicons/react/solid'
 import { UserIcon } from '@heroicons/react/solid'
-import apiAxios from "../lib/axios"
+import clientAxios from "../lib/axios"
 import { useRouter } from 'next/router'
 import nprogress from "nprogress"
 import { toast } from "react-toastify"
@@ -12,7 +12,7 @@ const Navbar = ({ user }) => {
 
     async function logout() {
         nprogress.start()
-        await apiAxios.get('/auth/logout', { withCredentials: true })
+        await clientAxios.get('/api/auth/logout', { withCredentials: true })
         nprogress.done()
         router.push('/login')
         toast.success("Logged out successfully", { delay: 1000 })

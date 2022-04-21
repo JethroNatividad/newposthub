@@ -32,7 +32,7 @@ const SinglePost = ({ data, loading, user }) => {
 
     const deletePost = async (id) => {
         const toastId = toast.loading("Deleting...")
-        const [err] = await deleter(`/posts/${id}`)
+        const [err] = await deleter(`/api/posts/${id}`)
         if (err) {
             return toast.update(toastId, { render: err.message, type: "error", isLoading: false, closeOnClick: true, autoClose: 2000 })
         }

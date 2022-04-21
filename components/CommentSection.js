@@ -13,7 +13,7 @@ const CommentSection = ({ pid }) => {
     const [loadingComments, setLoadingComments] = useState(true)
 
     const fetchComments = async () => {
-        const [err, data] = await fetcher(`/posts/${pid}/comments`)
+        const [err, data] = await fetcher(`/api/posts/${pid}/comments`)
         if (err) {
             toast.error(err.message)
             return []
@@ -32,7 +32,7 @@ const CommentSection = ({ pid }) => {
 
     const deleteComment = async (id) => {
         const toastId = toast.loading("Deleting...")
-        const [err] = await deleter(`/posts/${pid}/comments/${id}`)
+        const [err] = await deleter(`/api/posts/${pid}/comments/${id}`)
         if (err) {
             return toast.update(toastId, { render: err.message, type: "error", isLoading: false, closeOnClick: true, autoClose: 2000 })
         }
@@ -48,7 +48,7 @@ const CommentSection = ({ pid }) => {
         setSubmitting(true)
         nprogress.start()
         console.log('CLICK')
-        const [err, data] = await poster(`/posts/${pid}/comments`, { text: text })
+        const [err, data] = await poster(`/api/posts/${pid}/comments`, { text: text })
         if (err) {
             setSubmitting(false)
             return toast.error(err.message)

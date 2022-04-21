@@ -1,7 +1,7 @@
 @pid = 624f114cfb6531b6abedd863
 ###
 # create a post
-POST {{$dotenv BASEURL}}/posts/
+POST {{$dotenv BASEURL}}/api/posts/
 Authorization: bearer {{$dotenv ACCESSTOKEN}}
 Content-Type: multipart/form-data
 
@@ -13,15 +13,15 @@ Content-Type: multipart/form-data
 
 ###
 # get all posts
-GET {{$dotenv BASEURL}}/posts/
+GET {{$dotenv BASEURL}}/api/posts/
 
 ###
 # get single posts
-GET {{$dotenv BASEURL}}/posts/{{pid}}
+GET {{$dotenv BASEURL}}/api/posts/{{pid}}
 
 ###
 # update a post
-PUT {{$dotenv BASEURL}}/posts/{{pid}}
+PUT {{$dotenv BASEURL}}/api/posts/{{pid}}
 Authorization: bearer {{$dotenv ACCESSTOKEN}}
 Content-Type: application/json
 

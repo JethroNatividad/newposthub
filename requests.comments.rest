@@ -2,7 +2,7 @@
 @cid = 624f0b161dd4f5f0b1918de6
 ###
 # @create a comment
-POST {{$dotenv BASEURL}}/posts/{{pid}}/comments
+POST {{$dotenv BASEURL}}/api/posts/{{pid}}/comments
 Authorization: bearer {{$dotenv ACCESSTOKEN}}
 Content-Type: application/json
 
@@ -12,15 +12,15 @@ Content-Type: application/json
 
 ###
 # get all comments of a post
-GET {{$dotenv BASEURL}}/posts/{{pid}}/comments
+GET {{$dotenv BASEURL}}/api/posts/{{pid}}/comments
 
 ###
 # get single comment
-GET {{$dotenv BASEURL}}/posts/{{pid}}/comments/{{cid}}
+GET {{$dotenv BASEURL}}/api/posts/{{pid}}/comments/{{cid}}
 
 ###
 # update a comment
-PUT {{$dotenv BASEURL}}/posts/{{pid}}/comments/{{cid}}
+PUT {{$dotenv BASEURL}}/api/posts/{{pid}}/comments/{{cid}}
 Authorization: bearer {{$dotenv ACCESSTOKEN}}
 Content-Type: application/json
 
@@ -28,5 +28,5 @@ Content-Type: application/json
     "text": "I change my mind sir"
 }
 ### delete a comment
-DELETE {{$dotenv BASEURL}}/posts/624f0b051dd4f5f0b1918de1/comments/{{cid}}
+DELETE {{$dotenv BASEURL}}/api/posts/624f0b051dd4f5f0b1918de1/comments/{{cid}}
 Authorization: bearer {{$dotenv ACCESSTOKEN}}

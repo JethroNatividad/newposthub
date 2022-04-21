@@ -8,7 +8,7 @@ const useUser = () => {
 
     useEffect(() => {
         const fn = async () => {
-            const [err, data] = await fetcher('/auth/user')
+            const [err, data] = await fetcher('/api/auth/user')
             if (err) {
                 setLoading(false)
                 return toast.error(err.message)
