@@ -14,7 +14,7 @@ export async function getServerSideProps({ req, res }) {
     return { props: { error: error, data } }
 }
 
-const login = ({ error, data }) => {
+const Login = ({ error, data }) => {
     useEffect(() => {
         console.log("login error", error)
         console.log("login data", data)
@@ -30,4 +30,4 @@ const login = ({ error, data }) => {
     )
 }
 
-export default login
+export default Login
