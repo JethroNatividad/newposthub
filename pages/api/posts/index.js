@@ -26,7 +26,8 @@ export default async function handler(req, res) {
         }
     }
     async function createPost(req, res) {
-        const { body: { text }, user: { id } } = req
+        const { body: { text, images }, user: { id } } = req
+
         if (!text) {
             return res.status(200).json({ error: { message: "text required", field: 'text' } })
         }
