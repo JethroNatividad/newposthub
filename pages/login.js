@@ -11,7 +11,7 @@ export async function getServerSideProps({ req, res }) {
     if (data?.user) {
         return { redirect: { destination: '/' } }
     }
-    return { props: { error: error, data } }
+    return { props: { error: error?.message, data } }
 }
 
 const Page = ({ error, data }) => {
@@ -20,8 +20,8 @@ const Page = ({ error, data }) => {
         console.log("login data", data)
         if (error) {
             console.log("error", error)
-            console.log("error", error.message)
-            toast.error(error.message)
+            console.log("error", error)
+            // toast.error(error.message)
         }
     }, [])
 
