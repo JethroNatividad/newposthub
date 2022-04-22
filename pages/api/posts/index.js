@@ -59,6 +59,8 @@ export default async function handler(req, res) {
             //     original_filename: '5c0ae97a947b6611e8cd5b706',
             //     api_key: '916925932114439'
             //   }
+            // check if images is an array
+
 
             const imagesResult = images ? await uploadImages(images) : []
             const imageUrls = imagesResult.map(image => image.secure_url)
