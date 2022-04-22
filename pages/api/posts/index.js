@@ -3,6 +3,7 @@ import User from "../../../lib/models/User"
 import Post from "../../../lib/models/Post"
 import verifyToken from "../../../lib/verifyToken"
 import parseForm from "../../../lib/parseForm"
+import uploadImages from "../../../lib/cloudinary"
 
 export default async function handler(req, res) {
     await dbConnect()
@@ -28,13 +29,20 @@ export default async function handler(req, res) {
     }
     async function createPost(req, res) {
         const { body: { text }, files: { images }, user: { id } } = req
-        console.log(images)
+
         if (!text) {
             return res.status(200).json({ error: { message: "text required", field: 'text' } })
         }
 
         try {
+
             const currentUser = await User.findById(id)
+
+            if (images) {
+                const imagesResult = await uploadImages(images)
+                console.log(imagesResult, "IMGGG")
+                console.log(JSON.stringify(imagesResult), "IMGGG")
+            }
             const newPost = new Post({ text, author: currentUser._id })
             const savedPost = await newPost.save()
             currentUser.posts.push(savedPost._id)
