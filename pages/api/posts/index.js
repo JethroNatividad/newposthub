@@ -60,7 +60,7 @@ export default async function handler(req, res) {
             //     api_key: '916925932114439'
             //   }
 
-            const imagesResult = images ? [] : await uploadImages(images)
+            const imagesResult = images ? await uploadImages(images) : []
             const imageUrls = imagesResult.map(image => image.secure_url)
             const newPost = new Post({ text, author: currentUser._id, images: imageUrls })
             const savedPost = await newPost.save()
