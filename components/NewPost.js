@@ -13,10 +13,8 @@ const NewPost = () => {
         console.log("IMAGES", images)
         const formData = new FormData()
         formData.append('text', text)
+        Array.from(images).forEach(image => formData.append('images', image))
 
-        images.forEach((image, index) => {
-            formData.append(`images[${index}]`, image)
-        })
         nprogress.start()
         setSubmitting(true)
         const [err, data] = await poster('/api/posts', formData, true)
@@ -38,7 +36,7 @@ const NewPost = () => {
             <h1 className='text-xl font-semibold'>Create a post</h1>
             <div className='rounded-lg p-2 bg-secondary-dark w-full max-w-3xl md:mx-0'>
 
-                <Formik initialValues={ { text: '', images: new FileList() } }
+                <Formik initialValues={ { text: '', images: {} } }
                     onSubmit={ handleSubmit }>
                     { ({ values, handleChange, isSubmitting, handleSubmit, setFieldValue }) => (
                         <form className='flex flex-col items-center space-y-5' onSubmit={ handleSubmit }>
