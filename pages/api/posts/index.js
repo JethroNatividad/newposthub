@@ -47,3 +47,10 @@ export default async function handler(req, res) {
         }
     }
 }
+
+// need to add this to use parseForm
+export const config = {
+    api: {
+        bodyParser: false,
+    },
+}
