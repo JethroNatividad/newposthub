@@ -39,11 +39,36 @@ export default async function handler(req, res) {
             const currentUser = await User.findById(id)
 
             if (images) {
+                // {
+                //     asset_id: 'ac70f1219e8fdf87d18e41978ae75c36',
+                //     public_id: 'newposthub/thfm6ba28kpereoexan6',
+                //     version: 1650642783,
+                //     version_id: '2e2853747374ebb49e73a5651134a97f',
+                //     signature: 'a743f4862b71f064437b8985b4c72155c749d913',
+                //     width: 1920,
+                //     height: 1080,
+                //     format: 'png',
+                //     resource_type: 'image',
+                //     created_at: '2022-04-22T15:53:03Z',
+                //     tags: [],
+                //     bytes: 2779068,
+                //     type: 'upload',
+                //     etag: 'dc099db420c93faed78c974c43cbb00f',
+                //     placeholder: false,
+                //     url: 'http://res.cloudinary.com/jethrosama/image/upload/v1650642783/newposthub/thfm6ba28kpereoexan6.png',
+                //     secure_url: 'https://res.cloudinary.com/jethrosama/image/upload/v1650642783/newposthub/thfm6ba28kpereoexan6.png',
+                //     folder: 'newposthub',
+                //     original_filename: '5c0ae97a947b6611e8cd5b706',
+                //     api_key: '916925932114439'
+                //   }
                 const imagesResult = await uploadImages(images)
                 console.log(imagesResult, "IMGGG")
                 console.log(JSON.stringify(imagesResult), "IMGGG")
+                const imageUrls = imagesResult.map(image => image.secure_url)
+                const newPost = new Post({ text, author: currentUser._id, images: imageUrls })
+            } else {
+                const newPost = new Post({ text, author: currentUser._id, })
             }
-            const newPost = new Post({ text, author: currentUser._id })
             const savedPost = await newPost.save()
             currentUser.posts.push(savedPost._id)
             await currentUser.save()
