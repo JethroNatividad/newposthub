@@ -2,6 +2,7 @@ import dbConnect from "../../../lib/dbConnect"
 import User from "../../../lib/models/User"
 import Post from "../../../lib/models/Post"
 import verifyToken from "../../../lib/verifyToken"
+import parseForm from "../../../lib/parseForm"
 
 export default async function handler(req, res) {
     await dbConnect()
@@ -11,7 +12,7 @@ export default async function handler(req, res) {
         case 'GET':
             return getPosts(res)
         case 'POST':
-            return verifyToken(req, res, () => createPost(req, res))
+            return verifyToken(req, res, () => parseForm(req, res, () => createPost(req, res)))
         default:
             res.setHeader('Allow', ['GET', 'POST'])
             return res.status(405).end(`Method ${method} Not Allowed`)
@@ -26,7 +27,7 @@ export default async function handler(req, res) {
         }
     }
     async function createPost(req, res) {
-        const { body: { text, images }, user: { id } } = req
+        const { body: { text }, user: { id } } = req
 
         if (!text) {
             return res.status(200).json({ error: { message: "text required", field: 'text' } })
