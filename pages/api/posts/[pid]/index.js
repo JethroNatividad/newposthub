@@ -2,6 +2,7 @@ import dbConnect from "../../../../lib/dbConnect"
 import Post from "../../../../lib/models/Post"
 import Comment from "../../../../lib/models/Comment"
 import verifyToken from "../../../../lib/verifyToken"
+import { deleteImage } from "../../../../lib/cloudinary"
 
 export default async function handler(req, res) {
     // i forgot to add this lol
@@ -69,6 +70,10 @@ export default async function handler(req, res) {
                 return res.status(403).end('You are not authorized to delete this post')
             }
 
+            // delete the images
+            post.images.forEach(async (image) => {
+                await deleteImage(image.publicId)
+            })
             // remove also the comments of this post
             post.comments.forEach(async (cid) => {
                 await Comment.findOneAndDelete({ _id: cid })
