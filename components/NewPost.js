@@ -11,9 +11,15 @@ const NewPost = () => {
 
     const handleSubmit = async ({ text, images }, { setValues, setSubmitting }) => {
         console.log("IMAGES", images)
+        const formData = new FormData()
+        formData.append('text', text)
+
+        images.forEach((image, index) => {
+            formData.append(`images[${index}]`, image)
+        })
         nprogress.start()
         setSubmitting(true)
-        const [err, data] = await poster('/api/posts', { text, images })
+        const [err, data] = await poster('/api/posts', formData, true)
         if (err) {
             console.log(err.message)
             nprogress.done()
@@ -32,17 +38,16 @@ const NewPost = () => {
             <h1 className='text-xl font-semibold'>Create a post</h1>
             <div className='rounded-lg p-2 bg-secondary-dark w-full max-w-3xl md:mx-0'>
 
-                <Formik initialValues={ { text: '', images: [] } }
+                <Formik initialValues={ { text: '', images: new FileList() } }
                     onSubmit={ handleSubmit }>
                     { ({ values, handleChange, isSubmitting, handleSubmit, setFieldValue }) => (
                         <form className='flex flex-col items-center space-y-5' onSubmit={ handleSubmit }>
 
                             <textarea className=' px-4 py-3 max-h-96 w-full rounded-lg outline-none text-md md:text-md text-offwhite-50 bg-tertiary-dark' placeholder='Type something...' type="text" name="text" value={ values.text } onChange={ handleChange } />
-                            {/* <input type="file" multiple={ true } name="images" onChange={ (e) => {
+                            <input type="file" multiple={ true } name="images" onChange={ (e) => {
                                 setFieldValue('images', e.target.files)
-                                console.log(e.target.files[0], "File")
                                 console.log(e.target.files, "Files")
-                            } } /> */}
+                            } } />
                             <button disabled={ isSubmitting } className='px-4 w-[30%] hover:brightness-110 mb-5 py-3 rounded-lg outline-none text-md md:text-xl font-bold text-offwhite-50 bg-primary-dark' type="submit">Post</button>
 
                         </form>
