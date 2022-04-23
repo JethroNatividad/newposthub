@@ -52,6 +52,7 @@ export default async function handler(req, res) {
                 return res.status(401).end('You are not authorized to edit this comment')
             }
             comment.text = text
+            comment.edited = true
             await comment.save()
             return res.status(200).json({ error: null, comment })
         } catch (error) {
