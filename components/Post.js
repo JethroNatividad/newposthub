@@ -14,13 +14,12 @@ const Post = ({ data, user, deletePost, loading }) => {
     const text = data?.text
     const author = data?.author
     const comments = data?.comments
-    const updatedAt = data?.updatedAt
     const createdAt = data?.createdAt
     const _id = data?._id
     const commentsCount = comments?.length
     const isAuthor = author?._id === user?.id
     const timePassed = moment(createdAt).fromNow()
-    const isEdited = updatedAt !== createdAt
+    const isEdited = data?.edited
 
     const handleDelete = () => {
         deletePost(_id)

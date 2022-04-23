@@ -16,13 +16,13 @@ const SinglePost = ({ data, loading, user }) => {
     const text = data?.text
     const author = data?.author
     const comments = data?.comments
-    const updatedAt = data?.updatedAt
     const createdAt = data?.createdAt
     const _id = data?._id
     const commentsCount = comments?.length
     const isAuthor = author?._id === user.id
     const timePassed = moment(createdAt).fromNow()
-    const isEdited = updatedAt !== createdAt
+    const isEdited = data?.edited
+
 
     const testImages = [
         { src: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80' },
