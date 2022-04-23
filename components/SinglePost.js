@@ -23,7 +23,8 @@ const SinglePost = ({ data, loading, user }) => {
     const isAuthor = author?._id === user.id
     const timePassed = moment(createdAt).fromNow()
     const isEdited = data?.edited
-    const images = data?.images?.map(i => i.url)
+    const images = data?.images || []
+    const imageUrls = images?.map(image => image.url)
 
     const testImages = [
         { src: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80' },
@@ -80,11 +81,14 @@ const SinglePost = ({ data, loading, user }) => {
                 </div>
 
                 {/* Images */ }
-                <div className='w-full'>
-                    {/* <Images images={images} /> */ }
-                    <p>{ loading ? <Skeleton count={ 3 } /> : <Images images={ images } /> }</p>
+                { imageUrls?.length > 0 && (
+                    <div className='w-full'>
+                        {/* <Images images={images} /> */ }
+                        { loading ? <Skeleton count={ 3 } /> : <Images images={ imageUrls } /> }
 
-                </div>
+                    </div>
+                ) }
+
 
                 {/* Comments button */ }
                 <div className='p-2 md:p-4 space-y-3 flex flex-col'>

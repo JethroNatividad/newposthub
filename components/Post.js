@@ -7,6 +7,7 @@ import DotsMenu from './DotsMenu'
 import ConfirmationButton from './ConfirmationButton'
 import Skeleton from 'react-loading-skeleton'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 const Post = ({ data, user, deletePost, loading }) => {
     const router = useRouter()
@@ -58,6 +59,10 @@ const Post = ({ data, user, deletePost, loading }) => {
             {/* Content */ }
             <div className='p-2 md:p-4'>
                 <p>{ loading ? <Skeleton count={ 3 } /> : text }</p>
+            </div>
+            <div>
+                <Image src="https://res.cloudinary.com/jethrosama/image/upload/v1650709741/newposthub/eubnu4xqj7rfrd4hkqy9.png" layout='fill' alt="img" />
+
             </div>
 
             {/* Comments button */ }
