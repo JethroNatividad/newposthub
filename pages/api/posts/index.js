@@ -63,7 +63,7 @@ export default async function handler(req, res) {
 
 
             const imagesResult = images ? await uploadImages(images) : []
-            const imageUrls = imagesResult.map(image => ({ url: image.secure_url, publicId: image.public_id }))
+            const imageUrls = imagesResult.map(image => ({ url: image.secure_url, publicId: image.public_id, height: image.height, width: image.width }))
             const newPost = new Post({ text, author: currentUser._id, images: imageUrls })
             const savedPost = await newPost.save()
             currentUser.posts.push(savedPost._id)

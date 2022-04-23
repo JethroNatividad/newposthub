@@ -1,11 +1,10 @@
 import Image from 'next/image'
 import { useState } from 'react'
-import Lightbox from 'react-image-lightbox'
-import 'react-image-lightbox/style.css'
+import { Gallery, Item } from 'react-photoswipe-gallery'
+import 'photoswipe/dist/photoswipe.css'
 
 const Images = ({ images, countFrom = 5 }) => {
     const [isOpen, setIsOpen] = useState(true)
-    const [photoIndex, setphotoIndex] = useState(0)
 
     // const imagesToShow = images
     // if (countFrom && images.length > countFrom) {
@@ -24,11 +23,25 @@ const Images = ({ images, countFrom = 5 }) => {
     }
     const renderOneImage = () => {
         return (
-            <div className='grid grid-cols-1 h-[576px]'>
-                <div onClick={ () => handleOpen(0) } className='relative h-full cursor-pointer'>
-                    <Image className='object-contain' src={ images[0] } layout="fill" alt="img" />
+            <Gallery>
+                <div className='grid grid-cols-1 h-[576px]'>
+                    <Item
+                        original={ images[0] }
+                        width={ 1280 }
+                        height={ 720 }
+                        objectFit='cover'
+
+                    >
+                        { ({ ref, open, }) => (
+                            // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
+                            <div ref={ ref } onClick={ open } className='relative h-full cursor-pointer'>
+                                <Image className='object-contain' src={ images[0] } layout="fill" alt="img" />
+                            </div>
+                        ) }
+                    </Item>
                 </div>
-            </div>)
+            </Gallery>
+        )
     }
 
 
@@ -36,22 +49,7 @@ const Images = ({ images, countFrom = 5 }) => {
     return (
         <div className='w-full shadow-sm shadow-tertiary-dark'>
             { renderOneImage() }
-            { isOpen && (
-                <Lightbox
-                    onImageLoad={ () => console.log('Image loaded') }
-                    mainSrc={ images[photoIndex] }
-                    nextSrc={ images[(photoIndex + 1) % images.length] }
-                    prevSrc={ images[(photoIndex + images.length - 1) % images.length] }
-                    onCloseRequest={ () => setIsOpen(false) }
-                    onMovePrevRequest={ () =>
-                        setphotoIndex((photoIndex + images.length - 1) % images.length)
-                    }
-                    onMoveNextRequest={ () =>
-                        setphotoIndex((photoIndex + 1) % images.length)
 
-                    }
-                />
-            ) }
         </div>
     )
 }
