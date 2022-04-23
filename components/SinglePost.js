@@ -9,6 +9,7 @@ import Skeleton from 'react-loading-skeleton'
 import { useRouter } from 'next/router'
 import { deleter } from '../lib/fetcher'
 import { toast } from 'react-toastify'
+import Images from './Images'
 
 const SinglePost = ({ data, loading, user }) => {
     const router = useRouter()
@@ -22,7 +23,7 @@ const SinglePost = ({ data, loading, user }) => {
     const isAuthor = author?._id === user.id
     const timePassed = moment(createdAt).fromNow()
     const isEdited = data?.edited
-
+    const images = data?.images?.map(i => i.url)
 
     const testImages = [
         { src: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80' },
@@ -75,6 +76,13 @@ const SinglePost = ({ data, loading, user }) => {
                 {/* Content */ }
                 <div className='p-2 md:p-4'>
                     <p>{ loading ? <Skeleton count={ 3 } /> : text }</p>
+
+                </div>
+
+                {/* Images */ }
+                <div className='w-full'>
+                    {/* <Images images={images} /> */ }
+                    <p>{ loading ? <Skeleton count={ 3 } /> : <Images images={ images } /> }</p>
 
                 </div>
 
