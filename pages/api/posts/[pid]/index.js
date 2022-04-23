@@ -49,6 +49,7 @@ export default async function handler(req, res) {
                 return res.status(403).end('You are not authorized to edit this post')
             }
             post.text = text
+            post.edited = true
             await post.save()
             return res.status(200).json({ error: null, post })
         } catch (error) {
