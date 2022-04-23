@@ -15,14 +15,17 @@ const Images = ({ images, countFrom = 5 }) => {
 
 
     const renderOneImage = () => {
-        return <div className='relative'>
-            <Image src="https://res.cloudinary.com/jethrosama/image/upload/v1650709741/newposthub/eubnu4xqj7rfrd4hkqy9.png" height={ 100 } width={ 100 } alt="img" />
-        </div>
+        return (
+            <div className='grid grid-cols-1 h-[576px]'>
+                <div className='relative h-full '>
+                    <Image className='object-contain' src={ images[0] } layout="fill" alt="img" />
+                </div>
+            </div>)
     }
 
 
     return (
-        <div>
+        <div className='w-full shadow-sm shadow-tertiary-dark'>
             { renderOneImage() }
 
             {/* { images.map(image => <p>{ image }</p>) } */ }

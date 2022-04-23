@@ -75,7 +75,7 @@ const SinglePost = ({ data, loading, user }) => {
                 </div>
 
                 {/* Content */ }
-                <div className='p-2 md:p-4'>
+                <div className='p-2 md:p-4 shadow-sm shadow-tertiary-dark'>
                     <p>{ loading ? <Skeleton count={ 3 } /> : text }</p>
 
                 </div>
