@@ -17,21 +17,21 @@ const Images = ({ images }) => {
     // For more than five, it should display an overlay presenting the counts of additional images
 
     const renderOneImage = () => {
-        const { url, height, width } = images[0]
+        const image0 = images[0]
         return (
             <Gallery>
                 <div className='grid grid-cols-1 h-[576px]'>
                     <Item
-                        original={ url }
-                        width={ width }
-                        height={ height }
+                        original={ images[0].url }
+                        width={ images[0].width }
+                        height={ images[0].height }
                         objectFit='cover'
 
                     >
                         { ({ ref, open, }) => (
                             // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
                             <div ref={ ref } onClick={ open } className='relative h-full cursor-pointer'>
-                                <Image className='object-contain' src={ url } layout="fill" alt="img" />
+                                <Image className='object-contain' src={ images[0].url } layout="fill" alt="img" />
                             </div>
                         ) }
                     </Item>
