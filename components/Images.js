@@ -161,8 +161,12 @@ const Images = ({ images }) => {
     }
 
     const renderFiveImage = () => {
+        // check if images.length is greater than 5
+        const showOverlay = images.length > 5
+        const overlayNumber = '+' + (images.length - 5)
         const images0to1 = images.slice(0, 2)
         const images2to4 = images.slice(2, 5)
+        const restImages = images.slice(5)
         return (
             <Gallery>
 
@@ -187,7 +191,7 @@ const Images = ({ images }) => {
                         )) }
                     </div>
                     <div className='h-1/3 grid grid-cols-3'>
-                        { images2to4.map((image) => (
+                        { images2to4.map((image, index) => (
                             <Item
                                 key={ image.url }
                                 original={ image.url }
@@ -199,12 +203,31 @@ const Images = ({ images }) => {
                                 { ({ ref, open, }) => (
                                     // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
                                     <div ref={ ref } onClick={ open } className='relative h-full cursor-pointer'>
-                                        <Image className='object-cover' src={ image.url } layout="fill" alt="img" />
+                                        <Image className={ `object-cover ${index === 2 && showOverlay && 'brightness-50'}` } src={ image.url } layout="fill" alt="img" />
+                                        { index === 2 && showOverlay && (
+                                            <div className='absolute top-0 left-0 h-full w-full flex items-center justify-center font-semibold text-3xl'>{ overlayNumber }</div>
+                                        ) }
                                     </div>
                                 ) }
                             </Item>
                         )) }
                     </div>
+                    { showOverlay && restImages.map((image) => (
+                        <Item
+                            key={ image.url }
+                            original={ image.url }
+                            width={ image.width }
+                            height={ image.height }
+                            objectFit='cover'
+                        >
+                            { ({ ref, }) => (
+                                // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
+                                <div ref={ ref } />
+
+                            ) }
+
+                        </Item>
+                    )) }
                 </div>
             </Gallery>
         )
@@ -216,7 +239,7 @@ const Images = ({ images }) => {
             { images.length === 2 && renderTwoImage() }
             { images.length === 3 && renderThreeImage() }
             { images.length === 4 && renderFourImage() }
-            { images.length === 5 && renderFiveImage() }
+            { images.length >= 5 && renderFiveImage() }
         </div>
     )
 }
