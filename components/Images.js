@@ -3,8 +3,7 @@ import { useState } from 'react'
 import { Gallery, Item } from 'react-photoswipe-gallery'
 import 'photoswipe/dist/photoswipe.css'
 
-const Images = ({ images, countFrom = 5 }) => {
-    const [isOpen, setIsOpen] = useState(true)
+const Images = ({ images }) => {
 
     // const imagesToShow = images
     // if (countFrom && images.length > countFrom) {
@@ -17,10 +16,6 @@ const Images = ({ images, countFrom = 5 }) => {
     // For five pictures, two in the first row, three in the second row
     // For more than five, it should display an overlay presenting the counts of additional images
 
-    const handleOpen = (index) => {
-        setphotoIndex(index)
-        setIsOpen(true)
-    }
     const renderOneImage = () => {
         const { url, height, width } = images[0]
         return (
@@ -211,7 +206,6 @@ const Images = ({ images, countFrom = 5 }) => {
     return (
         <div className='w-full shadow-sm shadow-tertiary-dark'>
             { renderOneImage() }
-
         </div>
     )
 }
