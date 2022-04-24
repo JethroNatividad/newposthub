@@ -170,7 +170,7 @@ const Images = ({ images }) => {
         return (
             <Gallery>
 
-                <div className='h-[576px] space-y-1'>
+                <div className='h-[576px] space-y-1 overflow-hidden'>
                     <div className='h-2/3 grid grid-cols-2 space-x-1'>
                         { images0to1.map((image) => (
                             <Item
