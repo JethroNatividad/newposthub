@@ -72,9 +72,54 @@ const Images = ({ images, countFrom = 5 }) => {
     }
 
     const renderThreeImage = () => {
+        const image0 = images[0]
+        const images1to2 = images.slice(1)
         return (
             <Gallery>
                 <div className='grid grid-cols-2 h-[576px]'>
+                    <Item
+                        original={ image0.url }
+                        width={ image0.width }
+                        height={ image0.height }
+                        objectFit='cover'
+
+                    >
+                        { ({ ref, open, }) => (
+                            // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?images=1" />
+                            <div ref={ ref } onClick={ open } className='relative h-full cursor-pointer'>
+                                <Image className='object-cover' src={ image0.url } layout="fill" alt="img" />
+                            </div>
+                        ) }
+                    </Item>
+                    <div className='h-full'>
+                        { images1to2.map((image) => (
+                            <Item
+                                original={ image.url }
+                                width={ image.width }
+                                height={ image.height }
+                                objectFit='cover'
+
+                            >
+                                { ({ ref, open, }) => (
+                                    // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?images=1" />
+                                    <div ref={ ref } onClick={ open } className='relative h-1/2 cursor-pointer'>
+                                        <Image className='object-cover' src={ image.url } layout="fill" alt="img" />
+                                    </div>
+                                ) }
+                            </Item>
+                        )) }
+
+                    </div>
+                </div>
+            </Gallery>
+        )
+    }
+
+
+    const renderFourImage = () => {
+        return (
+            <Gallery>
+                <div className='grid grid-cols-3 h-[576px]'>
                     <Item
                         original={ images[0].url }
                         width={ images[0].width }
@@ -83,8 +128,8 @@ const Images = ({ images, countFrom = 5 }) => {
 
                     >
                         { ({ ref, open, }) => (
-                            // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?images=1" />
-                            <div ref={ ref } onClick={ open } className='relative h-full cursor-pointer'>
+                            // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
+                            <div ref={ ref } onClick={ open } className='relative h-full cursor-pointer col-span-2'>
                                 <Image className='object-cover' src={ images[0].url } layout="fill" alt="img" />
                             </div>
                         ) }
@@ -99,23 +144,37 @@ const Images = ({ images, countFrom = 5 }) => {
 
                         >
                             { ({ ref, open, }) => (
-                                // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?images=1" />
-                                <div ref={ ref } onClick={ open } className='relative h-1/2 cursor-pointer'>
+                                // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
+                                <div ref={ ref } onClick={ open } className='relative h-1/3 cursor-pointer'>
                                     <Image className='object-cover' src={ images[1].url } layout="fill" alt="img" />
                                 </div>
                             ) }
                         </Item>
                         <Item
                             original={ images[2].url }
-                            width={ images[2].width }
-                            height={ images[2].height }
+                            width={ width }
+                            height={ height }
                             objectFit='cover'
 
                         >
                             { ({ ref, open, }) => (
-                                // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?images=1" />
-                                <div ref={ ref } onClick={ open } className='relative h-1/2 cursor-pointer'>
-                                    <Image className='object-cover' src={ images[2].url } layout="fill" alt="img" />
+                                // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
+                                <div ref={ ref } onClick={ open } className='relative h-1/3 cursor-pointer'>
+                                    <Image className='object-cover' src={ url } layout="fill" alt="img" />
+                                </div>
+                            ) }
+                        </Item>
+                        <Item
+                            original={ url }
+                            width={ width }
+                            height={ height }
+                            objectFit='cover'
+
+                        >
+                            { ({ ref, open, }) => (
+                                // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
+                                <div ref={ ref } onClick={ open } className='relative h-1/3 cursor-pointer'>
+                                    <Image className='object-cover' src={ url } layout="fill" alt="img" />
                                 </div>
                             ) }
                         </Item>
@@ -201,75 +260,6 @@ const Images = ({ images, countFrom = 5 }) => {
                             { ({ ref, open, }) => (
                                 // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
                                 <div ref={ ref } onClick={ open } className='relative h-full cursor-pointer'>
-                                    <Image className='object-cover' src={ url } layout="fill" alt="img" />
-                                </div>
-                            ) }
-                        </Item>
-                    </div>
-                </div>
-            </Gallery>
-        )
-    }
-
-    const renderFourImage = () => {
-        const { url, height, width } = images[0]
-        return (
-            <Gallery>
-                <div className='grid grid-cols-3 h-[576px]'>
-                    <Item
-                        original={ url }
-                        width={ width }
-                        height={ height }
-                        objectFit='cover'
-
-                    >
-                        { ({ ref, open, }) => (
-                            // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
-                            <div ref={ ref } onClick={ open } className='relative h-full cursor-pointer col-span-2'>
-                                <Image className='object-cover' src={ url } layout="fill" alt="img" />
-                            </div>
-                        ) }
-                    </Item>
-                    <div className='h-full'>
-
-                        <Item
-                            original={ url }
-                            width={ width }
-                            height={ height }
-                            objectFit='cover'
-
-                        >
-                            { ({ ref, open, }) => (
-                                // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
-                                <div ref={ ref } onClick={ open } className='relative h-1/3 cursor-pointer'>
-                                    <Image className='object-cover' src={ url } layout="fill" alt="img" />
-                                </div>
-                            ) }
-                        </Item>
-                        <Item
-                            original={ url }
-                            width={ width }
-                            height={ height }
-                            objectFit='cover'
-
-                        >
-                            { ({ ref, open, }) => (
-                                // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
-                                <div ref={ ref } onClick={ open } className='relative h-1/3 cursor-pointer'>
-                                    <Image className='object-cover' src={ url } layout="fill" alt="img" />
-                                </div>
-                            ) }
-                        </Item>
-                        <Item
-                            original={ url }
-                            width={ width }
-                            height={ height }
-                            objectFit='cover'
-
-                        >
-                            { ({ ref, open, }) => (
-                                // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
-                                <div ref={ ref } onClick={ open } className='relative h-1/3 cursor-pointer'>
                                     <Image className='object-cover' src={ url } layout="fill" alt="img" />
                                 </div>
                             ) }
