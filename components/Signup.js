@@ -26,7 +26,7 @@ const Signup = () => {
 
     return (
         <div
-            className='min-h-screen bg-primary-dark'
+            className='pt-5 lg:pt-0 min-h-screen bg-primary-dark'
         >
             <div className='min-h-screen space-y-10 px-3 flex flex-col lg:flex-row items-center lg:justify-around'>
 
