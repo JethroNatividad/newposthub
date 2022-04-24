@@ -44,7 +44,7 @@ const Images = ({ images }) => {
         const image0to1 = images.slice(0, 2)
         return (
             <Gallery>
-                <div className='w-full h-[576px]'>
+                <div className='w-full h-[576px] space-y-1 overflow-hidden'>
                     { image0to1.map((image) => (
                         <Item
                             key={ image.url }
