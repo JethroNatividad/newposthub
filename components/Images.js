@@ -170,8 +170,8 @@ const Images = ({ images }) => {
         return (
             <Gallery>
 
-                <div className='h-[576px]'>
-                    <div className='h-2/3 grid grid-cols-2'>
+                <div className='h-[576px] space-y-1'>
+                    <div className='h-2/3 grid grid-cols-2 space-x-1'>
                         { images0to1.map((image) => (
                             <Item
                                 key={ image.url }
@@ -190,7 +190,7 @@ const Images = ({ images }) => {
                             </Item>
                         )) }
                     </div>
-                    <div className='h-1/3 grid grid-cols-3'>
+                    <div className='h-1/3 grid grid-cols-3 space-x-1'>
                         { images2to4.map((image, index) => (
                             <Item
                                 key={ image.url }
