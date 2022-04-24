@@ -117,67 +117,43 @@ const Images = ({ images, countFrom = 5 }) => {
 
 
     const renderFourImage = () => {
+        const image0 = images[0]
+        const images1to3 = images.slice(1)
         return (
             <Gallery>
                 <div className='grid grid-cols-3 h-[576px]'>
                     <Item
-                        original={ images[0].url }
-                        width={ images[0].width }
-                        height={ images[0].height }
+                        original={ image0.url }
+                        width={ image0.width }
+                        height={ image0.height }
                         objectFit='cover'
 
                     >
                         { ({ ref, open, }) => (
                             // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
                             <div ref={ ref } onClick={ open } className='relative h-full cursor-pointer col-span-2'>
-                                <Image className='object-cover' src={ images[0].url } layout="fill" alt="img" />
+                                <Image className='object-cover' src={ image0.url } layout="fill" alt="img" />
                             </div>
                         ) }
                     </Item>
                     <div className='h-full'>
+                        { images1to3.map((image) => (
+                            <Item
+                                original={ image.url }
+                                width={ image.width }
+                                height={ image.height }
+                                objectFit='cover'
 
-                        <Item
-                            original={ images[1].url }
-                            width={ images[1].width }
-                            height={ images[1].height }
-                            objectFit='cover'
+                            >
+                                { ({ ref, open, }) => (
+                                    // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
+                                    <div ref={ ref } onClick={ open } className='relative h-1/3 cursor-pointer'>
+                                        <Image className='object-cover' src={ image.url } layout="fill" alt="img" />
+                                    </div>
+                                ) }
+                            </Item>
+                        )) }
 
-                        >
-                            { ({ ref, open, }) => (
-                                // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
-                                <div ref={ ref } onClick={ open } className='relative h-1/3 cursor-pointer'>
-                                    <Image className='object-cover' src={ images[1].url } layout="fill" alt="img" />
-                                </div>
-                            ) }
-                        </Item>
-                        <Item
-                            original={ images[2].url }
-                            width={ width }
-                            height={ height }
-                            objectFit='cover'
-
-                        >
-                            { ({ ref, open, }) => (
-                                // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
-                                <div ref={ ref } onClick={ open } className='relative h-1/3 cursor-pointer'>
-                                    <Image className='object-cover' src={ url } layout="fill" alt="img" />
-                                </div>
-                            ) }
-                        </Item>
-                        <Item
-                            original={ url }
-                            width={ width }
-                            height={ height }
-                            objectFit='cover'
-
-                        >
-                            { ({ ref, open, }) => (
-                                // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
-                                <div ref={ ref } onClick={ open } className='relative h-1/3 cursor-pointer'>
-                                    <Image className='object-cover' src={ url } layout="fill" alt="img" />
-                                </div>
-                            ) }
-                        </Item>
                     </div>
                 </div>
             </Gallery>
