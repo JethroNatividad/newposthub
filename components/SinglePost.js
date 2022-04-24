@@ -24,12 +24,8 @@ const SinglePost = ({ data, loading, user }) => {
     const timePassed = moment(createdAt).fromNow()
     const isEdited = data?.edited
     const images = data?.images || []
-    const imageUrls = images?.map(image => image.url)
 
-    const testImages = [
-        { src: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80' },
-        { src: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' },
-        { src: 'https://raw.githubusercontent.com/sopetrichor/react-photo-collage/master/preview.png' }]
+
 
 
     const deletePost = async (id) => {
@@ -81,10 +77,10 @@ const SinglePost = ({ data, loading, user }) => {
                 </div>
 
                 {/* Images */ }
-                { imageUrls?.length > 0 && (
+                { images?.length > 0 && (
                     <div className='w-full'>
                         {/* <Images images={images} /> */ }
-                        { loading ? <Skeleton count={ 3 } /> : <Images images={ imageUrls } /> }
+                        { loading ? <Skeleton count={ 3 } /> : <Images images={ images } /> }
 
                     </div>
                 ) }
