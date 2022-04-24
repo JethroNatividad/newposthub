@@ -41,10 +41,11 @@ const Images = ({ images }) => {
     }
 
     const renderTwoImage = () => {
+        const image0to1 = images.slice(0, 2)
         return (
             <Gallery>
                 <div className='w-full h-[576px]'>
-                    { images.map((image) => (
+                    { image0to1.map((image) => (
                         <Item
                             key={ image.url }
                             original={ image.url }
@@ -68,7 +69,7 @@ const Images = ({ images }) => {
 
     const renderThreeImage = () => {
         const image0 = images[0]
-        const images1to2 = images.slice(1)
+        const images1to2 = images.slice(1, 3)
         return (
             <Gallery>
                 <div className='grid grid-cols-2 h-[576px]'>
@@ -113,7 +114,7 @@ const Images = ({ images }) => {
 
     const renderFourImage = () => {
         const image0 = images[0]
-        const images1to3 = images.slice(1)
+        const images1to3 = images.slice(1, 4)
         return (
             <Gallery>
                 <div className='grid grid-cols-3 h-[576px]'>
@@ -157,7 +158,7 @@ const Images = ({ images }) => {
 
     const renderFiveImage = () => {
         const images0to1 = images.slice(0, 2)
-        const images2to4 = images.slice(2)
+        const images2to4 = images.slice(2, 5)
         return (
             <Gallery>
 
@@ -205,7 +206,11 @@ const Images = ({ images }) => {
 
     return (
         <div className='w-full shadow-sm shadow-tertiary-dark'>
-            { renderOneImage() }
+            { images.length === 1 && renderOneImage() }
+            { images.length === 2 && renderTwoImage() }
+            { images.length === 3 && renderThreeImage() }
+            { images.length === 4 && renderFourImage() }
+            { images.length === 5 && renderFiveImage() }
         </div>
     )
 }
