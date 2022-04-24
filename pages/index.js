@@ -61,7 +61,7 @@ export default function Home({ user }) {
       <Navbar user={ user } />
 
 
-      <div className='max-w-3xl mx-3 md:mx-auto space-y-2'>
+      <div className='max-w-3xl mx-3 md:mx-auto space-y-2 pt-2'>
         { loading
           ? <>
             <Post loading={ loading } />
