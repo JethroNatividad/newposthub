@@ -90,6 +90,7 @@ const Images = ({ images }) => {
                     <div className='h-full'>
                         { images1to2.map((image) => (
                             <Item
+                                key={ image.url }
                                 original={ image.url }
                                 width={ image.width }
                                 height={ image.height }
@@ -119,6 +120,7 @@ const Images = ({ images }) => {
             <Gallery>
                 <div className='grid grid-cols-3 h-[576px]'>
                     <Item
+                        key={ image0.url }
                         original={ image0.url }
                         width={ image0.width }
                         height={ image0.height }
@@ -134,7 +136,9 @@ const Images = ({ images }) => {
                     </Item>
                     <div className='h-full'>
                         { images1to3.map((image) => (
+
                             <Item
+                                key={ image.url }
                                 original={ image.url }
                                 width={ image.width }
                                 height={ image.height }
@@ -166,6 +170,7 @@ const Images = ({ images }) => {
                     <div className='h-1/2 grid grid-cols-2'>
                         { images0to1.map((image) => (
                             <Item
+                                key={ image.url }
                                 original={ image.url }
                                 width={ image.width }
                                 height={ image.height }
@@ -184,6 +189,7 @@ const Images = ({ images }) => {
                     <div className='h-1/2 grid grid-cols-3'>
                         { images2to4.map((image) => (
                             <Item
+                                key={ image.url }
                                 original={ image.url }
                                 width={ image.width }
                                 height={ image.height }
