@@ -118,7 +118,7 @@ const Images = ({ images }) => {
         const images1to3 = images.slice(1, 4)
         return (
             <Gallery>
-                <div className='grid grid-cols-3 h-[576px]'>
+                <div className='grid grid-cols-3 h-[576px] space-x-1 overflow-hidden'>
                     <Item
                         key={ image0.url }
                         original={ image0.url }
@@ -134,7 +134,7 @@ const Images = ({ images }) => {
                             </div>
                         ) }
                     </Item>
-                    <div className='h-full'>
+                    <div className='h-full space-y-1'>
                         { images1to3.map((image) => (
 
                             <Item
