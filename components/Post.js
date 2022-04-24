@@ -7,6 +7,7 @@ import DotsMenu from './DotsMenu'
 import ConfirmationButton from './ConfirmationButton'
 import Skeleton from 'react-loading-skeleton'
 import { useRouter } from 'next/router'
+import Images from './Images'
 // import Image from 'next/image'
 
 const Post = ({ data, user, deletePost, loading }) => {
@@ -21,6 +22,7 @@ const Post = ({ data, user, deletePost, loading }) => {
     const isAuthor = author?._id === user?.id
     const timePassed = moment(createdAt).fromNow()
     const isEdited = data?.edited
+    const images = data?.images || []
 
     const handleDelete = () => {
         deletePost(_id)
@@ -61,6 +63,13 @@ const Post = ({ data, user, deletePost, loading }) => {
                 <p>{ loading ? <Skeleton count={ 3 } /> : text }</p>
             </div>
 
+            { images?.length > 0 && (
+                <div className='w-full'>
+                    {/* <Images images={images} /> */ }
+                    { loading ? <Skeleton count={ 3 } /> : <Images images={ images } /> }
+
+                </div>
+            ) }
 
             {/* Comments button */ }
             <div className='p-2 md:p-4 space-y-3 flex flex-col'>
