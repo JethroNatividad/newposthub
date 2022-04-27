@@ -6,10 +6,8 @@ import clientAxios from "../lib/axios"
 import { useRouter } from 'next/router'
 import nprogress from "nprogress"
 import { toast } from "react-toastify"
-import useUser from "../hooks/useUser"
 
 const Navbar = ({ user }) => {
-    const [currentUser, currentUserLoading] = useUser(user.id)
     const router = useRouter()
 
     async function logout() {
@@ -19,8 +17,6 @@ const Navbar = ({ user }) => {
         router.push('/login')
         toast.success("Logged out successfully", { delay: 1000 })
     }
-
-    console.log(currentUser, 'currentUser')
 
     return (
         <div className="flex z-20 shadow-md shadow-primary-dark h-14 w-full justify-between items-center bg-secondary-dark px-5 sticky top-0 right-0">
@@ -59,7 +55,7 @@ const Navbar = ({ user }) => {
                     <div className="text-offwhite-50 hover:brightness-150 bg-tertiary-dark p-1 rounded-3xl cursor-pointer flex justify-center items-center">
                         <UserIcon className="w-5 h-5" />
                     </div>
-                    <p>{ currentUser?.username }</p>
+                    <p>{ user.username }</p>
 
                 </div>
 
