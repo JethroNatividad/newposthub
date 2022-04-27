@@ -11,6 +11,7 @@ import { deleter } from '../lib/fetcher'
 import { toast } from 'react-toastify'
 import Images from './Images'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 const SinglePost = ({ data, loading, user }) => {
     const router = useRouter()
@@ -53,7 +54,9 @@ const SinglePost = ({ data, loading, user }) => {
                         <div className='h-10 w-10 rounded-3xl overflow-hidden'>
 
                             { loading ? <Skeleton circle height={ 40 } width={ 40 } /> : <div className="text-offwhite-50 hover:brightness-150 w-full h-full flex items-center justify-center bg-tertiary-dark">
-                                <UserIcon className="w-6 h-6" />
+                                <div className="relative bg-primary-dark h-full w-full rounded-full overflow-hidden">
+                                    <Image src='https://res.cloudinary.com/jethrosama/image/upload/v1651059504/newposthub/profile_pictures/images_ufarco.png' layout="fill" />
+                                </div>
                             </div> }
                         </div>
                         <div>

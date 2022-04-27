@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import fetcher from '../lib/fetcher'
 
-const useUser = ({ uid }) => {
+const useUser = () => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fn = async () => {
-            const [err, data] = await fetcher(`/api/user/${uid}`)
+            const [err, data] = await fetcher(`/api/auth/user`)
             if (err) {
                 setLoading(false)
                 return toast.error(err.message)
