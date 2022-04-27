@@ -20,25 +20,25 @@ const Index = ({ user, query }) => {
     const { pid } = query
     const [post, setPost] = useState(null)
     const [loading, setLoading] = useState(true)
+    const fetchPosts = async (initial = false) => {
+        const [err, data] = await fetcher(`/api/posts/${pid}`)
+        if (err) {
+            initial && setLoading(false)
+            return toast.error(err.message)
+        }
+        console.log(data, "POST DATA SINGLE")
+        initial && setLoading(false)
+        setPost(data.post)
+    }
 
     useEffect(() => {
-        const fn = async () => {
-            const [err, data] = await fetcher(`/api/posts/${pid}`)
-            if (err) {
-                setLoading(false)
-                return toast.error(err.message)
-            }
-            console.log(data, "POST DATA SINGLE")
-            setLoading(false)
-            setPost(data.post)
-        }
-        fn()
-    }, [pid])
+        fetchPosts(true)
+    }, [pid, fetchPosts])
 
     return (
         <div className='bg-primary-dark min-h-screen'>
             <Navbar user={ user } />
-            <SinglePost user={ user } data={ post } loading={ loading } />
+            <SinglePost fetchPosts={ fetchPosts } user={ user } data={ post } loading={ loading } />
         </div>
     )
 }

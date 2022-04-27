@@ -10,22 +10,25 @@ import { useRouter } from 'next/router'
 import { deleter } from '../lib/fetcher'
 import { toast } from 'react-toastify'
 import Images from './Images'
+import { useState, useEffect } from 'react'
 
 const SinglePost = ({ data, loading, user }) => {
     const router = useRouter()
-
+    const [commentsCount, setCommentsCount] = useState(0)
     const text = data?.text
     const author = data?.author
-    const comments = data?.comments
     const createdAt = data?.createdAt
     const _id = data?._id
-    const commentsCount = comments?.length
     const isAuthor = author?._id === user.id
     const timePassed = moment(createdAt).fromNow()
     const isEdited = data?.edited
     const images = data?.images || []
 
-
+    useEffect(() => {
+        if (!loading && data) {
+            setCommentsCount(data.comments.length)
+        }
+    }, [data, loading])
 
 
     const deletePost = async (id) => {
@@ -94,8 +97,9 @@ const SinglePost = ({ data, loading, user }) => {
 
                     <div className='w-full  h-[1px] bg-offwhite-50' />
 
+
                     <div className='flex justify-center items-center'>
-                        { !loading && <CommentSection pid={ _id } />
+                        { !loading && <CommentSection pid={ _id } setCommentsCount={ setCommentsCount } />
                         }
                     </div>
 

@@ -20,18 +20,18 @@ const Images = ({ images }) => {
         const image0 = images[0]
         return (
             <Gallery>
-                <div className='grid grid-cols-1 h-[576px]'>
+                <div className='grid grid-cols-1 h-[400px] sm:h-[500px] md:h-[576px]'>
                     <Item
-                        original={ images[0].url }
-                        width={ images[0].width }
-                        height={ images[0].height }
+                        original={ image0.url }
+                        width={ image0.width }
+                        height={ image0.height }
                         objectFit='cover'
 
                     >
                         { ({ ref, open, }) => (
                             // <img ref={ref} onClick={open} src="https://placekitten.com/80/60?image=1" />
                             <div ref={ ref } onClick={ open } className='relative h-full cursor-pointer'>
-                                <Image className='object-contain' src={ images[0].url } layout="fill" alt="img" />
+                                <Image className='object-contain' src={ image0.url } layout="fill" alt="img" />
                             </div>
                         ) }
                     </Item>
@@ -44,7 +44,7 @@ const Images = ({ images }) => {
         const image0to1 = images.slice(0, 2)
         return (
             <Gallery>
-                <div className='w-full h-[576px] space-y-1 overflow-hidden'>
+                <div className='w-full h-[400px] sm:h-[500px] md:h-[576px] space-y-1 overflow-hidden'>
                     { image0to1.map((image) => (
                         <Item
                             key={ image.url }
@@ -72,7 +72,7 @@ const Images = ({ images }) => {
         const images1to2 = images.slice(1, 3)
         return (
             <Gallery>
-                <div className='grid grid-cols-2 h-[576px] space-x-1 overflow-hidden'>
+                <div className='grid grid-cols-2 h-[400px] sm:h-[500px] md:h-[576px] space-x-1 overflow-hidden'>
                     <Item
                         original={ image0.url }
                         width={ image0.width }
@@ -118,7 +118,7 @@ const Images = ({ images }) => {
         const images1to3 = images.slice(1, 4)
         return (
             <Gallery>
-                <div className='grid grid-cols-3 h-[576px] space-x-1 overflow-hidden'>
+                <div className='grid grid-cols-3 h-[400px] sm:h-[500px] md:h-[576px] space-x-1 overflow-hidden'>
                     <Item
                         key={ image0.url }
                         original={ image0.url }
@@ -170,7 +170,7 @@ const Images = ({ images }) => {
         return (
             <Gallery>
 
-                <div className='h-[576px] space-y-1 overflow-hidden'>
+                <div className='h-[400px] sm:h-[500px] md:h-[576px] space-y-1 overflow-hidden'>
                     <div className='h-2/3 grid grid-cols-2 space-x-1'>
                         { images0to1.map((image) => (
                             <Item

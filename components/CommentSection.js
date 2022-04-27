@@ -8,7 +8,7 @@ import fetcher, { deleter, poster } from '../lib/fetcher'
 import Comment from './Comment'
 
 
-const CommentSection = ({ pid }) => {
+const CommentSection = ({ pid, setCommentsCount }) => {
     const [comments, setComments] = useState([])
     const [loadingComments, setLoadingComments] = useState(true)
 
@@ -38,8 +38,10 @@ const CommentSection = ({ pid }) => {
         }
         setComments(comments => comments.filter(comment => comment._id !== id))
         toast.update(toastId, { render: "Comment deleted", type: "success", isLoading: false, closeOnClick: true, autoClose: 2000 })
+        setCommentsCount((prev) => prev - 1)
         // sync with server
         const comments = await fetchComments()
+        setCommentsCount(comments.length)
         setComments(comments)
 
     }
@@ -56,10 +58,13 @@ const CommentSection = ({ pid }) => {
         setValues({ text: '' })
         nprogress.done()
         setComments([...comments, data.comment])
+        setCommentsCount((prev) => prev + 1)
+
         setSubmitting(false)
 
         // sync with server
         const sync = await fetchComments()
+        setCommentsCount(sync.length)
         setComments(sync)
     }
     return (
