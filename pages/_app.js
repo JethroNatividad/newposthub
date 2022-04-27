@@ -1,7 +1,6 @@
 import Router from 'next/router'
 import NProgress from 'nprogress' //nprogress module
 import ToastContainer from '../components/ToastContainer'
-import { AuthProvider } from '../lib/AuthProvider'
 import '../styles/globals.css'
 import '../styles/nprogress.css' //styles of nprogress
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -12,7 +11,7 @@ NProgress.configure({ showSpinner: false })
 Router.events.on('routeChangeStart', () => NProgress.start()); Router.events.on('routeChangeComplete', () => NProgress.done()); Router.events.on('routeChangeError', () => NProgress.done())
 function MyApp({ Component, pageProps }) {
   return (
-    <AuthProvider>
+    <>
       <ToastContainer />
       <SkeletonTheme
         baseColor="#b0b3b8"
@@ -23,7 +22,7 @@ function MyApp({ Component, pageProps }) {
 
         <Component { ...pageProps } />
       </SkeletonTheme>
-    </AuthProvider>
+    </>
   )
 }
 
