@@ -8,7 +8,7 @@ import dbConnect from "../../../../../lib/dbConnect"
 export default async function handler(req, res) {
     await dbConnect()
 
-    const { method, query: { cid } } = req
+    const { method, query: { cid, pid } } = req
 
     switch (method) {
         case 'GET':
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
             return verifyToken(req, res, () => updateComment(req, res, cid))
 
         case 'DELETE':
-            return verifyToken(req, res, () => deleteComment(req, res, cid))
+            return verifyToken(req, res, () => deleteComment(req, res, cid, pid))
 
         default:
             res.setHeader('Allow', ['GET', 'PUT', 'DELETE'])
@@ -61,10 +61,11 @@ export default async function handler(req, res) {
         }
     }
 
-    async function deleteComment(req, res, cid) {
+    async function deleteComment(req, res, cid, pid) {
         const { user: { id } } = req
 
         try {
+            const post = await Post.findOne({ _id: pid })
             const comment = await Comment.findOne({ _id: cid })
             if (!comment) {
                 return res.status(404).end('Comment not found, already deleted')
@@ -72,7 +73,9 @@ export default async function handler(req, res) {
             if (comment.author.toString() !== id) {
                 return res.status(401).end('You are not authorized to delete this comment')
             }
-
+            // remove comment from post comments array
+            post.comments = post.comments.filter(comment => comment.toString() !== cid)
+            await post.save()
             await comment.remove()
             return res.status(200).end('Comment deleted')
         } catch (error) {
