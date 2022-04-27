@@ -1,5 +1,6 @@
 import dbConnect from "../../../../lib/dbConnect"
 import User from "../../../../lib/models/User"
+import verifyToken from "../../../../lib/verifyToken"
 
 
 export default async function handler(req, res) {
