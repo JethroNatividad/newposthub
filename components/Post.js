@@ -8,7 +8,7 @@ import ConfirmationButton from './ConfirmationButton'
 import Skeleton from 'react-loading-skeleton'
 import { useRouter } from 'next/router'
 import Images from './Images'
-// import Image from 'next/image'
+import Image from 'next/image'
 
 const Post = ({ data, user, deletePost, loading }) => {
     const router = useRouter()
@@ -38,7 +38,9 @@ const Post = ({ data, user, deletePost, loading }) => {
                     <div className='h-10 w-10 rounded-3xl overflow-hidden'>
 
                         { loading ? <Skeleton circle height={ 40 } width={ 40 } /> : <div className="text-offwhite-50 hover:brightness-150 w-full h-full flex items-center justify-center bg-tertiary-dark">
-                            <UserIcon className="w-6 h-6" />
+                            <div className="relative bg-primary-dark h-full w-full rounded-full overflow-hidden">
+                                <Image src='https://res.cloudinary.com/jethrosama/image/upload/v1651059504/newposthub/profile_pictures/images_ufarco.png' layout="fill" />
+                            </div>
                         </div> }
                     </div>
                     <div>
