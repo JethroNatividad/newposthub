@@ -6,10 +6,10 @@ import clientAxios from "../lib/axios"
 import { useRouter } from 'next/router'
 import nprogress from "nprogress"
 import { toast } from "react-toastify"
-
+import Image from 'next/image'
 const Navbar = ({ user }) => {
     const router = useRouter()
-
+    console.log(user, "USER")
     async function logout() {
         nprogress.start()
         await clientAxios.get('/api/auth/logout', { withCredentials: true })
@@ -61,8 +61,10 @@ const Navbar = ({ user }) => {
 
                 <div onClick={ () => {
                     toast("IT WORKS")
-                } } className="text-offwhite-50 sm:hidden hover:brightness-150 bg-tertiary-dark p-2 rounded-3xl cursor-pointer flex justify-center items-center">
-                    <UserIcon className="w-7 h-7" />
+                } } className="text-offwhite-50 sm:hidden hover:brightness-110 overflow-hidden cursor-pointer flex justify-center items-center">
+                    <div className="relative p-2 bg-primary-dark h-10 w-10 rounded-full overflow-hidden">
+                        <Image src='https://res.cloudinary.com/jethrosama/image/upload/v1651059504/newposthub/profile_pictures/images_ufarco.png' layout="fill" />
+                    </div>
                 </div>
 
 
