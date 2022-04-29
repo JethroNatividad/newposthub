@@ -19,7 +19,7 @@ export async function getServerSideProps({ req, res, query }) {
     }
 
     // check if user owns post
-    if (data.post.author._id !== user.user.id) {
+    if (data.post.author._id !== user.user._id) {
         return { redirect: { destination: '/' } }
     }
 
