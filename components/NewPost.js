@@ -42,7 +42,7 @@ const NewPost = () => {
                         <form className='flex flex-col items-center space-y-5' onSubmit={ handleSubmit }>
 
                             <textarea className=' px-4 py-3 max-h-96 w-full rounded-lg outline-none text-md md:text-md text-offwhite-50 bg-tertiary-dark' placeholder='Type something...' type="text" name="text" value={ values.text } onChange={ handleChange } />
-                            <input type="file" multiple={ true } name="images" onChange={ (e) => {
+                            <input accept='image/*' type="file" multiple={ true } name="images" onChange={ (e) => {
                                 setFieldValue('images', e.target.files)
                                 console.log(e.target.files, "Files")
                             } } />
