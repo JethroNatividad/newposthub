@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import Navbar from '../components/Navbar'
 import Post from '../components/Post'
+import PostList from '../components/PostList'
 import fetcher, { deleter } from '../lib/fetcher'
 import fetcherSSR from '../lib/fetcherSSR'
 
@@ -59,23 +60,7 @@ export default function Home({ user }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar user={ user } />
-
-
-      <div className='max-w-3xl mx-3 md:mx-auto space-y-2 pt-2'>
-        { loading
-          ? <>
-            <Post loading={ loading } />
-            <Post loading={ loading } />
-            <Post loading={ loading } />
-            <Post loading={ loading } />
-
-          </>
-          : posts.map(post => (
-            <Post deletePost={ deletePost } key={ post._id } data={ post } user={ user } />
-          )) }
-
-
-      </div>
+      <PostList posts={ posts } loading={ loading } deletePost={ deletePost } currentUser={ user } />
     </div>
   )
 }

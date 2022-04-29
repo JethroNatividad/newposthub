@@ -50,7 +50,7 @@ const Post = ({ data, user, deletePost, loading }) => {
 
                 {
                     loading ? <Skeleton width={ 30 } /> : isAuthor && <DotsMenu className="bg-tertiary-dark">
-                        <button className='px-4 flex justify-center hover:brightness-110 py-1 w-full rounded-lg outline-none text-md md:text-xl text-offwhite-100 bg-primary-dark max-w-xs hover:text-orange-400' type="submit"><Link href={ `/post/${_id}/edit` } passHref ><PencilAltIcon className="w-6 h-6 relative" /></Link></button>
+                        <button className='px-4 flex justify-center hover:brightness-110 py-1 w-full rounded-lg outline-none text-md md:text-xl text-offwhite-100 bg-primary-dark max-w-xs hover:text-orange-400' type="button"><Link href={ `/post/${_id}/edit` } passHref ><PencilAltIcon className="w-6 h-6 relative" /></Link></button>
                         <ConfirmationButton handleDelete={ handleDelete } />
                     </DotsMenu>
                 }
