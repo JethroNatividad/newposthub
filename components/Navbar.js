@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import nprogress from "nprogress"
 import { toast } from "react-toastify"
 import Image from 'next/image'
+
 const Navbar = ({ user }) => {
     const router = useRouter()
     async function logout() {
