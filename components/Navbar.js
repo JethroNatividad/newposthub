@@ -17,6 +17,10 @@ const Navbar = ({ user }) => {
         toast.success("Logged out successfully", { delay: 1000 })
     }
 
+    const handleProfileClick = () => {
+        router.push(`/user/${user._id}`)
+    }
+
     return (
         <div className="flex z-20 shadow-md shadow-primary-dark h-14 w-full justify-between items-center bg-secondary-dark px-5 sticky top-0 right-0">
             {/* Logo */ }
@@ -47,10 +51,7 @@ const Navbar = ({ user }) => {
 
             {/* Right area */ }
             <div className="flex space-x-2">
-                <div onClick={ () => {
-                    toast("IT WORKS")
-
-                } } className="text-offwhite-50 hidden sm:flex hover:brightness-105 bg-tertiary-dark pl-1 pr-3 rounded-3xl cursor-pointer justify-center items-center">
+                <div onClick={ handleProfileClick } className="text-offwhite-50 hidden sm:flex hover:brightness-105 bg-tertiary-dark pl-1 pr-3 rounded-3xl cursor-pointer justify-center items-center">
                     <div className="text-offwhite-50 hover:brightness-110 bg-tertiary-dark p-1 rounded-3xl cursor-pointer flex justify-center items-center">
                         <div className="relative p-2 bg-primary-dark h-8 w-8 rounded-full overflow-hidden">
                             <Image src='https://res.cloudinary.com/jethrosama/image/upload/v1651059504/newposthub/profile_pictures/images_ufarco.png' layout="fill" />
@@ -60,9 +61,7 @@ const Navbar = ({ user }) => {
 
                 </div>
 
-                <div onClick={ () => {
-                    toast("IT WORKS")
-                } } className="text-offwhite-50 sm:hidden hover:brightness-110 overflow-hidden cursor-pointer flex justify-center items-center">
+                <div onClick={ handleProfileClick } className="text-offwhite-50 sm:hidden hover:brightness-110 overflow-hidden cursor-pointer flex justify-center items-center">
                     <div className="relative p-2 bg-primary-dark h-10 w-10 rounded-full overflow-hidden">
                         <Image src='https://res.cloudinary.com/jethrosama/image/upload/v1651059504/newposthub/profile_pictures/images_ufarco.png' layout="fill" />
                     </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import fetcherSSR from '../../lib/fetcherSSR'
 
 export async function getServerSideProps({ req, res, query }) {
     const [error, user] = await fetcherSSR(req, res, '/api/auth/user')
@@ -12,7 +13,7 @@ export async function getServerSideProps({ req, res, query }) {
 
 const Index = ({ user, query }) => {
     return (
-        <div>{ query }</div>
+        <div>{ query.uid }</div>
     )
 }
 
