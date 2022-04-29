@@ -20,7 +20,7 @@ const UserPage = ({ currentUser, uid }) => {
 
     useEffect(() => {
         fetchUser()
-    }, [])
+    }, [uid])
 
     const deletePost = async (id) => {
         const toastId = toast.loading("Deleting...")
@@ -36,7 +36,7 @@ const UserPage = ({ currentUser, uid }) => {
 
     return (
         <div className='p-3'>
-            <div className='w-full max-w-5xl md:mx-auto bg-secondary-dark rounded-lg text-offwhite-50 flex flex-col items-center py-2'>
+            <div className='w-full max-w-5xl md:mx-auto bg-secondary-dark rounded-lg text-offwhite-50 flex flex-col items-center py-2 mb-6'>
                 <div className='h-24 w-24 sm:h-32 sm:w-32 lg:h-40 lg:w-40 rounded-full overflow-hidden cursor-pointer flex'>
                     { loading ? <Skeleton className='leading-loose' height='160px' width='160px' /> : <div className="text-offwhite-50 hover:brightness-150 w-full h-full flex items-center justify-center bg-tertiary-dark">
                         <div className="relative bg-primary-dark h-full w-full rounded-full overflow-hidden">
