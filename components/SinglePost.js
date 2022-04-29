@@ -11,7 +11,7 @@ import { deleter } from '../lib/fetcher'
 import { toast } from 'react-toastify'
 import Images from './Images'
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
+import AuthorImage from './AuthorImage'
 
 const SinglePost = ({ data, loading, user }) => {
     const router = useRouter()
@@ -24,6 +24,7 @@ const SinglePost = ({ data, loading, user }) => {
     const timePassed = moment(createdAt).fromNow()
     const isEdited = data?.edited
     const images = data?.images || []
+    const profilePicture = author?.profilePicture?.url
 
     useEffect(() => {
         if (!loading && data) {
@@ -51,14 +52,7 @@ const SinglePost = ({ data, loading, user }) => {
                 {/* Author */ }
                 <div className='flex p-2 md:p-4 justify-between'>
                     <div className='flex space-x-2'>
-                        <div className='h-10 w-10 rounded-3xl overflow-hidden'>
-
-                            { loading ? <Skeleton circle height={ 40 } width={ 40 } /> : <div className="text-offwhite-50 hover:brightness-150 w-full h-full flex items-center justify-center bg-tertiary-dark">
-                                <div className="relative bg-primary-dark h-full w-full rounded-full overflow-hidden">
-                                    <Image src='https://res.cloudinary.com/jethrosama/image/upload/v1651059504/newposthub/profile_pictures/images_ufarco.png' layout="fill" />
-                                </div>
-                            </div> }
-                        </div>
+                        <AuthorImage loading={ loading } image={ profilePicture } authorId={ author?._id } />
                         <div>
                             <p className='font-semibold'>{ loading ? <Skeleton width={ 60 } /> : author?.username }</p>
                             <div className='flex items-center space-x-1'>

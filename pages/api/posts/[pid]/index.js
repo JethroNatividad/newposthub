@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     }
     async function getPost(pid) {
         try {
-            const post = await Post.findOne({ _id: pid }).populate('author', ['username', '_id'])
+            const post = await Post.findOne({ _id: pid }).populate('author', ['username', '_id', 'profilePicture'])
             if (!post) {
                 return res.status(404).end('Post not found')
             }
