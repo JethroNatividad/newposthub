@@ -37,10 +37,10 @@ const Post = ({ data, user, deletePost, loading }) => {
             {/* Author */ }
             <div className='flex p-2 md:p-4 justify-between'>
                 <div className='flex space-x-2'>
-                    <AuthorImage loading={ loading } image={ profilePicture } authorId={ author?._id } />
+                    <AuthorImage loading={ loading } image={ profilePicture || user?.profilePicture?.url } authorId={ author?._id || user?._id } />
 
                     <div>
-                        <p className='font-semibold'>{ loading ? <Skeleton width={ 60 } /> : author?.username }</p>
+                        <p className='font-semibold'>{ loading ? <Skeleton width={ 60 } /> : author?.username || user?.username }</p>
                         <div className='flex items-center space-x-1'>
                             <p className='text-sm text-offwhite-100'>{ loading ? <Skeleton width={ 100 } /> : timePassed }</p>
                             { isEdited && <span className='text-xs text-gray-500'>• edited</span> }

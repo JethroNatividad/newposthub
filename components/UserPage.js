@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import fetcher from '../lib/fetcher'
 import Image from 'next/image'
+import PostList from './PostList'
 
 const UserPage = ({ currentUser, uid }) => {
     const [user, setUser] = useState(null)
@@ -21,6 +22,18 @@ const UserPage = ({ currentUser, uid }) => {
         fetchUser()
     }, [])
 
+    const deletePost = async (id) => {
+        const toastId = toast.loading("Deleting...")
+        const [err] = await deleter(`/api/posts/${id}`)
+        if (err) {
+            return toast.update(toastId, { render: err.message, type: "error", isLoading: false, closeOnClick: true, autoClose: 2000 })
+        }
+        setUser(user => ({ ...user, posts: user.posts.filter(post => post._id !== id) })
+        )
+        return toast.update(toastId, { render: "Post deleted", type: "success", isLoading: false, closeOnClick: true, autoClose: 2000 })
+
+    }
+
     return (
         <div className='p-3'>
             <div className='w-full max-w-5xl md:mx-auto bg-secondary-dark rounded-lg text-offwhite-50 flex flex-col items-center py-2'>
@@ -36,7 +49,7 @@ const UserPage = ({ currentUser, uid }) => {
                     { loading ? <Skeleton width={ 60 } /> : user.username }
                 </h1>
             </div>
-
+            <PostList posts={ user?.posts } loading={ loading } deletePost={ deletePost } currentUser={ currentUser } />
         </div>
     )
 }
