@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
     async function getComments(pid) {
         try {
-            const comments = await Comment.find({ post: pid }).populate('author', ['username', '_id'])
+            const comments = await Comment.find({ post: pid }).populate('author', ['username', '_id', 'profilePicture'])
             return res.status(200).json({ error: null, comments })
         } catch (error) {
             console.log(error)
