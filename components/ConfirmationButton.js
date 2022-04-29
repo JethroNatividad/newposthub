@@ -9,6 +9,7 @@ const ConfirmationButton = ({ handleDelete }) => {
         /**
          * Alert if clicked on outside of element
          */
+        console.log('Confirmation button')
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target) && isOpen) {
                 setIsOpen(false)

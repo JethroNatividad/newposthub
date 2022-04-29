@@ -9,9 +9,11 @@ const Comment = ({ data, loading, deleteComment }) => {
     // const { text, author, createdAt, updatedAt, _id } = data
     const [user] = useUser()
 
+    console.log(user)
+
     const text = data?.text
     const author = data?.author
-    const isAuthor = author?._id === user?.id
+    const isAuthor = author?._id === user?._id
 
     const handleDelete = (id) => {
         deleteComment(id)

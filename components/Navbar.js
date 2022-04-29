@@ -9,7 +9,6 @@ import { toast } from "react-toastify"
 import Image from 'next/image'
 const Navbar = ({ user }) => {
     const router = useRouter()
-    console.log(user, "USER")
     async function logout() {
         nprogress.start()
         await clientAxios.get('/api/auth/logout', { withCredentials: true })

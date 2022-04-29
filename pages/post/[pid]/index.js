@@ -26,14 +26,14 @@ const Index = ({ user, query }) => {
             initial && setLoading(false)
             return toast.error(err.message)
         }
-        console.log(data, "POST DATA SINGLE")
         initial && setLoading(false)
         setPost(data.post)
+        console.log(data, "POST DATA SINGLE")
     }
 
     useEffect(() => {
         fetchPosts(true)
-    }, [pid, fetchPosts])
+    }, [])
 
     return (
         <div className='bg-primary-dark min-h-screen'>

@@ -19,7 +19,7 @@ const Post = ({ data, user, deletePost, loading }) => {
     const createdAt = data?.createdAt
     const _id = data?._id
     const commentsCount = comments?.length
-    const isAuthor = author?._id === user?.id
+    const isAuthor = author?._id === user?._id
     const timePassed = moment(createdAt).fromNow()
     const isEdited = data?.edited
     const images = data?.images || []
