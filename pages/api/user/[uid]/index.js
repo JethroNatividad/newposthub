@@ -17,12 +17,19 @@ export default async function handler(req, res) {
     }
     async function getUser(req, res, uid) {
         try {
-            const user = await User.findOne({ _id: uid }).populate('posts')
+            const user = await User.findOne({ _id: uid }).populate({
+                path: 'posts',
+                populate: {
+                    path: 'author',
+                    select: ['username', '_id', 'profilePicture']
+                }
+            })
             // remove the password from the response
             if (!user) {
                 return res.status(404).end('User not found')
             }
             user.hashedPassword = undefined
+
             return res.status(200).json({ error: null, user })
         } catch (error) {
             console.log(error)
