@@ -6,7 +6,7 @@ import verifyToken from "../../../../lib/verifyToken"
 export default async function handler(req, res) {
     await dbConnect()
 
-    const { method } = req
+    const { method, query: { uid } } = req
     switch (method) {
         case 'PUT':
             return verifyToken(req, res, () => parseForm(req, res, () => updateProfilePicture(req, res)))
@@ -16,9 +16,12 @@ export default async function handler(req, res) {
     }
 
     async function updateProfilePicture(req, res) {
-        const { files: { profilePicture }, user: { id } } = req
+        const { files: { profilePicture }, user: { id, role } } = req
+        if (user.role !== 'admin' || id !== uid) {
+            return res.status(401).end('Unauthorized')
+        }
         try {
-            const currentUser = await User.findOne({ _id: user.id })
+            const currentUser = await User.findOne({ _id: uid })
             if (!currentUser) {
                 return res.status(404).end('User not found')
             }
