@@ -55,7 +55,7 @@ const Navbar = ({ user }) => {
                 <div onClick={ handleProfileClick } className="text-offwhite-50 hidden sm:flex hover:brightness-105 bg-tertiary-dark pl-1 pr-3 rounded-3xl cursor-pointer justify-center items-center">
                     <div className="text-offwhite-50 hover:brightness-110 bg-tertiary-dark p-1 rounded-3xl cursor-pointer flex justify-center items-center">
                         <div className="relative p-2 bg-primary-dark h-8 w-8 rounded-full overflow-hidden">
-                            <Image src='https://res.cloudinary.com/jethrosama/image/upload/v1651059504/newposthub/profile_pictures/images_ufarco.png' layout="fill" />
+                            <Image src={ user.profilePicture.url } layout="fill" />
                         </div>
                     </div>
                     <p>{ user.username }</p>

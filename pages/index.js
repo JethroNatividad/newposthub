@@ -13,12 +13,11 @@ export async function getServerSideProps({ req, res }) {
   if (!user?.user) {
     return { redirect: { destination: '/login' } }
   }
-
-
   return { props: { user: user.user } }
 
 }
 export default function Home({ user }) {
+  console.log(user, 'user')
 
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
