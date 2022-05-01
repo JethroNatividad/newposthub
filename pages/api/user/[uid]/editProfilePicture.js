@@ -1,13 +1,10 @@
-import dbConnect from "../../../lib/dbConnect"
-import User from "../../../lib/models/User"
-import verifyToken from "../../../lib/verifyToken"
-
 export default async function handler(req, res) {
 
-    await dbConnect()
     const { method } = req
     switch (method) {
         case 'GET':
+            return verifyToken(req, res, () => getUser(req, res))
+        case 'PUT':
             return verifyToken(req, res, () => getUser(req, res))
         default:
             res.setHeader('Allow', ['GET'])
@@ -29,4 +26,5 @@ export default async function handler(req, res) {
         }
 
     }
+
 }
