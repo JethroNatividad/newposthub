@@ -62,7 +62,7 @@ export default async function handler(req, res) {
             // check if images is an array
 
 
-            const imagesResult = images ? await uploadImages(images) : []
+            const imagesResult = images ? await uploadImages(images, 'posts') : []
             const imageUrls = imagesResult.map(image => ({ url: image.secure_url, publicId: image.public_id, height: image.height, width: image.width }))
             const newPost = new Post({ text, author: currentUser._id, images: imageUrls })
             const savedPost = await newPost.save()

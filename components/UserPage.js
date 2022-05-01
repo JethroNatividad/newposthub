@@ -10,7 +10,7 @@ const UserPage = ({ currentUser, uid }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
     const isOwner = currentUser?._id === user?._id
-    const [profileModalOpen, setProfileModalOpen] = useState(true)
+    const [profileModalOpen, setProfileModalOpen] = useState(false)
     const fetchUser = async () => {
         setLoading(true)
         const [err, user] = await fetcher(`/api/user/${uid}`)
@@ -39,7 +39,7 @@ const UserPage = ({ currentUser, uid }) => {
 
     return (
         <div className='p-3'>
-            <UpdateProfileModal isOpen={ profileModalOpen } setIsOpen={ setProfileModalOpen } />
+            <UpdateProfileModal isOpen={ profileModalOpen } setIsOpen={ setProfileModalOpen } uid={ uid } />
             <div className='w-full max-w-5xl md:mx-auto bg-secondary-dark rounded-lg text-offwhite-50 flex flex-col items-center py-2 mb-6'>
                 <div className='h-24 w-24 sm:h-32 sm:w-32 lg:h-40 lg:w-40 rounded-full overflow-hidden flex'>
                     { loading ? <Skeleton className='leading-loose' height='160px' width='160px' /> : <div onClick={ () => setProfileModalOpen(true) } className="cursor-pointer text-offwhite-50 w-full h-full flex items-center justify-center bg-tertiary-dark">
