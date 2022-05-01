@@ -5,6 +5,7 @@ import Image from 'next/image'
 import PostList from './PostList'
 import { toast } from 'react-toastify'
 import UpdateProfileModal from './UpdateProfileModal'
+import { CameraIcon, PhotographIcon } from '@heroicons/react/outline'
 
 const UserPage = ({ currentUser, uid }) => {
     const [user, setUser] = useState(null)
@@ -42,8 +43,9 @@ const UserPage = ({ currentUser, uid }) => {
             <UpdateProfileModal isOpen={ profileModalOpen } setIsOpen={ setProfileModalOpen } uid={ uid } />
             <div className='w-full max-w-5xl md:mx-auto bg-secondary-dark rounded-lg text-offwhite-50 flex flex-col items-center py-2 mb-6'>
                 <div className='h-24 w-24 sm:h-32 sm:w-32 lg:h-40 lg:w-40 rounded-full overflow-hidden flex'>
-                    { loading ? <Skeleton className='leading-loose' height='160px' width='160px' /> : <div onClick={ () => setProfileModalOpen(true) } className="cursor-pointer text-offwhite-50 w-full h-full flex items-center justify-center bg-tertiary-dark">
-                        <div className="relative bg-primary-dark h-full w-full rounded-full overflow-hidden">
+                    { loading ? <Skeleton className='leading-loose' height='160px' width='160px' /> : <div onClick={ () => setProfileModalOpen(true) } className="group cursor-pointer relative text-offwhite-50 w-full h-full flex items-center justify-center bg-tertiary-dark">
+                        <div className='scale-0 group-hover:scale-100 transition-all ease-in-out duration-75 absolute top-0 left-0 h-full w-full bg-transparent z-10 flex flex-col justify-center items-center backdrop-blur-lg'><CameraIcon height={ 30 } width={ 30 } /><p className='text-xs sm:text-sm lg:text-lg'>Change photo</p></div>
+                        <div className="relative bg-primary-dark h-full w-full rounded-full overflow-hidden group-hover:blur-sm transition-all ease-in-out duration-75">
                             <Image src={ currentUser.profilePicture.url } layout="fill" />
                         </div>
                     </div> }
