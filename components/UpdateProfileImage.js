@@ -25,11 +25,10 @@ const UpdateProfileImage = ({ loading, profilePictureUrl, uid }) => {
         inputFileRef.current.value = ""
     }
 
-    const handleUploadImage = async (crop) => {
+    const handleUploadImage = async (croppedImage) => {
         const formData = new FormData()
         // append the image with crop data to the form data
-        formData.append('profilePicture', imageUpload)
-        // formData.append('crop', JSON.stringify(crop))
+        formData.append('profilePicture', croppedImage)
         const [err, data] = await putter(`/api/user/${uid}/updateProfilePicture`, formData, true)
         if (err) {
             console.log(err.message)
