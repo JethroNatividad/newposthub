@@ -19,6 +19,7 @@ const UpdateProfileImage = ({ loading, profilePictureUrl }) => {
     const onCancel = () => {
         setCropImageModalOpen(false)
         setImageUpload(null)
+        inputFileRef.current.value = ""
     }
 
     return (
