@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 
-const CropImageModal = ({ isOpen, onCancel, imageUploadFile }) => {
+const CropImageModal = ({ isOpen, onCancel, imageUploadFile, handleUpload }) => {
     const [imgSrc, setImgSrc] = useState('')
     const imgRef = useRef(null)
     const aspect = 1
@@ -58,7 +58,7 @@ const CropImageModal = ({ isOpen, onCancel, imageUploadFile }) => {
             </ReactCrop>
             <div className='flex justify-center space-x-4'>
                 <button className="px-4 hover:brightness-110 py-2 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-red-800 max-w-xs" onClick={ onCancel }>Cancel</button>
-                <button className="px-4 hover:brightness-110 py-2 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-blue-800 max-w-xs" onClick={ onCancel }>Upload</button>
+                <button className="px-4 hover:brightness-110 py-2 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-blue-800 max-w-xs" onClick={ handleUpload }>Upload</button>
             </div>
         </div>
     )

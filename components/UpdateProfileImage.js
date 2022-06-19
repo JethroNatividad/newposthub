@@ -4,9 +4,10 @@ import nProgress from 'nprogress'
 import React, { useEffect, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { toast } from 'react-toastify'
+import { putter } from '../lib/fetcher'
 import CropImageModal from './CropImageModal'
 
-const UpdateProfileImage = ({ loading, profilePictureUrl }) => {
+const UpdateProfileImage = ({ loading, profilePictureUrl, uid }) => {
     const [cropImageModalOpen, setCropImageModalOpen] = useState(false)
     const inputFileRef = useRef(null)
     const [imageUpload, setImageUpload] = useState(null)
@@ -24,11 +25,11 @@ const UpdateProfileImage = ({ loading, profilePictureUrl }) => {
         inputFileRef.current.value = ""
     }
 
-    const handleUploadImage = async (img, crop) => {
+    const handleUploadImage = async (crop) => {
         const formData = new FormData()
         // append the image with crop data to the form data
-        formData.append('profilePicture', img)
-        formData.append('crop', JSON.stringify(crop))
+        formData.append('profilePicture', imageUpload)
+        // formData.append('crop', JSON.stringify(crop))
         const [err, data] = await putter(`/api/user/${uid}/updateProfilePicture`, formData, true)
         if (err) {
             console.log(err.message)
