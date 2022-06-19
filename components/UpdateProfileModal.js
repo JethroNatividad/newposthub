@@ -94,21 +94,23 @@ const UpdateProfileModal = ({ isOpen, setIsOpen, uid }) => {
                                 reader.readAsDataURL(e.target.files[0])
                             }
                         } } />
-                        <ReactCrop
-                            crop={ crop }
-                            onChange={ (_, percentCrop) => setCrop(percentCrop) }
-                            onComplete={ (c) => setCompletedCrop(c) }
-                            aspect={ aspect }
-                        >
-                            <img
-                                ref={ imgRef }
-                                alt="Crop me"
-                                src={ imgSrc }
-                                style={ { transform: `scale(${scale})` } }
-                                onLoad={ onImageLoad }
-                            />
-                        </ReactCrop>
-                        <button disabled={ isSubmitting } className='px-4 w-full hover:brightness-110 mb-5 py-3 rounded-lg outline-none text-md md:text-xl font-bold text-offwhite-50 bg-primary-dark' type="submit">Submit</button>
+                        <div className='absolute top-0 left-0 h-full w-full z-40'>
+                            <ReactCrop
+                                crop={ crop }
+                                onChange={ (_, percentCrop) => setCrop(percentCrop) }
+                                onComplete={ (c) => setCompletedCrop(c) }
+                                aspect={ aspect }
+                            >
+                                <img
+                                    ref={ imgRef }
+                                    alt="Crop me"
+                                    src={ imgSrc }
+                                    style={ { transform: `scale(${scale})` } }
+                                    onLoad={ onImageLoad }
+                                />
+                            </ReactCrop>
+                            <button disabled={ isSubmitting } className='px-4 w-full hover:brightness-110 mb-5 py-3 rounded-lg outline-none text-md md:text-xl font-bold text-offwhite-50 bg-primary-dark' type="submit">Submit</button>
+                        </div>
 
                     </form>
                 ) }
