@@ -1,15 +1,26 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 
-const CropImageModal = ({ isOpen, setIsOpen, imgSrc }) => {
-    console.log(imgSrc, "imgSrc")
+const CropImageModal = ({ isOpen, onCancel, imageUploadFile }) => {
+    const [imgSrc, setImgSrc] = useState('')
     const imgRef = useRef(null)
     const aspect = 1
     const scale = 1
     const [completedCrop, setCompletedCrop] = useState()
     // make crop square
     const [crop, setCrop] = useState()
+
+    useEffect(() => {
+        if (imageUploadFile) {
+            const reader = new FileReader()
+            reader.readAsDataURL(imageUploadFile)
+            reader.addEventListener('load', () => {
+                setImgSrc(reader.result.toString() || '')
+            })
+        }
+    }, [imageUploadFile])
+
 
     const onImageLoad = (e) => {
         // set the crop to the center of the image and square
@@ -46,8 +57,8 @@ const CropImageModal = ({ isOpen, setIsOpen, imgSrc }) => {
                 />
             </ReactCrop>
             <div className='flex justify-center space-x-4'>
-                <button className="px-4 hover:brightness-110 py-2 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-red-800 max-w-xs" onClick={ () => setIsOpen(false) }>Cancel</button>
-                <button className="px-4 hover:brightness-110 py-2 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-blue-800 max-w-xs" onClick={ () => setIsOpen(false) }>Upload</button>
+                <button className="px-4 hover:brightness-110 py-2 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-red-800 max-w-xs" onClick={ onCancel }>Cancel</button>
+                <button className="px-4 hover:brightness-110 py-2 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-blue-800 max-w-xs" onClick={ onCancel }>Upload</button>
             </div>
         </div>
     )
