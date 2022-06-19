@@ -30,7 +30,7 @@ const CropImageModal = ({ isOpen, setIsOpen, imgSrc }) => {
     }
 
     return (
-        <div className={ `${isOpen ? 'fixed' : 'hidden'} top-0 right-0 left-0 mx-auto z-50 w-full max-w-2xl bg-black` }>
+        <div className={ `${isOpen ? 'fixed' : 'hidden'} p-2 top-0 right-0 left-0 mx-auto z-50 w-full max-w-2xl bg-black` }>
             <ReactCrop
                 crop={ crop }
                 onChange={ (_, percentCrop) => setCrop(percentCrop) }
@@ -45,8 +45,9 @@ const CropImageModal = ({ isOpen, setIsOpen, imgSrc }) => {
                     onLoad={ onImageLoad }
                 />
             </ReactCrop>
-            <div>
-                <button onClick={ () => setIsOpen(false) }>Cancel</button>
+            <div className='flex justify-center space-x-4'>
+                <button className="px-4 hover:brightness-110 py-2 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-red-800 max-w-xs" onClick={ () => setIsOpen(false) }>Cancel</button>
+                <button className="px-4 hover:brightness-110 py-2 rounded-lg outline-none text-md md:text-xl text-offwhite-50 bg-blue-800 max-w-xs" onClick={ () => setIsOpen(false) }>Upload</button>
             </div>
         </div>
     )
