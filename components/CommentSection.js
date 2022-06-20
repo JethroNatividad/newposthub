@@ -55,18 +55,14 @@ const CommentSection = ({ pid, setCommentsCount }) => {
             setSubmitting(false)
             return toast.error(err.message)
         }
-        setValues({ text: '' })
-        nprogress.done()
-        setComments([...comments, data.comment])
-        setCommentsCount((prev) => prev + 1)
-
-        setSubmitting(false)
-
-        // sync with server
         const sync = await fetchComments()
         setCommentsCount(sync.length)
         setComments(sync)
+        setValues({ text: '' })
+        nprogress.done()
+        setSubmitting(false)
     }
+    console.log(comments, "COMMENTS")
     return (
         <div className='w-full'>
             <div className='mb-3 pb-5 space-y-2 max-h-[60vh] overflow-y-scroll'>
