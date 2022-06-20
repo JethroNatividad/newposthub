@@ -38,7 +38,7 @@ const UserPage = ({ currentUser, uid }) => {
     return (
         <div className='p-3'>
             <div className='w-full max-w-5xl md:mx-auto bg-secondary-dark rounded-lg text-offwhite-50 flex flex-col items-center py-2 mb-6'>
-                <UpdateProfileImage loading={ loading } uid={ uid } profilePictureUrl={ user?.profilePicture?.url } />
+                <UpdateProfileImage isOwner={ isOwner } loading={ loading } uid={ uid } profilePictureUrl={ user?.profilePicture?.url } />
 
                 <h1 className='font-semibold text-lg sm:text-2xl lg:text-3xl'>
                     { loading ? <Skeleton width={ 60 } /> : user.username }
